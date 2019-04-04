@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace+id必须唯一, 建议namespace=dao的全路径-->
+<mapper namespace="com.xh.mapper.UserInfoMapper">
+	<!-- 与dao的方法名一致 -->
+	<!-- 配置 属性与列名的映射 -->
+	<resultMap type="com.xh.entity.UserInfo" id="list">
+		<id property="id" column="id"/>
+		<result property="nickname" column="nickname"/>
+		<result property="usericon" column="usericon"/>
+		<result property="userphone" column="userphone"/>
+		<result property="useraddress" column="useraddress"/>
+		<result property="usersex" column="usersex"/>
+		<result property="userpwd" column="userpwd"/>
+		<result property="useremail" column="useremail"/>
+		
+	</resultMap>
+	
+	<!-- 判断用户名是否重复 -->
+	<select id="usernameonly" resultMap="list">
+	select nickname from userinfo
+	</select>
+	<!-- 注册 -->
+	<insert id="userregister" >
+	insert into userinfo(nickname,usericon,userphone,useraddress,usersex,userpwd,useremail) values(#{nickname},#{usericon},#{userphone},#{useraddress},#{usersex},#{userpwd},#{useremail})
+	</insert>
+	<!-- 修改个人信息 -->
+	<update id="userupdate" >
+	update userinfo set(nickname=#{nickname},usericon=#{usericon},userphone=#{userphone},useraddress=#{useraddress},usersex=#{usersex},userpwd=#{userpwd},useremail=#{useremail}) where id=#{id}
+	</update>
+	<!-- 修改密码-->
+	<update id="userpwdupdate" >
+	update userinfo set userpwd=#{userpwd} where useremail=#{useremail}
+	</update>
+	<!-- 密码找回 -->
+	<select id="pwdback" resultMap="list">
+	select * from userinfo where useremail=#{useremail}
+	</select>
+</mapper>
