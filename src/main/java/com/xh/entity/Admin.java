@@ -29,7 +29,7 @@ public void setAdminMenus(List<AdminMenu> adminMenus) {
 @Override
 public String toString() {
 	return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPwd=" + adminPwd + ", adminPhone="
-			+ adminPhone + ", adminPermission=" + adminPermission + ", adminMenus=" + adminMenus + "]";
+			+ adminPhone + ", adminPermission=" + adminPermission + "]";
 }
 public String getAdminId() {
 	return adminId;

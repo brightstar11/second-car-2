@@ -22,44 +22,29 @@
 							</div>
 							<div class="dropdown">
 								<a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
-									<span class="avatar" style="background-image: url(./demo/faces/female/25.jpg)"></span>
 									<span class="ml-2 d-none d-lg-block">
 										<span class="text-default" th:text="${session.LOGIN_KEY.adminName}"></span>
 										<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>
 									</span>
 								</a>
-								<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-user"></i>
-										Profile
-									</a>
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-settings"></i>
-										Settings
-									</a>
-									<a class="dropdown-item" href="#">
-										<span class="float-right">
-											<span class="badge badge-primary">6</span>
-										</span>
-										<i class="dropdown-icon fe fe-mail"></i>
-										Inbox
-									</a>
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-send"></i>
-										Message
-									</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-help-circle"></i>
-										Need help?
-									</a>
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-log-out"></i>
-										Sign out
-									</a>
-								</div>
+								<div
+								class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+								<a class="dropdown-item" href="#"> <i
+									class="dropdown-icon fe fe-user"></i> 用户信息
+								</a> <a class="dropdown-item" href="#"> <i
+									class="dropdown-icon fe fe-settings"></i> 设置
+								</a>  <a class="dropdown-item" href="#"> <i
+									class="dropdown-icon fe fe-send"></i> Message
+								</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"> <i
+									class="dropdown-icon fe fe-help-circle"></i> 帮助?
+								</a> <a class="dropdown-item" href="#"> <i
+									class="dropdown-icon fe fe-log-out"></i> 退出
+								</a>
 							</div>
 						</div>
+					</div>
 						<a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
 							<span class="header-toggler-icon"></span>
 						</a>
@@ -119,7 +104,8 @@
 			<div class="my-3 my-md-5">
 				<!-- 首页展示 -->
 				<div class="card-header">
-                    <h3 class="card-title">欢迎：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>使用二手车后端管理平台</h3>
+                    <h3 class="card-title">欢迎：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>你是：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminPermission}+级管理员" ></small>
+                         使用二手车后端管理平台</h3>
                   </div>
                   
 			</div>

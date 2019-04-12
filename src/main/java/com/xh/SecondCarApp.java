@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 @SpringBootApplication
 @ImportResource(locations = { "classpath:druid-bean.xml" })
 @EnableAspectJAutoProxy
+
 public class SecondCarApp {
 	 
     public static void main(String[] args) {

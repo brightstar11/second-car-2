@@ -7,9 +7,9 @@ import com.xh.entity.UserInfo;
 public interface UserInfoService {
 
 	//注册
-	 public Integer userinforegister(UserInfo userInfo);
+	 public Integer userregister(UserInfo userInfo);
 	 //用户名重复判断
-	 public List<UserInfo> usernameonly();
+	 public List<UserInfo> usernameonly(String usename);
 	 //修改个人信息
 	 public Integer userupdate(UserInfo userInfo);
 	 //密码找回

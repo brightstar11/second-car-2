@@ -13,7 +13,13 @@ public class UserInfo {
 	private String userphone;
     private String useraddress;
     private String usersex;
-    private String userpwd;
+    @Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", username=" + username + ", usericon=" + usericon + ", userphone=" + userphone
+				+ ", useraddress=" + useraddress + ", usersex=" + usersex + ", userpwd=" + userpwd + ", useremail="
+				+ useremail + "]";
+	}
+	private String userpwd;
     private String useremail;
     public String getUseremail() {
 		return useremail;
@@ -21,11 +27,7 @@ public class UserInfo {
 	public void setUseremail(String useremail) {
 		this.useremail = useremail;
 	}
-	@Override
-	public String toString() {
-		return "UserInfo [id=" + id + ", username=" + username + ", usericon=" + usericon + ", userphone=" + userphone
-				+ ", useraddress=" + useraddress + ", usersex=" + usersex + ", usertype=" + usertype + "]";
-	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -62,11 +64,5 @@ public class UserInfo {
 	public void setUsersex(String usersex) {
 		this.usersex = usersex;
 	}
-	public int getUsertype() {
-		return usertype;
-	}
-	public void setUsertype(int usertype) {
-		this.usertype = usertype;
-	}
-	private int usertype;
+	
 }

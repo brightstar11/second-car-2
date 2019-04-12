@@ -7,7 +7,7 @@
 	<!-- 配置 属性与列名的映射 -->
 	<resultMap type="com.xh.entity.UserInfo" id="list">
 		<id property="id" column="id"/>
-		<result property="nickname" column="nickname"/>
+		<result property="username" column="username"/>
 		<result property="usericon" column="usericon"/>
 		<result property="userphone" column="userphone"/>
 		<result property="useraddress" column="useraddress"/>
@@ -19,15 +19,39 @@
 	
 	<!-- 判断用户名是否重复 -->
 	<select id="usernameonly" resultMap="list">
-	select nickname from userinfo
+	select * from userinfo where username=#{username}
 	</select>
 	<!-- 注册 -->
 	<insert id="userregister" >
-	insert into userinfo(nickname,usericon,userphone,useraddress,usersex,userpwd,useremail) values(#{nickname},#{usericon},#{userphone},#{useraddress},#{usersex},#{userpwd},#{useremail})
+	insert into userinfo(username,usericon,userphone,useraddress,usersex,userpwd,useremail) values(#{username},#{usericon},#{userphone},#{useraddress},#{usersex},#{userpwd},#{useremail})
 	</insert>
 	<!-- 修改个人信息 -->
 	<update id="userupdate" >
-	update userinfo set(nickname=#{nickname},usericon=#{usericon},userphone=#{userphone},useraddress=#{useraddress},usersex=#{usersex},userpwd=#{userpwd},useremail=#{useremail}) where id=#{id}
+	update userinfo 
+	<set>
+	<if test="username !=null and username !=''">
+	username=#{username},
+	</if>
+	<if test="usericon !=null and usericon !=''">
+	usericon=#{usericon},
+	</if>
+	<if test="userphone !=null and userphone !=''">
+	userphone=#{userphone},
+	</if>
+	<if test="useraddress !=null and useraddress !=''">
+	useraddress=#{useraddress},
+	</if>
+	<if test="usersex !=null and usersex !=''">
+	usersex=#{usersex},
+	</if>
+	<if test="userpwd !=null and userpwd !=''">
+	userpwd=#{userpwd},
+	</if>
+	<if test="username !=null and username !=''">
+	useremail=#{useremail}
+	</if>
+	</set>
+    where id=#{id}
 	</update>
 	<!-- 修改密码-->
 	<update id="userpwdupdate" >

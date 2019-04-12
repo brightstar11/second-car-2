@@ -4729,13 +4729,7 @@ tbody.collapse.show {
   padding-right: 3.90625rem;
 }
 
-.alert-dismissible .close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0.75rem 1.25rem;
-  color: inherit;
-}
+
 
 .alert-primary {
   color: #24426c;
@@ -5117,32 +5111,8 @@ tbody.collapse.show {
   border-color: #1b1e21;
 }
 
-.close {
-  float: right;
-  font-size: 1.40625rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
-  opacity: .5;
-}
 
-.close:hover, .close:focus {
-  color: #000;
-  text-decoration: none;
-  opacity: .75;
-}
 
-.close:not(:disabled):not(.disabled) {
-  cursor: pointer;
-}
-
-button.close {
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-  -webkit-appearance: none;
-}
 
 .modal-open {
   overflow: hidden;
@@ -5226,23 +5196,8 @@ button.close {
   opacity: 0.5;
 }
 
-.modal-header {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: start;
-  align-items: flex-start;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
 
-.modal-header .close {
-  padding: 1rem;
-  margin: -1rem -1rem -1rem auto;
-}
+
 
 .modal-title {
   margin-bottom: 0;
@@ -12481,16 +12436,8 @@ a.icon:hover {
   left: .75rem;
 }
 
-.close {
-  font-size: 1rem;
-  line-height: 1.5;
-  transition: .3s color;
-}
 
-.close:before {
-  content: '\ea00';
-  font-family: "feather";
-}
+
 
 .badge {
   color: #fff;

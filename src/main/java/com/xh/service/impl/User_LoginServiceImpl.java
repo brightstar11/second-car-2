@@ -15,18 +15,18 @@ public class User_LoginServiceImpl implements User_LoginService{
 	private User_LoginMapper User_LoginMapper;
 	@Override
 	public List<UserLogin> userloginquery(UserLogin userLogin) {
-        User_LoginMapper.userloginquery(userLogin);
+       
 
 		return User_LoginMapper.userloginquery(userLogin);
 	}
 	@Override
 	public Integer userloginregister(UserLogin userLogin) {
-        User_LoginMapper.userloginregister(userLogin);
+        
 		return User_LoginMapper.userloginregister(userLogin);
 	}
 	@Override
 	public Integer userloginupdate(UserLogin userLogin) {
-		User_LoginMapper.userloginupdate(userLogin);
+		
 		return User_LoginMapper.userloginupdate(userLogin);
 	}
 

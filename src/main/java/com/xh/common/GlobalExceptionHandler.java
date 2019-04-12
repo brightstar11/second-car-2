@@ -1,4 +1,5 @@
 package com.xh.common;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,6 +27,8 @@ public class GlobalExceptionHandler {
 	public @ResponseBody Object exceptionHandler(Exception ex,HttpServletRequest req,HttpServletResponse resp) {
 		String header = req.getHeader("X-Requested-With");
 		// 如果发生该异常的是ajax请求,则返回json
+
+		ex.printStackTrace();
 		if (null != header && header.equals("XMLHttpRequest")) {
 			log.error("控制层Ajax请求异常"+ex.getMessage());
 			if(ajaxReqReturnErrorMsg){

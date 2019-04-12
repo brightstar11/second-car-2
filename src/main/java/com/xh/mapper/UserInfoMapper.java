@@ -12,9 +12,9 @@ public interface UserInfoMapper {
 	//查询
     public List<UserInfo> userinfoquery(UserInfo userinfo);
     //注册
-    public Integer userinforegister(UserInfo userInfo);
+    public Integer userregister(UserInfo userInfo);
     //判断是否唯一
-    public List<UserInfo> usernameonly();
+    public List<UserInfo> usernameonly(String username);
     //修改
     public Integer userupdate(UserInfo userInfo);
     //密码找回

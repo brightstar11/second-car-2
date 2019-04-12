@@ -18,8 +18,8 @@ public interface User_LoginMapper {
 	@Insert("insert into user_login(username,userpwd) values(#{username},#{userpwd})")
 	public Integer userloginregister(UserLogin userLogin);
     //修改
-	@Update("update user_login set(username=#{username},userpwd=#{userpwd})where id=#{id}")
-	public Integer userloginupdate(UserLogin userLogin);
+	@Update("update user_login set username=#{username},userpwd=#{userpwd} where id=#{id}")
+	public Integer userloginupdate(UserLogin userLogin );
     
     
     

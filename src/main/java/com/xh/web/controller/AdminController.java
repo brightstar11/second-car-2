@@ -1,12 +1,16 @@
 package com.xh.web.controller;
 
 import java.util.List;
+
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.pagehelper.PageInfo;
 import com.xh.common.GlobalConstant;
 import com.xh.common.MD5Util;
@@ -15,8 +19,11 @@ import com.xh.common.anno.Permission;
 import com.xh.entity.Admin;
 import com.xh.entity.AdminMenu;
 import com.xh.entity.UserInfo;
+import com.xh.entity.UserLogin;
 import com.xh.service.AdminMenuService;
 import com.xh.service.AdminService;
+import com.xh.service.UserInfoService;
+import com.xh.service.User_LoginService;
 import com.xh.web.model.PageModel;
 
 
@@ -28,6 +35,10 @@ public class AdminController {
 private AdminService adminService;
 @Autowired
 private AdminMenuService ad;
+@Autowired
+private UserInfoService user;
+@Autowired
+private User_LoginService User_LoginService;
 /**
  * 加载登录页
  */
@@ -44,7 +55,7 @@ public String index2() {
 @RequestMapping("/doLogin")
 @Permission(checkLogin=false)
 public String userinfoQuery(Admin admin,HttpSession session,Model model) {
-	   System.out.println(admin.getAdminName()+""+admin.getAdminPwd());
+	   //System.out.println(admin.getAdminName()+""+admin.getAdminPwd());
 	   //把密码进行MD5加密装换
 	   String userpwd=MD5Util.MD5(admin.getAdminPwd());
 	   admin.setAdminPwd(userpwd);
@@ -59,9 +70,9 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 			
 			// 登录成功,查询用户的菜单列表
 			List<AdminMenu> menus = ad.findMenu1ByUserId(admin2.getAdminPermission());
-			System.out.println(menus.size());
+			//System.out.println(menus.size());
 			admin2.setAdminMenus(menus);
-			System.out.println(admin2.toString());
+			//System.out.println(admin2.toString());
 		    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
 		return "index";
 		}else if(admin2.getAdminPermission().equals("1")) {
@@ -102,56 +113,100 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 	
 }
 //修改用户信息展示
-@RequestMapping(value="/usermanageupdate/{id}")
-public String usermanageupdate(Model model,@PathVariable("id") String id) {
-	
-	List<UserInfo> list=adminService.usermanage2("1");
+@RequestMapping("/usermanageupdate")
+public String usermanageupdate(Model model,Integer id) {
+    List<UserInfo> list=adminService.usermanage2(id);
 	UserInfo userInfo=(UserInfo)list.get(0);
 	model.addAttribute("list",userInfo);
 	return "usermanageupdate";
+}
+//修改用户信息
+/*
+ * 要同时修改用户信息和登录信息  加上事务回滚
+ */
+@Transactional
+@RequestMapping("/usermanageupdate2")
+public String usermanageupdate2(UserInfo userInfo) {
+	System.out.println("进入修改");
+	System.out.println(userInfo.toString());
+		//修改用户信息
+		String userpwd=MD5Util.MD5(userInfo.getUserpwd());
+		userInfo.setUserpwd(userpwd);
+		Integer index=user.userupdate(userInfo);
+		//修改登录信息
+		UserLogin userLogin=new UserLogin();
+		userLogin.setUsername(userInfo.getUsername());
+		userLogin.setUserpwd(userpwd);
+		userLogin.setid(userInfo.getId());
+		Integer index2=User_LoginService.userloginupdate(userLogin);
+		
+		if (index==index2) {
+			return "usermanageupdatesuccess";
+		}
+		
+	
+	return "usermanageupdateerror";
+	
+}
+//删除用户信息
+/*
+* 要同时修改用户信息和登录信息  加上事务回滚
+*/
+@Transactional
+@RequestMapping("/usermanagedelect")
+@ResponseBody
+public Integer usermanagedelect(String username) {
+	System.out.println("进入删除操作");
+	System.out.println(username);
+	
+		//删除用户信息
+		int count=adminService.usermanagedelect1(username);
+		System.out.println(count);
+		//删除登录信息
+		int count2=adminService.usermanagedelect2(username);
+		System.out.println(count2);
+		
+		if (count==1&&count2==1) {
+			return 1;
+		}
+		
+	
+	return 0;
 	
 }
 //注册-------------------------------------------------------------------------------
-//@RequestMapping("/register")
-//public String userRegister(UserInfo userInfo) {
-//	   //判断用户名是否重复
-//	   List<UserInfo> list=userInfoService.usernameonly();
-//	 for(int i=0;i<list.size();i++) {
-//		 UserInfo userInfo2=(UserInfo)list.get(i);
-//		 if(userInfo2.getUsername().equals(userInfo.getUsername())) {
-//			 System.out.println("用户名重复");
-//		 }else {
-//			System.out.println("用户名可以使用");
-//		}
-//	 }
-//	   //把密码进行MD5转换
-//	 String userpwd=  userInfo.getUserpwd();
-//	 userInfo.setUserpwd(MD5Util.MD5(userpwd));
-//	 //调用sql 获取添加结果返回值
-//	 int count=userInfoService.userinforegister(userInfo);
-//	 System.out.println(count);
-//	 if(count==1) {
-//		 return "添加成功界面";
-//	 }else {
-//		 return "添加失败界面";
-//	}
-//	
-//	   
-//}
-//修改个人信息-----------------------------------------------------------------------
-//@RequestMapping("/modifyInformation")
-//public String modifyInformation(UserInfo userInfo){
-//	   //把密码进行MD5转换
-//		 String userpwd=  userInfo.getUserpwd();
-//		 userInfo.setUserpwd(MD5Util.MD5(userpwd));
-//		 //sql 修改个人信息 包括  密码 昵称 头像
-//		 int count=userInfoService.userupdate(userInfo);
-//		 //判断是否修改成功
-//		 if (count==1) {
-//			return "修改成功";
-//		}else {
-//			return "修改失败";
-//		}
-//}
+@RequestMapping("/usermanageAdd")
+@ResponseBody
+public Integer usermanageAdd(UserInfo userInfo) {
+	   //判断用户名是否重复
+	   List<UserInfo> list=user.usernameonly(userInfo.getUsername());
+	 if(list.size()==0) {
+		 System.out.println("用户名可以使用");
+	  //把密码进行MD5转换
+	 String userpwd=  userInfo.getUserpwd();
+	 userInfo.setUserpwd(MD5Util.MD5(userpwd));
+	 //调用sql 获取添加结果返回值
+	 int count=user.userregister(userInfo);
+	 
+	 UserLogin userLogin=new UserLogin();
+	 userLogin.setUsername(userInfo.getUsername());
+	 userLogin.setUserpwd(userInfo.getUserpwd());
+	 
+	 int count2=User_LoginService.userloginregister(userLogin);
+	 System.out.println(count);
+	 if(count==count2&&count==1) {
+		 return 1;
+	 }
+		 return 0;
+	}
+	else {
+		return 2;
+	}
+	   
+}
+
 
 }
+
+
+

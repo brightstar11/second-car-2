@@ -1,18 +1,18 @@
 package com.xh.entity;
 
 public class UserLogin {
-private Integer userid;
+private Integer id;
 private String username;
 @Override
 public String toString() {
-	return "UserLogin [userid=" + userid + ", username=" + username + ", userpwd=" + userpwd + "]";
+	return "UserLogin [userid=" +id + ", username=" + username + ", userpwd=" + userpwd + "]";
 }
 private String userpwd;
-public Integer getUserid() {
-	return userid;
+public Integer getId() {
+	return id;
 }
-public void setUserid(Integer userid) {
-	this.userid = userid;
+public void setid(Integer id) {
+	this.id = id;
 }
 public String getUsername() {
 	return username;
