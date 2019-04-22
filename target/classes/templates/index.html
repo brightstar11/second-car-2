@@ -1,3 +1,4 @@
+﻿  
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8" />
@@ -27,19 +28,13 @@
 										<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>
 									</span>
 								</a>
-								<div
+							<div
 								class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-								<a class="dropdown-item" href="#"> <i
-									class="dropdown-icon fe fe-user"></i> 用户信息
-								</a> <a class="dropdown-item" href="#"> <i
-									class="dropdown-icon fe fe-settings"></i> 设置
-								</a>  <a class="dropdown-item" href="#"> <i
-									class="dropdown-icon fe fe-send"></i> Message
-								</a>
+								
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#"> <i
+								<button class="dropdown-item"  onclick="help()"> <i
 									class="dropdown-icon fe fe-help-circle"></i> 帮助?
-								</a> <a class="dropdown-item" href="#"> <i
+								</button> <a class="dropdown-item" href="/WebCar/admin/logout"> <i
 									class="dropdown-icon fe fe-log-out"></i> 退出
 								</a>
 							</div>
@@ -139,4 +134,9 @@
 		</footer>
 	</div>
 </body>
+<script type="text/javascript">
+function help(){
+	alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+	}
+</script>
 </html>

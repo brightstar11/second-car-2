@@ -2,7 +2,9 @@ package com.xh.web.controller;
 
 import java.util.List;
 
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +52,21 @@ public String index() {
 @RequestMapping("/returnindex")
 public String index2() {
 	return "index";
+}
+@RequestMapping("/logout")
+public String index3(HttpServletRequest request,HttpServletResponse response) {
+	request.getSession().removeAttribute("GlobalConstant.LOGIN_KEY");//清空session信息
+	request.getSession().invalidate();//清除 session 中的所有信息
+	//退出登录的时候清空cookie信息,cookie需要通过HttpServletRequest，HttpServletResponse获取
+	Cookie[] cookie=request.getCookies();
+	for(Cookie c:cookie){
+		if("doLogin".equals(c.getName())){
+			c.setMaxAge(0);
+			response.addCookie(c);
+		}
+	}
+
+	 return "adminlogin";
 }
 //登录------------------------------------------------------------------------------
 @RequestMapping("/doLogin")

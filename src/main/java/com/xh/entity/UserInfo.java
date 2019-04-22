@@ -3,7 +3,14 @@ package com.xh.entity;
 public class UserInfo {
     private Integer id;
     private String username;
-    private String usericon;
+    private String userrealname;
+    public String getUserrealname() {
+		return userrealname;
+	}
+	public void setUserrealname(String userrealname) {
+		this.userrealname = userrealname;
+	}
+	private String usericon;
     public String getUserpwd() {
 		return userpwd;
 	}

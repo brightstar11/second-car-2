@@ -8,6 +8,7 @@
 	<resultMap type="com.xh.entity.UserInfo" id="list">
 		<id property="id" column="id"/>
 		<result property="username" column="username"/>
+		<result property="userrealname" column="userrealname"/>
 		<result property="usericon" column="usericon"/>
 		<result property="userphone" column="userphone"/>
 		<result property="useraddress" column="useraddress"/>
@@ -23,7 +24,7 @@
 	</select>
 	<!-- 注册 -->
 	<insert id="userregister" >
-	insert into userinfo(username,usericon,userphone,useraddress,usersex,userpwd,useremail) values(#{username},#{usericon},#{userphone},#{useraddress},#{usersex},#{userpwd},#{useremail})
+	insert into userinfo(username,userrealname,usericon,userphone,useraddress,usersex,userpwd,useremail) values(#{username},#{userrealname},#{usericon},#{userphone},#{useraddress},#{usersex},#{userpwd},#{useremail})
 	</insert>
 	<!-- 修改个人信息 -->
 	<update id="userupdate" >
@@ -31,6 +32,9 @@
 	<set>
 	<if test="username !=null and username !=''">
 	username=#{username},
+	</if>
+	<if test="username !=null and username !=''">
+	userrealname=#{userrealname},
 	</if>
 	<if test="usericon !=null and usericon !=''">
 	usericon=#{usericon},
