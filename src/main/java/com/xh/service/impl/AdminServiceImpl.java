@@ -100,4 +100,16 @@ public class AdminServiceImpl implements AdminService{
 		
 		return admindao.adminSeletOne2(adminName);
 	}
+
+	@Override
+	public List<UserInfo> SerarchUsermanage(String username) {
+		
+		return admindao.SerarchUsermanage(username);
+	}
+
+	@Override
+	public List<Admin> searchAdminName(Admin admin) {
+		
+		return admindao.searchAdminName(admin);
+	}
 }

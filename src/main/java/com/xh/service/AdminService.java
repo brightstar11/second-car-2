@@ -20,6 +20,9 @@ public interface AdminService {
 		 public Integer  adminupdate(Admin admin);
 		 //注册用户管理
 		 public List<UserInfo> usermanage();
+		 
+		 public List<UserInfo> SerarchUsermanage(String username);
+		 
 		 public List<UserInfo> usermanage2(Integer id);
 		 
 		  //删除用户------------------------------------------------------------------------
@@ -29,6 +32,9 @@ public interface AdminService {
 		   //----------------------------------------------------------------------------
 		   //管理员查找显示在管理员页
 		   public List<Admin> adminSeletAll(String adminPermission);
+		   
+		   public List<Admin> searchAdminName(Admin admin);
+		   
 		 //查找单一管理员信息
 		   public List<Admin> adminSeletOne(Integer adminId);
 		   

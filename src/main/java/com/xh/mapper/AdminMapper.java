@@ -16,12 +16,19 @@ public interface AdminMapper {
 	@Select("select * from admin where adminName=#{adminName} and adminPwd=#{adminPwd}")
 	 public List<Admin> adminquery(Admin admin);
 	
+	@Select("select * from admin where adminPermission=#{adminPermission} and adminName=#{adminName}")
+	 public List<Admin> searchAdminName(Admin admin);
+	
 	    public Integer adminregister(Admin admin);
 	    @Select("select adminName from admin")
 	    public List<Admin> adminnameonly();
 	    public Integer adminupdate(Admin admin);
 	    @Select("select * from userinfo")
 	    public List<UserInfo> usermanage();
+	    
+	    @Select("select * from userinfo where username=#{username}")
+	    public List<UserInfo> SerarchUsermanage(String username);
+	    
 	    @Select("select * from userinfo where id=#{id}")
 	    public List<UserInfo> usermanage2(Integer id);
 	    //后台管理删除用户------------------------------------------------------------------------
