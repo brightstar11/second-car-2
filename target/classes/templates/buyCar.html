@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8" />
+    <title>基于互联网+的二手车交易系统</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <!--引入bootstrap样式-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/buyCar.css}"/>
+
+</head>
+<body>
+<!--导航栏开始-->
+<div class="container-fluid" style="background-color: #f8f8f8;">
+    <div class="container">
+        <div class="row" style="height: 36px;">
+            <div class="col-sm-11" style="height: 36px">
+                <div class="row daohang" style="height: 100%;">
+                    <div class="col-sm-2" style="height: 100%;"><a href="/WebCar/userInfo/userindex" title="互联网汽车交易系统">首页</a></div>
+                    <div class="col-sm-3" style="height: 100%;"></div>
+                    <div class="col-sm-7" style="height: 100%">
+                        <ul class="Right_nav">
+                        <li style="background-color: #f8f8f8" width="25px">
+                            <p><p>欢迎</p><p th:text="${session.LoginUser.username}" id="NowUserName" name="NowUserName"></p><p>登录网站</p></p>
+                            </li>
+                            <li class="dropdown" style="cursor:pointer;position: relative;z-index: 2;">
+                                <a href="#" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
+                                <ul class="aa" style="display: none;position: absolute;">
+                                    <li><a onclick="order()">二手车订单</a></li>
+                                    <li><a href="#">二手车服务</a></li>
+                                    <li><a href="#">免费发车</a></li>
+                                </ul>
+                            </li>
+
+                            
+                            <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi2()">联系方式</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 daohang" style="height: 36px;"><a href="./user_newindex" style="line-height: 36px;">退出</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--导航栏结束-->
+<!--搜索框开始-->
+<div class="container">
+    <div class="row" style="height: 123px;">
+        <div class="col-sm-3" style="height: 100%">
+            <div class="logo">
+                <a href=""><img th:src="@{/images/淘车.PNG}" alt="" title="二手车交易市场" /></a>
+            </div>
+        </div>
+        <div class="col-sm-7" style="height: 100%">
+            <div class="choose">
+                <a href="#">二手车</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="搜'10-20万'大众试试" id="BuyCarSearch" name="BuyCarSearch"/>
+                <button onclick="BCSearch()">搜索</button>
+            </div>
+        </div>
+        <!--<div class="col-sm-2" style="height: 100%">-->
+        <!--<a href="#" class="maiche">卖车</a>-->
+        <!--</div>-->
+    </div>
+</div>
+<!--搜索框结束-->
+<!--列表栏开始-->
+<div class="container-fluid">
+    <div class="row" style="background-color: #ff6402;height: 36px;">
+        <div class="container" style="height: 100%;">
+            <div class="row">
+                <ul class="list">
+                    <li><a href="./user_index">首页</a></li>
+                    <li class="list-active"><a href="./buyCar">买车</a></li>
+                    <li><a href="#">卖车</a></li>
+                    <li><a href="#">置换</a></li>
+                    <li><a href="#">估价</a></li>
+                    <li><a href="#">新车</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--列表栏结束-->
+<!--开始搜索-->
+<div class="container-fluid" style="background-color: #f8f8f8">
+    <div class="container">
+        <div class="row" style="height: 44px;line-height: 44px" data-class="start-search">
+            
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row search-car">
+            <div class="selected">
+                <span>您已选择：</span>
+                <ul class="selected-type">
+                    <!--<li><span></span><span class="close"></span></li>-->
+                    <!--<li><span></span><span class="close"></span></li>-->
+                    <!--<li><span></span><span class="close"></span></li>-->
+                </ul>
+            </div>
+            <ul class="search-carList">
+                <li class="search-carTop">
+                    <div class="brand-name"><span>品牌</span></div>
+                    <div class="brand">
+                        <ul class="brand-list Sort">
+                            <li><a href="#" class="aSort">不限</a></li>
+                            <li><a href="#">奔驰</a></li>
+                            <li><a href="#">宝马</a></li>
+                            <li><a href="#">大众</a></li>
+                            <li><a href="#">丰田</a></li>
+                            <li><a href="#">哈弗</a></li>
+                            <li><a href="#">吉利</a></li>
+                            <li><a href="#">哈弗</a></li>
+                            <li><a href="#">吉利</a></li>
+                            <li><a href="#">吉利</a></li>
+                            <li><a href="#">哈弗</a></li>
+                            <li><a href="#">吉利</a></li>
+                            <li id="ALL"><a href="#" class="dropdown-toggle">全部<span class="caret"></span></a>
+                                <ul class="otherbrand" id="ALLdown"  style="width: 520px;height:244px;">
+                                    <div class="o-b-box"><span class="arrow"><s></s></span>
+                                        <ul data-role="letterNav" class="o-b-list " id="Sort">
+                                            <li class="clearfix"> <span>A</span>
+                                                <div> <a  href="#" title="奥迪二手车"> 奥迪 </a> </div>
+                                            </li>
+                                            <li class="clearfix"><span>B</span>
+                                                <div> <a href="#" title="宝骏二手车"> 宝骏 </a> <a  href="#" title="宝马二手车"> 宝马 </a> <a  href="#" title="保时捷二手车"> 保时捷 </a> <a  href="#" title="北京二手车"> 北京 </a> <a  href="#" title="北汽二手车"> 北汽 </a> <a  href="#" title="北汽幻速二手车"> 北汽幻速 </a> <a href="#" title="北汽绅宝二手车"> 北汽绅宝 </a> <a  href="#" title="奔驰二手车"> 奔驰 </a> <a href="#" title="奔腾二手车"> 奔腾 </a> <a  href="#" title="本田二手车"> 本田 </a> <a  href="#" title="标致二手车"> 标致 </a> <a  href="#" title="别克二手车"> 别克 </a> <a  href="#" title="比亚迪二手车"> 比亚迪 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>C</span>
+                                                <div> <a  href="#" title="长安二手车"> 长安 </a> <a  href="#" title="长安商用二手车"> 长安商用 </a> <a  href="#" title="长城二手车"> 长城 </a> <a  href="#" title="传祺二手车"> 传祺 </a> <a  href="#" title="川汽野马二手车"> 川汽野马 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>D</span>
+                                                <div> <a  href="#" title="大发二手车"> 大发 </a> <a  href="#" title="道奇二手车"> 道奇 </a> <a  href="#" title="大众二手车"> 大众 </a> <a  href="#" title="东风二手车"> 东风 </a> <a  href="#" title="东风风度二手车"> 东风风度 </a> <a  href="#" title="东风风神二手车"> 东风风神 </a> <a  href="#" title="东风风行二手车"> 东风风行 </a> <a  href="#" title="东风小康二手车"> 东风小康 </a> <a  href="#" title="东南二手车"> 东南 </a> <a  href="#" title="DS二手车"> DS </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>F</span>
+                                                <div> <a href="#" title="菲亚特二手车"> 菲亚特 </a> <a href="#" title="丰田二手车"> 丰田 </a> <a  href="#" title="福迪二手车"> 福迪 </a> <a  href="#" title="福特二手车"> 福特 </a> <a href="#" title="福田二手车"> 福田 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>G</span>
+                                                <div> <a  href="#" title="GMC二手车"> GMC </a> <a  href="#" title="广汽吉奥二手车"> 广汽吉奥 </a> <a  href="#" title="观致二手车"> 观致 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>H</span>
+                                                <div> <a  href="#" title="哈飞二手车"> 哈飞 </a> <a  href="#" title="哈弗二手车"> 哈弗 </a> <a href="#" title="海马二手车"> 海马 </a> <a href="#" title="红旗二手车"> 红旗 </a> <a  href="#" title="黄海二手车"> 黄海 </a> <a  href="#" title="华普二手车"> 华普 </a> <a href="#" title="华泰二手车"> 华泰 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>J</span>
+                                                <div> <a  href="#" title="Jeep二手车"> Jeep </a> <a  href="#" title="江淮二手车"> 江淮 </a> <a  href="#" title="江铃二手车"> 江铃 </a> <a href="#" title="捷豹二手车"> 捷豹 </a> <a  href="#" title="吉利二手车"> 吉利 </a> <a  href="#" title="金杯二手车"> 金杯 </a> <a  href="#" title="九龙二手车"> 九龙 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>K</span>
+                                                <div> <a  href="#" title="凯迪拉克二手车"> 凯迪拉克 </a> <a  href="#" title="凯翼二手车"> 凯翼 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>L</span>
+                                                <div> <a  href="#" title="雷克萨斯二手车"> 雷克萨斯 </a> <a href="#" title="雷诺二手车"> 雷诺 </a> <a  href="#" title="猎豹二手车"> 猎豹 </a> <a  href="#" title="力帆二手车"> 力帆 </a> <a  href="#" title="铃木二手车"> 铃木 </a> <a  href="#" title="陆风二手车"> 陆风 </a> <a  href="#" title="路虎二手车"> 路虎 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>M</span>
+                                                <div> <a  href="#" title="马自达二手车"> 马自达 </a> <a  href="#" title="MG二手车"> MG </a> <a  href="#" title="MINI二手车"> MINI </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>N</span>
+                                                <div> <a  href="#" title="纳智捷二手车"> 纳智捷 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>O</span>
+                                                <div> <a href="#" title="欧宝二手车"> 欧宝 </a> <a  href="#" title="讴歌二手车"> 讴歌 </a> <a  href="#" title="欧朗二手车"> 欧朗 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>Q</span>
+                                                <div> <a  href="#" title="启辰二手车"> 启辰 </a> <a  href="#" title="奇瑞二手车"> 奇瑞 </a> <a  href="#" title="起亚二手车"> 起亚 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>R</span>
+                                                <div> <a  href="#" title="日产二手车"> 日产 </a> <a  href="#" title="荣威二手车"> 荣威 </a> <a  href="#" title="瑞麒二手车"> 瑞麒 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>S</span>
+                                                <div> <a  href="#" title="三菱二手车"> 三菱 </a> <a  href="#" title="上汽大通二手车"> 上汽大通 </a> <a  href="#" title="双龙二手车"> 双龙 </a> <a  href="#" title="斯巴鲁二手车"> 斯巴鲁 </a> <a  href="#" title="斯柯达二手车"> 斯柯达 </a> <a  href="#" title="思铭二手车"> 思铭 </a> <a  href="#" title="Smart二手车"> Smart </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>W</span>
+                                                <div> <a  href="#" title="威旺二手车"> 威旺 </a> <a  href="#" title="沃尔沃二手车"> 沃尔沃 </a> <a href="#" title="五菱二手车"> 五菱 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>X</span>
+                                                <div> <a  href="#" title="夏利二手车"> 夏利 </a> <a  href="#" title="现代二手车"> 现代 </a> <a  href="#" title="雪佛兰二手车"> 雪佛兰 </a> <a  href="#" title="雪铁龙二手车"> 雪铁龙 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>Y</span>
+                                                <div> <a  href="#" title="英菲尼迪二手车"> 英菲尼迪 </a> <a  href="#" title="一汽二手车"> 一汽 </a> <a href="#" title="依维柯二手车"> 依维柯 </a> <a  href="#" title="永源二手车"> 永源 </a> </div>
+                                            </li>
+                                            <li class="clearfix"> <span>Z</span>
+                                                <div> <a  href="#" title="中华二手车"> 中华 </a> <a  href="#" title="众泰二手车"> 众泰 </a> </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="search-carTop">
+                    <div class="brand-name"><span>车价</span></div>
+                    <div class="brand">
+                        <ul class="brand-list Sort">
+                            <li><a href="#" class="aSort">不限</a></li>
+                            <li><a href="#">3万内</a></li>
+                            <li><a href="#">3-5万</a></li>
+                            <li><a href="#">5-8万</a></li>
+                            <li><a href="#">8-10万</a></li>
+                            <li><a href="#">10-15万</a></li>
+                            <li><a href="#">15-20万</a></li>
+                            <li><a href="#">20-30万</a></li>
+                            <li><a href="#">20-30万</a></li>
+                            <li><a href="#">30-50万</a></li>
+                            <li><a href="#">50-100万</a></li>
+                            <li><a href="#">100万以上</a></li>
+                            <li><a href="javascript:void(0)" class="customize-click" id="customize-click">自定义 <span
+                                    class="caret" id="caret"></span></a>
+                                <div id="customize" style="display: none">
+                                    <i>车价</i>
+                                    <span style="margin-left: 8px"><input type="text" id="input-priceone" />万</span>
+                                    <i>-</i>
+                                    <sapn><input type="text" id="input-pricetwo" />万</sapn>
+                                    <span><button class="confirm">确定</button></span>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+                <li class="search-carTop">
+                    <div class="brand-name"><span>车型</span></div>
+                    <div class="brand">
+                        <ul class="brand-list Sort">
+                            <li><a href="#" class="aSort">不限</a></li>
+                            <li><a href="#">准新车</a></li>
+                            <li><a href="#">连新车</a></li>
+                            <li><a href="#">SUV</a></li>
+                            <li><a href="#">小型车</a></li>
+                            <li><a href="#">MPV</a></li>
+                            <li><a href="#">大型车</a></li>
+                            <li><a href="#">吉利</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="search-carTop">
+                    <div class="brand-name"><span>款型</span></div>
+                    <div class="brand">
+                        <ul class="brand-list Sort">
+                            <li><a href="#" class="aSort">不限</a></li>
+                            <li><a href="#">2018款</a></li>
+                            <li><a href="#">2017款</a></li>
+                            <li><a href="#">2016款</a></li>
+                            <li><a href="#">2015款</a></li>
+                            <li><a href="#">2014款</a></li>
+                            <li><a href="#">2013款</a></li>
+                            <li><a href="#">2012款</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="search-carTop">
+                    <div class="brand-name"><span>其他</span></div>
+                    <div class="brand">
+                        <ul class="brand-list">
+                            <li style="width: 48px;"><a href="#" class="car_age">车龄 <span
+                                    class="caret"></span></a>
+                                <ul class="Car-age Sort" style="display: none;position: absolute">
+                                    <li><a href="#" class="aSort">不限</a></li>
+                                    <li><a href="#">1年内</a></li>
+                                    <li><a href="#">2年内</a></li>
+                                    <li><a href="#">3年内</a></li>
+                                    <li><a href="#">3-8年</a></li>
+                                    <li><a href="#">8年以上</a></li>
+                                </ul>
+                            </li>
+                            <li style="width: 48px;"><a href="javascript:void(0)" class="car-mileage">里程 <span
+                                    class="caret"></span></a>
+                                <ul class="mileage Sort" style="display: none;position: absolute">
+                                    <li><a href="#" class="aSort">不限</a></li>
+                                    <li><a href="#">1万公里内</a></li>
+                                    <li><a href="#">3万公里内</a></li>
+                                    <li><a href="#">5万公里内</a></li>
+                                    <li><a href="#">10万公里内</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="search-carTop">
+                    <div class="brand-name" style="border-bottom: 1px solid rgb(229, 229, 229)"><span>排序</span></div>
+                    <div class="brand">
+                        <ul class="brand-list  Sort">
+                            <li><a href="#" class="aSort">默认排序</a></li>
+                            <li><a href="#">价格<span class="fuhao">↓</span></a></li>
+                            <li><a href="#">价格<span class="fuhao">↑</span></a></li>
+                            <li><a href="#">里程<span class="fuhao">↑</span></a></li>
+                            <li><a href="#" title="车龄由小到大">车龄<span class="fuhao">↑</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--搜索结束-->
+<!--显示开始-->
+<div class="container-fluid" style="background-color:#f8f8f8">
+    <div class="container" >
+        <div class="row showbuy_car" >
+            <div class="showcar-right" style="height:100%;padding: 0">
+            
+                <ul  style="margin: 0;height: 298px"  class="carf" th:each="p:${list}">
+                    <li th:text="${p.brandname}">
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href=""><p />雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                        <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                        <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                        </div>
+                    </li><li>
+                    <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                    <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                    <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                    <div class="car-price">
+                        <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                    </div>
+                </li><li>
+                    <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
+                    <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
+                    <p class="pcar">上牌2012年｜里程5.00万公里</p>
+                    <div class="car-price">
+                        <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
+                    </div>
+                </li>
+                </ul>
+              
+            </div>
+            <div class="pages">
+                <a href="#">首页</a>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <a href="#">最后一页</a>
+                <a href="#">共3页</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--显示结束-->
+<!--关于我们开始-->
+<div class="container-fluid" style="background-color:#f8f8f8">
+    <div class="container" style="padding: 0">
+        <div class="row" >
+            <div class="ftWrap">
+                <div class="foot">
+                    <div class="cent">
+                        <div class="relate">
+                            <div class="items">
+                                <div class="tit">交易帮助</div>
+                                <div class="con">
+                                    <a href="#">买车帮助</a>
+                                    <a href="#">卖车帮助</a>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="tit">客服中心
+                                </div>
+                                <div class="con">
+                                    <a href="#">网站合作</a>
+                                    <a href="#">关于我们</a>
+                                    <a href="#">联系我们</a>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="tit">购车指南
+                                </div>
+                                <div class="con">
+                                    <a href="#">购车帮助</a>
+                                </div>
+                            </div>
+                            <div class="items last">
+                                <div class="tel">
+                                    <h1>888-888-8888</h1>
+                                    <p>周一至周日 8:00-18:00</p>
+                                    <p>免费咨询</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--关于我们结束-->
+<div class="container-fluid" style="background-color:#f8f8f8;height: 25px"></div>
+</body>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">网站联系方式</h4>
+</div>
+
+<div class="modal-body">
+<h2>联系电话123456</h2>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<script type="text/javascript">
+
+
+// 自定义点击开始
+
+
+
+
+    function lianxifangshi2(){
+	
+	$('#myModal').modal().show();
+}
+    // 自定义点击结束
+    function order(){
+	var username=document.getElementById("NowUserName").innerHTML;
+	
+	window.location.href="/WebCar/userInfo/User_order?username="+username;
+	
+}
+   function BCSearch(){
+	  var carbrand=$('#BuyCarSearch').val();
+	  window.location.href="/WebCar/userInfo/User_BuyCarSearch?carbrand="+carbrand;
+   }
+</script>
+</html>

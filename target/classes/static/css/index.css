@@ -1,0 +1,517 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+/*导航栏开始*/
+.daohang {
+    background: #f8f8f8;
+    height: 36px;
+    line-height: 36px;
+    font-size: 14px;
+    color: #686868;
+}
+
+a {
+    text-decoration: none;
+    color: #686868;
+}
+
+.daohang a:hover {
+    text-decoration: none;
+    color: #ff6402;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
+}
+
+.Right_nav {
+    height: 100%;
+}
+
+.Right_nav li {
+    float: right;
+    width: 100px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.Right_nav li:hover {
+    background-color: #FFFFFF;
+}
+
+.left_nav {
+    position: relative;
+}
+
+.left_nav {
+    position: absolute;
+}
+
+.aa li {
+    width: 98px;
+    background-color: #FFFFFF;
+    margin-left: 0px;
+}
+
+.aa li:hover {
+    background-color: #f8f8f8;
+}
+
+.aa li a:hover {
+    color: #686868;
+}
+
+/*导航栏结束*/
+/*搜索框开始*/
+.logo {
+    width: 150px;
+    height: 95px;
+    padding: 14px;
+}
+
+.choose {
+    width: 100px;
+    margin-top: 20px;
+
+}
+
+.search {
+    width: 560px;
+    height: 37px;
+    border: 2px solid #ff6402;
+    position: relative;
+}
+
+.choose a {
+    display: inline-block;
+    height: 100%;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, #ff9000, #ff6402);
+}
+
+.search input {
+    border: none;
+    margin-left: 10px;
+    outline: none;
+    display: inline-block;
+    width: 80%;
+    height: 100%;
+}
+
+.search button {
+    position: absolute;
+    width: 18%;
+    height: 100%;
+    right: 0;
+    background: linear-gradient(90deg, #ff9000, #ff6402);
+    border: none;
+    border-right: 1px solid #ff6402;
+    color: #FFFFFF;
+}
+.maiche {
+    height: 35px;
+    width: 100px;
+    position: absolute;
+    margin-top: 42px;
+    border: 1px solid #ff6402;
+    display: inline-block;
+    font-size: 20px;
+    text-align: center;
+    color: #ff6402;
+    line-height: 37px;
+}
+.maiche:visited {
+    color: #ff6402;
+}
+.maiche:hover {
+    background-color: #fff3ec;
+    color: #ff6402;
+}
+/*搜索框结束*/
+/*列表栏开始*/
+.list {
+    width: 100%;
+    height: 36px;
+}
+.list li {
+    float: left;
+    width: 15%;
+    text-align: center;
+    cursor: pointer;
+}
+.list li a {
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 36px;
+
+}
+.list li:hover {
+    background-color: #f44b00;
+}
+.list-active {
+    background-color: #f44b00;
+}
+/*列表栏结束*/
+/*轮播图开始*/
+#lunbotu img {
+    height: 320px;
+    width: 100%;
+}
+/*轮播图结束*/
+/*买卖车开始*/
+.Buy-car {
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+}
+.Buy-car a {
+    font-size: 20px;
+    color: #394043;
+}
+.Buy-car a:hover {
+    color: #394043;
+}
+.Buy-carList {
+    width: 100%;
+    height: 150px;
+}
+
+.Buy-carList li {
+    width: 100%;
+}
+.tubiao {
+    height: 66px;
+}
+.tubiao a {
+    display: inline-block;
+    width: 11%;
+    margin-left: 1%;
+    height: 100%;
+    text-align: center;
+    padding-right: 20px;
+
+}
+.tubiao  img {
+    width: 40px;
+    height: 40px;
+}
+.Buy-carList a:hover {
+    color:#ff6402 ;
+}
+.Buy-carList li span {
+    margin-top: 5px;
+    display: block;
+}
+.Price,.Types {
+    width: 100%;
+    height: 27px;
+    margin-top: 15px;
+}
+.Price a {
+    width: 11%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 1%;
+    line-height: 27px;
+    padding-right: 20px;
+}
+.Types a {
+    width: 11%;
+    display: inline-block;
+    text-align: center;
+    margin-left: 1%;
+    line-height: 27px;
+    padding-right: 20px;
+}
+/*卖车 */
+.Selling-car {
+    width: 100%;
+    height: 30px;
+    margin-top: 20px;
+}
+.Selling-car a {
+    font-size: 20px;
+    color: #394043;
+}
+.Selling-car a:hover {
+    color: #394043;
+}
+.Selling-car-one {
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+.Selling-car-two {
+    width: 100%;
+    height: 50px;
+    background-color: #f4f5f7;
+    position: absolute;
+    margin-top: 12px;
+}
+
+.Input-account {
+    width: 95%;
+    display: block;
+    height: 100%;
+    border: 1px solid transparent;
+    background-color: #f4f5f7;
+    outline: none;
+    padding: 20px 0;
+    margin-left: 5%;
+    margin-rop: 25px;
+}
+.Selling-car-three {
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+
+    margin-left: 0;
+    background-color: #ff6402;
+    color: #fff;
+}
+.Selling-car-three:hover {
+    background-color: #eb5c01;
+    color: #fff;
+}
+.Selling-car-four {
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    position: absolute;
+    right: 0;
+    background-color: #0cb69b;
+    color: #fff;
+}
+.Selling-car-four:hover {
+    background-color: #00ae93;
+    color: #fff;
+}
+/*买卖车结束*/
+/*推荐开始*/
+.recommend {
+    height: 28px;
+    margin-bottom: 12px;
+    /*background-color: #0b97c4;*/
+}
+.recommend-left {
+    font-size: 22px;
+    color: #394043;
+    float: left;
+}
+.carPrice {
+    width: 50%;
+    /*background-color: red;*/
+    height: 100%;
+    float: left;
+    margin-left: 20px;
+}
+.carPrice-left {
+    float: left;
+    margin-left: 30px;
+    font-size: 16px;
+
+}
+.carPrice-left a{
+    line-height: 27px;
+    color: #394043;
+
+}
+.car-active {
+    border-bottom: 2px solid #ff6402;
+    color: #ff6402!important;
+}
+.showcar {
+    height: 298px;
+}
+#showcar-left {
+    width: 194px;
+    height: 298px;
+    float: left;
+}
+.showcar-right{
+    width: 100%;
+    height: 298px;
+}
+.showcar-right li {
+    background-color: #fff;
+    float: left;
+    width: 24%;
+    height: 100%;
+    margin-left: 1%;
+}
+.showcar-right li:hover {
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.16);
+}
+.showcar-right li img {
+    width: 100%;
+}
+.carname {
+    width: 100%;
+    height: 60px;
+    padding: 8px 16px 0;
+}
+.carname a {
+    font-size: 14px;
+    line-height: 27px;
+    color: #394043;
+}
+ .pcar {
+     font-size: 12px;
+     color: #b0b3b4;
+     /*line-height: 18px;*/
+     padding: 4px 14px 0;
+     height: 18px
+}
+.car-price {
+    width: 100%;
+    height: 40px;
+    padding: 8px 16px 0;
+}
+.carnumber {
+    color: #ff6402;
+    font-size: 18px;
+}
+/*推荐结束*/
+/*关于我们开始*/
+.about {
+    margin: 0 auto;
+    width: 100%;
+    height:201px;
+    padding: 30px 0 0;
+}
+ .footer_left{
+     width: 100%;
+     height:171px;
+     margin-right: 93px;
+     float: left;
+
+     padding: 44px 0;
+
+}
+.footer_img {
+    width: 110px;
+    height: 82px;
+
+    float: left;
+    margin-left: 8px;
+}
+.footer_img img {
+    width: 110px;
+    height: 82px;
+}
+.footer_text {
+    margin-left: 20px;
+    width: 476px;
+    height: 82px;
+
+    float: left;
+}
+.footer_text p {
+   text-indent: 2em;
+    font-size: 14px;
+    color: #686868;
+}
+.footer_right {
+    color: #686868;
+    width: 100%;
+    height: 171px;
+    padding: 44px 0;
+    text-align: right;
+}
+.aboutFoot {
+    margin: 0 auto;
+    width: 100%;
+    height:201px;
+    padding: 30px 0 0;
+    background-color:#686868
+}
+.ftWrap{
+    width:100%;
+    background:#686868;
+}
+.relate {
+    position:relative;
+    padding:0 30px;
+    zoom:1; margin:0;
+}
+.foot{
+    width:100%;
+}
+.foot .items{
+    width:15%;
+    float:left;
+}
+.foot .items.last{
+    width:25%;
+    position: absolute;
+    right:0;
+    top:0
+}
+.foot .items .tit{
+    color:#333;
+    padding:0 0 10px 0;
+    font-size:16px;
+    zoom:1;
+    overflow:hidden;
+}
+.foot .items .con{
+    padding:0 0 10px 0;
+    font-size:14px;
+}
+.foot .items .con a{
+    display:block;
+    color:#666;
+    padding:5px 0 0 0;
+}
+.foot .items .con a:hover{
+    color:#ff6402;
+}
+.foot .items .tel{
+    text-align:center;
+    margin:0;
+    position:relative;
+    border-left:1px solid #ddd;
+    padding-left:30px;
+}
+.foot .items .tel h1{
+    font-size:20px;
+    font-weight:normal;
+    padding:0 0 5px 0;
+    color:#ee7800;
+    font-family:Arial;
+    min-width:128px;
+}
+.foot .items .tel a{
+    border:1px solid #ee7800;
+    background:#fff;
+    display:block;
+    width:93px;
+    height:28px;
+    padding-left:25px;
+    text-align:center; margin:15px auto auto auto;
+    font-size:12px; line-height:28px;
+    color:#ee7800;
+}
+.foot .items .tel a:hover{
+    color:#F30;
+    background:#ee7800;
+    color:#fff; transition:
+    background-color 0.5s ease;
+}
+/*关于我们结束*/

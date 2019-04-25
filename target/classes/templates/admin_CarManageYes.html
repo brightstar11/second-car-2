@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<div th:include="common/head"></div>
+<body class="">
+
+	<div class="page-main">
+		<div class="header py-4">
+			<div class="container">
+				<div class="d-flex">
+					<a class="header-brand" href="./index.html"> <img
+						th:src="@{${application.logo}}" class="header-brand-img" /> <span
+						th:text="${application.title}"></span>
+					</a>
+					<div class="d-flex order-lg-2 ml-auto">
+						<div class="dropdown d-none d-md-flex">
+							<a class="nav-link icon" data-toggle="dropdown"> <i
+								class="fe fe-bell"></i> <span class="nav-unread"></span>
+							</a>
+
+						</div>
+						<div class="dropdown">
+							<a href="#" class="nav-link pr-0 leading-none"
+								data-toggle="dropdown"> 
+								<span class="ml-2 d-none d-lg-block"> <span
+									class="text-default" th:text="${session.LOGIN_KEY.adminName}"></span>
+									<small class="text-muted d-block mt-1"
+									th:text="${session.LOGIN_KEY.adminName}"></small>
+							</span>
+							</a>
+							<div
+								class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+								
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item"  onclick="help()"> <i
+									class="dropdown-icon fe fe-help-circle"></i> 帮助?
+								</button> <a class="dropdown-item" href="/WebCar/admin/logout"> <i
+									class="dropdown-icon fe fe-log-out"></i> 退出
+								</a>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0"
+						data-toggle="collapse" data-target="#headerMenuCollapse"> <span
+						class="header-toggler-icon"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-3 ml-auto">
+						<form class="input-icon my-3 my-lg-0">
+
+							<div class="input-icon-addon"></div>
+						</form>
+					</div>
+					<div class="col-lg order-lg-first">
+						<ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+							<li class="nav-item"
+								th:each="menu,menuStat:${session.LOGIN_KEY.adminMenus}">
+								<div th:if="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link"> <i th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.adminMenus}"
+											th:text="${m2.menuName}"> </a>
+									</div>
+								</div>
+								<div th:unless="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link" data-toggle="dropdown"> <i
+										th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.menus}" th:text="${m2.menuName}">
+										</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 首页内容 -->
+		<!-- 表格开始 -->
+		<div class="my-3 my-md-5">
+			<!-- 首页展示 -->
+			<div class="card-header">
+				<h3 class="card-title">车辆管理页面</h3>
+				<div class="col-lg-3 ml-auto">
+				
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table card-table table-vcenter text-nowrap">
+					<thead>
+						<tr>
+						     
+							<td>汽车品牌</td>
+							<td>汽车名称</td>
+							<td>汽车车型</td>
+							<td>上牌地点</td>
+							<td>上牌时间</td>
+							<td>行驶里程</td>
+							<td>排量</td>
+							<td>发动机型号</td>
+							<td>驱动方式</td>
+							<td>油耗</td>
+							<td>汽车长</td>
+							<td>汽车宽</td>
+							<td>汽车高</td>
+							<td>汽车级别</td>
+							<td>后备箱容积</td>
+							<td>驾驶方式</td>
+							<td>价格</td>
+							<td>车架号</td>
+							<td>颜色</td>
+							<td>使用能源类型</td>
+							<td>产地</td>
+							<td>生产方式</td>
+							
+							<td>汽车图片</td>
+							<td>是否通过验证</td>
+							<td>汽车拥有人用户名</td>
+							<td>你可以进行的操作</td>
+						</tr>
+					</thead>
+					<tbody th:each="p:${list}">
+						<tr>
+						    <td th:text="${p.id}" style="display:none"></td>
+                            <td th:text="${p.brandname}"></td>
+							<td th:text="${p.carname}"></td>
+							<td th:text="${p.cartype}"></td>
+							<td th:text="${p.carlnwhere}"></td>
+							<td th:text="${p.carlntime}"></td>
+							<td th:text="${p.carmileage}"></td>
+							<td th:text="${p.cardisplacement}"></td>
+							<td th:text="${p.carmotor}"></td>
+							<td th:text="${p.cardrive}"></td>
+							<td th:text="${p.caroil}"></td>
+							<td th:text="${p.carlong}"></td> 
+							<td th:text="${p.carwide}"></td> 
+							<td th:text="${p.carheight}"></td>
+							<td th:text="${p.levelname}"></td>
+							<td th:text="${p.cartrunk}"></td>
+							<td th:text="${p.drivetype}"></td>
+							<td th:text="${p.carprice}"></td>
+							<td th:text="${p.carno}"></td>
+							<td th:text="${p.carcolor}"></td>
+							<td th:text="${p.carpower}"></td>
+							<td th:text="${p.carpop}"></td>
+							<td th:text="${p.carpmethod}"></td>
+							<td th:text="${p.caricon}"></td>
+							<td th:text="${p.carvalidate}"></td>
+							<td th:text="${p.carhavename}"></td>
+							<td><input type="button" value="修改汽车验证状态" name="button"
+								th:onclick="'openwin(\''+${p.id}+'\')'" /> 
+								
+								</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div th:include="common/common::page"></div>
+		<!-- 表格结束 -->
+
+
+
+	</div>
+
+
+
+	<div class="col-6 col-md-3">
+
+
+		<footer class="footer">
+			<div class="container">
+				<div class="row align-items-center flex-row-reverse">
+					<div class="col-auto ml-lg-auto">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<ul class="list-inline list-inline-dots mb-0">
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+						Copyright © 2018</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+<script type="text/javascript">
+function help(){
+	alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+	}
+
+function openwin(id){
+	
+	var id=id;
+	var data='id='+id;
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/admin/Admin_CarManageUpdate" ,//url
+	     data:data,
+	     success: function (reslut) {
+	         
+	         console.log(reslut);//打印服务端返回的数据(调试用)
+	         if (reslut=='1') {
+	         	alert("修改成功");
+	         	window.location.href = "/WebCar/admin/Admin_CarManage";
+	         };
+	     },
+	     error : function() {
+	         alert("异常！");
+	         
+	     }
+	});
+} 
+</script>
+
+</html>

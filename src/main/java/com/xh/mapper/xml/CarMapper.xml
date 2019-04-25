@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.mapper.CarMapper">
+
+<!-- 配置 属性与列名的映射 -->
+<resultMap type="com.xh.web.model.CarModel" id="list">
+ <id property="id" column="id"  />
+ <result property="brandname" column="brandname"/>
+ <result property="carname" column="carname"/>
+ <result property="cartype" column="cartype"/>
+ <result property="carlnwhere" column="carlnwhere"/>
+ <result property="carlntime" column="carlntime"/>
+ <result property="carmileage" column="carmileage"/>
+ <result property="cardisplacement" column="cardisplacement"/>
+ <result property="carmotor" column="carmotor"/>
+ <result property="cardrive" column="cardrive"/>
+ <result property="caroil" column="caroil"/>
+ <result property="carlong" column="carlong"/>
+ <result property="carwide" column="carwide"/>
+ <result property="carheight" column="carheight"/>
+ <result property="levelname" column="levelname"/>
+ <result property="cartrunk" column="cartrunk"/>
+ <result property="drivetype" column="drivetype"/>
+ <result property="carprice" column="carprice"/>
+ <result property="carno" column="carno"/>
+ <result property="carcolor" column="carcolor"/>
+ <result property="carpower" column="carpower"/>
+ <result property="carpop" column="carpop"/>
+ <result property="carpmethod" column="carpmethod"/>
+ <result property="caricon" column="caricon"/>
+ <result property="carvalidate" column="carvalidate"/>
+ <result property="carhavename" column="carhavename"/>
+ </resultMap>
+
+<!-- 查询所用车辆信息 -->
+<select id="CarselectAll" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid                       
+</select>
+<!-- 品牌查找 -->
+<select id="searchCarName" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid and cb.brandname=#{brandname}                     
+</select>
+
+<!-- 查询审核后的车辆 -->
+<select id="CarselectYes" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid  and c.carvalidateid=1                     
+</select>
+<!-- 查询没有审核的车辆 -->
+<select id="CarselectNo" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid    and c.carvalidateid=2                    
+</select>
+<select id="CarselectOne" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid  and id=#{id}                     
+</select>
+<delete id="Admin_CarManageDelect">
+delete from car where id=#{id}
+</delete>
+
+
+<!-- 根据车的品牌，进行模糊搜索 -->
+<select id="BuyCarSearch" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,cl.carlntime,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carlevels cll,carlntime cl,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid  and c.carlntimeid=cl.carlntimeid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid  and cb.brandname like '%cb.brandname=#{brandname}%'                    
+</select>
+</mapper>

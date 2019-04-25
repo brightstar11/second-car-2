@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.mapper.OrderMapper">
+<!-- 配置 属性与列名的映射 -->
+<resultMap type="com.xh.web.model.OrderModel" id="list">
+ <id property="orderid" column="orderid"  />
+ <result property="ordercarname" column="ordercarname"/>
+ <result property="ordercarhavename" column="ordercarhavename"/>
+ <result property="orderhavetel" column="orderhavetel"/>
+ <result property="ordermoney" column="ordermoney"/>
+ <result property="ordername" column="ordername"/>
+ <result property="orderaddr" column="orderaddr"/>
+ <result property="ordertel" column="ordertel"/>
+ <result property="orderbegintime" column="orderbegintime"/>
+ <result property="orderendtime" column="orderendtime"/>
+ <result property="orderstatic" column="orderstatic"/>
+ </resultMap>
+ <select id="admin_OrderAll" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid
+ </select>
+ <!-- 查询未交易完成订单 -->
+ <select id="Admin_OrderManageOnGoing" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=2
+ </select>
+ <!-- 查询交易完成订单 -->
+ <select id="Admin_OrderManageFinish" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=1
+ </select>
+ <!-- 查询交易失败订单 -->
+ <select id="Admin_OrderManageFail" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=3
+ </select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  <select id="searchOrderNo" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderid=#{orderid}
+ </select>
+ 
+ <update id="Admin_OrderManageUpdate">
+ update orders set orderendtime=#{orderendtime},orderstaticid=#{orderstaticid} where orderid=#{orderid}
+ </update>
+ </mapper>

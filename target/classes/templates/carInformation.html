@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../images/favicon.ico">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/index.js"></script>
+    <!--引入bootstrap样式-->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="../css/carInformation.css" />
+    <!--<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+</head>
+<body>
+<!--导航栏开始-->
+<div class="container-fluid" style="background-color: #f8f8f8;">
+    <div class="container">
+        <div class="row" style="height: 36px;">
+            <div class="col-sm-11" style="height: 36px">
+                <div class="row daohang" style="height: 100%;">
+                    <div class="col-sm-2" style="height: 100%;"><a href="#" title="互联网汽车交易系统">首页</a></div>
+                    <div class="col-sm-3" style="height: 100%;"></div>
+                    <div class="col-sm-7" style="height: 100%">
+                        <ul class="Right_nav">
+                            <li style="background-color: #f8f8f8">
+                                <a href="./login.html" style="margin-left: 2px;">登录</a>
+                                <a href="./register.html" style="margin-left: 2px;">注册</a>
+                            </li>
+                            <li class="dropdown" style="cursor:pointer;position: relative;z-index: 2;">
+                                <a href="#" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
+                                <ul class="aa" style="display: none;position: absolute;">
+                                    <li><a href="order">二手车订单</a></li>
+                                    <li><a href="#">新车订单</a></li>
+                                    <li><a href="#">二手车服务</a></li>
+                                    <li><a href="#">免费发车</a></li>
+                                </ul>
+                            </li>
+
+                            <li style="cursor:pointer;"><a href="">联系方式</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 daohang" style="height: 36px;"><a href="./login.html" style="line-height: 36px;">退出</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--导航栏结束-->
+<!--搜索框开始-->
+<div class="container">
+    <div class="row" style="height: 123px;">
+        <div class="col-sm-3" style="height: 100%">
+            <div class="logo">
+                <a href=""><img src="../images/淘车.PNG" alt="" title="二手车交易市场"></a>
+            </div>
+        </div>
+        <div class="col-sm-7" style="height: 100%">
+            <div class="choose">
+                <a href="#">二手车</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder='搜"10-20万"大众试试'>
+                <button>搜索</button>
+            </div>
+        </div>
+        <!--<div class="col-sm-2" style="height: 100%">-->
+        <!--<a href="#" class="maiche">卖车</a>-->
+        <!--</div>-->
+    </div>
+</div>
+<!--搜索框结束-->
+<!--列表栏开始-->
+<div class="container-fluid">
+    <div class="row" style="background-color: #ff6402;height: 36px;">
+        <div class="container" style="height: 100%;">
+            <div class="row">
+                <ul class="list">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="list-active"><a href="#">买车</a></li>
+                    <li><a href="#">卖车</a></li>
+                    <li><a href="#">置换</a></li>
+                    <li><a href="#">估价</a></li>
+                    <li><a href="#">新车</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--列表栏结束-->
+<!--位置开始-->
+<div class="container-fluid" style="background-color: #f8f8f8">
+    <div class="container">
+        <div class="position">
+            您的位置：
+            <a href="#">二手车</a>
+            <i>></i>
+            <a href="#">雪佛兰科鲁兹 </a>
+            <i>>></i>
+            <a href="#">2012款</a>
+            <span class="car-number">车源号：019916784</span>
+        </div>
+        <div class="car-information">
+            <div class="car-left">
+                <div class="car-img">
+                    <ul>
+                        <li><img src="../images/雪佛兰1.webp" alt=""></li>
+                        <li><img src="../images/雪佛兰2.webp" alt=""></li>
+                        <li><img src="../images/雪佛兰3.webp" alt=""></li>
+                        <li><img src="../images/雪佛兰4.webp" alt=""></li>
+                    </ul>
+                </div>
+                <div class="small-img">
+                    <ol>
+                        <li><img src="../images/雪佛兰1.webp" alt=""><em ></em></li>
+                        <li><img src="../images/雪佛兰2.webp" alt=""><em></em></li>
+                        <li><img src="../images/雪佛兰3.webp" alt=""><em></em></li>
+                        <li ><img src="../images/雪佛兰4.webp" alt=""><em class="current"></em></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="car-right">
+                <h1 class="car-title">
+                    <span>成都市</span>
+                    <span>雪佛兰科鲁兹</span>
+                    <span>2012款</span>
+                    <span>1.8L SE AT</span>
+                </h1>
+                <div class="price"><span>金额：</span>
+                <span>5.28</span>万
+                </div>
+                <div class="showlist">
+                    <div>
+                        <span class="time-text">上牌时间</span><br>
+                        <span class="time">2012年9月</span>
+                    </div>
+                    <div>
+                        <span class="time-text">里程</span><br>
+                        <span class="time">5.00万公里</span>
+                    </div>
+                    <div>
+                        <span class="time-text">排量／变速箱</span><br>
+                        <span class="time">2.0L/双离合</span>
+                    </div>
+                    <div>
+                        <span class="time-text">销售城市</span><br>
+                        <span class="time">成都</span>
+                    </div>
+                </div>
+                <div class="phone"><span href="">联系电话</span><span>888-888-8888</span></div>
+            </div>
+        </div>
+        <div class="tab">
+            <li class="tabcurrent"><a href="#carinformation">车辆信息</a></li>
+            <li><a href="#carimg">车源图片</a></li>
+        </div>
+        <div class="parmter">
+            <div class="parmter-title">参数配置</div>
+            <div class="parmter-content">
+                <div class="col-xs-6">
+                    <ul class="list-left">
+                        <li>
+                            <span> <a href="#">雪佛兰</a> <a href="#">科鲁兹</a>
+                            </span>
+                            品牌型号
+                        </li>
+                        <li>
+                            <span>成都</span>
+                            牌照所在地
+                        </li>
+                        </li>
+                        <li>
+                            <span>147马力</span>
+                            发动机
+                        </li>
+                        <li>
+                            <span>前轮驱动</span>
+                            驱动方式
+                        </li>
+                        <li>
+                            <span>紧凑型</span>
+                            车辆级别
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    <ul class="list-left">
+                    <li>
+                        <span>1.8L</span>
+                        排量
+                    </li>
+                    <li>
+                        <span>7.8L</span>
+                        油耗
+                    </li>
+                    <li>
+                        <span>4598mm*1797mm*1477mm</span>
+                        长宽高
+                    </li>
+
+                    <li>
+                        <span>4598mm*1797mm*1477mm</span>
+                        4门5座三厢
+                    </li>
+                    <li>
+                        <span>400L</span>
+                        后备箱体积
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="carsourse-img">
+            <div class="carsourse-title" id="carimg">车源图片</div>
+            <ul class="carsourse-content">
+                <li class="col-xs-6">
+                    <div><img src="../images/雪佛兰1.webp" alt=""></div>
+                </li>
+                <li class="col-xs-6">
+                    <div><img src="../images/雪佛兰2.webp" alt=""></div>
+                </li>
+                <li class="col-xs-6">
+                    <div><img src="../images/雪佛兰3.webp" alt=""></div>
+                </li>
+                <li class="col-xs-6">
+                    <div><img src="../images/雪佛兰4.webp" alt=""></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--位置结束-->
+<!--关于我们开始-->
+<div class="container-fluid" style="background-color:#f8f8f8">
+    <div class="container" style="padding: 0">
+        <div class="row" >
+            <div class="ftWrap">
+                <div class="foot">
+                    <div class="cent">
+                        <div class="relate">
+                            <div class="items">
+                                <div class="tit">交易帮助</div>
+                                <div class="con">
+                                    <a href="#">买车帮助</a>
+                                    <a href="#">卖车帮助</a>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="tit">客服中心
+                                </div>
+                                <div class="con">
+                                    <a href="#">网站合作</a>
+                                    <a href="#">关于我们</a>
+                                    <a href="#">联系我们</a>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div class="tit">购车指南
+                                </div>
+                                <div class="con">
+                                    <a href="#">购车帮助</a>
+                                </div>
+                            </div>
+                            <div class="items last">
+                                <div class="tel">
+                                    <h1>888-888-8888</h1>
+                                    <p>周一至周日 8:00-18:00</p>
+                                    <p>免费咨询</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--关于我们结束-->
+<div class="container-fluid" style="background-color:#f8f8f8;height: 25px"></div>
+</body>
+</html>

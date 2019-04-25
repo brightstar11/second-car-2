@@ -1,0 +1,160 @@
+.sell_box {
+    width: 100%;
+    height: 450px;
+    padding: 50px 0;
+    background: url(../images/mcbanner.jpg) center no-repeat;
+    background-size: 100% 450px;
+    background-position: top;
+}
+
+.middlewrap {
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.w-title {
+    line-height: 60px;
+    font-size: 20px;
+}
+
+.sel-box, .sel-suc {
+    width: 80%;
+    padding: 25px 0;
+    background-color: #fff;
+    position: absolute;
+    left: 10%;
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
+
+.write-box {
+    padding: 0 50px 12px;
+    height: 40px;
+    font-size: 16px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #333333;
+
+}
+
+a {
+    color: #333333;
+}
+
+.input-phone {
+    display:inline-block;
+    width: 160px;
+    height: 15px;
+    padding: 10px;
+    border: 1px solid #d2d2d2;
+    font-size: 14px;
+    font-family: microsoft yahei;
+    line-height: 24px;
+    color:#333;
+    margin: 0 auto;
+}
+
+select {
+    width: 160px;
+}
+
+.sell-submit {
+    display: block;
+    width: 560px;
+    height: 46px;
+    line-height: 46px;
+    font-size: 18px;
+    font-family: Microsoft Yahei;
+    color: #fff;
+    background: #00002e;
+    border: 0;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.sell-img-1 {
+    width: 100%;
+    background: #f8f8f8;
+    padding: 30px 0px;
+    overflow: hidden;
+}
+
+.con-tit {
+    width: 1200px;
+    height: 39px;
+    margin: 40px auto;
+    color: #00002e;
+    font-size: 28px;
+    line-height: 38px;
+    font-family: Microsoft YaHei;
+    text-align: center
+}
+
+.sell-guide {
+    width: 1110px;
+    margin: 0 auto
+}
+
+.sell-guide li {
+    width: 540px;
+    height: 170px;
+    margin-bottom: 20px
+}
+
+.sell-guide .p1 {
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    color: #00002e;
+    font-family: Microsoft YaHei
+}
+
+.txt-box {
+    padding: 9px 14px;
+    margin-left: 40px;
+    font-size: 14px;
+    color: #666;
+    line-height: 24px;
+    width: 470px;
+    height: 100px;
+    font-family: Microsoft YaHei
+}
+
+.tj_form {
+    width: 100%;
+    background: #fff;
+    padding: 20px 0;
+    overflow: hidden
+}
+
+.write-tip {
+    text-align: center;
+    font-size: 18px;
+    height: 48px;
+    line-height: 48px;
+    color: #2a2a2a
+}
+
+.backtotop {
+    text-align: center;
+    display: block;
+    margin: 0 auto 50px;
+    width: 290px;
+    height: 50px;
+    line-height: 50px;
+    background: #00002e;
+    font-size: 24px;
+    color: #fff
+}
+
+.backtotop:hover {
+    background: #020247;
+    text-decoration: none;
+    color: #fff
+}

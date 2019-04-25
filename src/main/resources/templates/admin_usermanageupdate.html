@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<div th:include="common/head"></div>
+<style>
+body{ text-align:center} 
+#divcss5{margin:0 auto;border:1px solid #000;width:300px;height:100px} 
+.col-xs-4 img{
+	width:136px;
+	height:136px;
+}
+</style>
+<body class="">
+
+	<div class="page-main">
+		<div class="header py-4">
+			<div class="container">
+				<div class="d-flex">
+					<a class="header-brand" href="./index.html"> <img
+						th:src="@{${application.logo}}" class="header-brand-img" /> <span
+						th:text="${application.title}"></span>
+					</a>
+					<div class="d-flex order-lg-2 ml-auto">
+						<div class="dropdown d-none d-md-flex">
+							<a class="nav-link icon" data-toggle="dropdown"> <i
+								class="fe fe-bell"></i> <span class="nav-unread"></span>
+							</a>
+
+						</div>
+						<div class="dropdown">
+							<a href="#" class="nav-link pr-0 leading-none"
+								data-toggle="dropdown">
+								<span class="ml-2 d-none d-lg-block"> <span
+									class="text-default" th:text="${session.LOGIN_KEY.adminName}"></span>
+									<small class="text-muted d-block mt-1"
+									th:text="${session.LOGIN_KEY.adminName}"></small>
+							</span>
+							</a>
+						<div
+								class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+								
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item"  onclick="help()"> <i
+									class="dropdown-icon fe fe-help-circle"></i> 帮助?
+								</button> <a class="dropdown-item" href="/WebCar/admin/logout"> <i
+									class="dropdown-icon fe fe-log-out"></i> 退出
+								</a>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0"
+						data-toggle="collapse" data-target="#headerMenuCollapse"> <span
+						class="header-toggler-icon"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-3 ml-auto">
+						<form class="input-icon my-3 my-lg-0">
+
+							<div class="input-icon-addon"></div>
+						</form>
+					</div>
+					<div class="col-lg order-lg-first">
+						<ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+							<li class="nav-item"
+								th:each="menu,menuStat:${session.LOGIN_KEY.adminMenus}">
+								<div th:if="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link"> <i th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.adminMenus}"
+											th:text="${m2.menuName}"> </a>
+									</div>
+								</div>
+								<div th:unless="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link" data-toggle="dropdown"> <i
+										th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.menus}" th:text="${m2.menuName}">
+										</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 首页内容 -->
+		<!-- 表格开始 -->
+		<div class="my-3 my-md-5">
+			<!-- 首页展示 -->
+			<div class="card-header">
+				<h3 class="card-title"><a href="./usermanage">注册用户管理</a>—>修改用户信息</h3>
+				
+			</div>
+			<div class="table-responsive">
+			
+				<table class="table card-table table-vcenter text-nowrap" id="divcss5">
+<tr><td>头像: <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">选择头像</button></td></tr>
+			<form action="/WebCar/admin/usermanageupdate2" method="POST">
+			
+				
+<input name="id" th:value="${list.id}" type="hidden" readonly="readonly"/>
+<tr><td>用户名:<input name="username" th:value="${list.username}" /></td></tr>
+              <input  type="hidden" name="usericon" th:value="${list.usericon}" />
+<tr><td>真实名字: <input name="userrealname" th:value="${list.userrealname}" /></td></tr>
+<tr><td>密码: <input name="userpwd" value="" /></td></tr>
+<tr><td>电话: <input name="userphone" th:value="${list.userphone}" /></td></tr>
+<tr><td>地址: <input name="useraddress" th:value="${list.useraddress}" /></td></tr>
+<tr><td>性别: <input name="usersex" th:value="${list.usersex}" /></td></tr>
+<tr><td>邮箱: <input name="useremail" th:value="${list.useremail}" /></td></tr>
+
+<tr><td><input type="submit" value="确定" />
+<input type="button" name="return" value="返回" onClick="location.href='./usermanage'" />
+</td></tr>
+				
+				</form>
+				</table>
+			</div>
+	</div>
+		
+		<!-- 表格结束 -->
+
+
+
+</div>
+		<div class="col-6 col-md-3">
+
+
+			<footer class="footer">
+				<div class="container">
+					<div class="row align-items-center flex-row-reverse">
+						<div class="col-auto ml-lg-auto">
+							<div class="row align-items-center">
+								<div class="col-auto">
+									<ul class="list-inline list-inline-dots mb-0">
+
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+							Copyright © 2018</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		
+		
+		
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					头像选择
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-xs-4">
+						<img src="/images/icon/icon1.png"/>
+						<button onclick="selectIcon('1')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon2.png"/>
+						<button onclick="selectIcon('2')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon3.png"/>
+						<button onclick="selectIcon('3')">选择</button>
+					</div>
+					
+					<div class="col-xs-4">
+						<img src="/images/icon/icon4.png"/>
+						<button onclick="selectIcon('4')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon5.png"/>
+						<button onclick="selectIcon('5')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon6.png"/>
+						<button onclick="selectIcon('6')">选择</button>
+					</div>
+					
+					<div class="col-xs-4">
+						<img src="/images/icon/icon7.png"/>
+						<button onclick="selectIcon('7')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon8.png"/>
+						<button onclick="selectIcon('8')">选择</button>
+					</div>
+					<div class="col-xs-4">
+						<img src="/images/icon/icon9.png"/>
+						<button onclick="selectIcon('9')">选择</button>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="close" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script>
+	function selectIcon(index){
+		$("#myModal").modal("hide");
+		$('.close').click();
+		$("input[name=usericon]").val(index);
+		alert("选择成功");th:style="'background-image: th:url(/images/icon/icon'+${session.LOGIN_KEY.usericon+'.jpg)'"
+	
+		
+		}
+		
+	
+	function help(){
+		alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+		}
+
+</script>
+</body>
+
+
+
+
+</html>
