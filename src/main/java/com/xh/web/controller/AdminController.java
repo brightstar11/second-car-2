@@ -53,7 +53,7 @@ public String index() {
 //返回首页--------------------------------------------------------------------
 @RequestMapping("/returnindex")
 public String index2() {
-	return "index";
+	return "admin_index";
 }
 @RequestMapping("/logout")
 public String index3(HttpServletRequest request,HttpServletResponse response) {
@@ -93,13 +93,13 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 			admin2.setAdminMenus(menus);
 			//System.out.println(admin2.toString());
 		    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
-		return "index";
+		return "admin_index";
 		}else if(admin2.getAdminPermission().equals("1")) {
 			// 登录成功,查询用户的菜单列表
 						List<AdminMenu> menus = ad.findMenu1ByUserId(admin2.getAdminPermission()+"");
 						admin2.setAdminMenus(menus);
 					    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
-					    return "index";
+					    return "admin_index";
 		}
 		return "adminlogin";
 		

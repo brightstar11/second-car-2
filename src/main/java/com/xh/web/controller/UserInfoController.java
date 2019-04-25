@@ -40,6 +40,16 @@ private UserInfoService userInfoService;
    public String index() {
    	 return "login";
    }
+   
+   @RequestMapping("/user_index")
+   public String index6() {
+	   
+   	 return "user_index";
+   }
+   @RequestMapping("/user_newindex")
+   public String index7() {
+   	 return "user_newindex";
+   }
    @RequestMapping("/register")
    public String index2() {
    	 return "register";
@@ -72,12 +82,12 @@ private UserInfoService userInfoService;
 	   userLogin.setUserpwd(userpwd);
 	   List<UserLogin> list=User_LoginService.userloginquery(userLogin);
 //使用session 存储用户登录信息
-	  session.setAttribute("LoginUser", list);
+	  
          if(list.size()>0) {
         	 //把list 转换成 实体类
         	 
         	 UserLogin userLogin2= (UserLogin)list.get(0);
-		  
+        	 session.setAttribute("LoginUser", userLogin2);
 		   System.out.println(userLogin2.getId());
 		        return 1;
 		   }else {

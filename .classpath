@@ -31,5 +31,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/caiwenchao/Desktop/毕业设计/第三方依赖/javax.mail .jar"/>
 	<classpathentry kind="lib" path="E:/新建文件夹/知了堂/eclipse/plugins/javax.servlet.jsp_2.2.0.v201112011158.jar"/>
+	<classpathentry kind="lib" path="F:/QQ/574704464/FileRecv/jsoup-1.11.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
