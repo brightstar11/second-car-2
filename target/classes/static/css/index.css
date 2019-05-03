@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
 }
-
+a {text-decoration:none;}
 /*导航栏开始*/
 .daohang {
     background: #f8f8f8;

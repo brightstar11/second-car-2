@@ -58,12 +58,13 @@ $(function () {
         var child=$(parent).children()
         $(this).addClass('aSort');
         $(child).removeClass('aSort')
+
         // var li="<li><span></span><span class='close'></span></li>"
         // $('.selected-type').append(li)
     })
     $('#Sort li a').click(function (e) {
         var parent=$(this).parent().parent().siblings()
-        console.log(parent)
+        // console.log(parent)
         for(var i=0;i<parent.length;i++){
             var child=$(parent[i]).children();
             $(child[i]).children().removeClass('aSort')
@@ -71,7 +72,23 @@ $(function () {
 
         $(this).siblings().removeClass('aSort')
         $(this).addClass('aSort');
-        console.log($(this)[0].innerHTML)
+        var clickText=$(this)[0].innerHTML
+        var brandName=$('#brand-name li').children('a')
+        var aa=[]
+        for(var i=0;i<brandName.length;i++){
+            aa.push(brandName[i].innerHTML)
+        }
+        var index=aa.indexOf($(this)[0].innerHTML.trim())
+        if(index==-1){
+            $('#select-brand a')[0].innerHTML=clickText
+            $('#select-brand a').addClass('aSort')
+            $('#select-brand').siblings().children().removeClass('aSort')
+        }else{
+            var currentLi = $('#brand-name li')[index]
+            $(currentLi).children().addClass('aSort')
+            $(currentLi).siblings().children().removeClass('aSort')
+        }
+        $('#ALLdown')[0].style.display="none"
     })
     // 图片点击
     var num2=6;
@@ -94,4 +111,12 @@ $(function () {
         $(this).addClass('tabcurrent')
         $(this).siblings().removeClass('tabcurrent')
     })
+
+    var meun = $('.leftMeun .meun-item')
+    for(var i=0;i<meun.length;i++){
+        $(meun[i]).click(function (e) {
+            $(this).addClass('meun-item-active')
+            $(this).siblings().removeClass('meun-item-active')
+        })
+    }
 });

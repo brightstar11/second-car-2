@@ -31,8 +31,8 @@ public interface CarService {
 	   public List<CarModel> BuyCarSearch(String  brandname);
 	   //价格
 	   public List<CarModel> BuyCarSearch2(Integer  carprice1,Integer  carprice2);
-	   
-	   
+	   //类型
+	   public List<CarModel> BuyCarSearch3(String levelname);
 	   
 	   
 	   

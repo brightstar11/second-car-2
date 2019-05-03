@@ -138,5 +138,10 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		return CarMapper.insertCar_User(carno, username);
 	}
+	@Override
+	public List<CarModel> BuyCarSearch3(String levelname) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch3(levelname);
+	}
  
 }

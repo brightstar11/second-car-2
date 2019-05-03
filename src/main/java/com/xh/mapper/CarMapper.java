@@ -35,6 +35,7 @@ public interface CarMapper {
    
    public List<CarModel> BuyCarSearch(String  brandname);
    public List<CarModel> BuyCarSearch2(Integer  carprice1,Integer  carprice2);
+   public List<CarModel> BuyCarSearch3(String levelname);
    
    //查询车的品牌，只使用carbrands表
    @Select("select * from carbrands limit 0,10")

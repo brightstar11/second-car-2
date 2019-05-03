@@ -43,7 +43,7 @@ public String buyCar(Integer pageNum,Model model) {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list=car.CarselectAll();
 	
 		
@@ -103,7 +103,7 @@ public String  BuyCarSearch(Integer pageNum,String brandname,Model model) {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list=car.BuyCarSearch(brandname);
 	
 		
@@ -151,7 +151,7 @@ public String  BuyCarSearch2(Integer pageNum,Integer carprice1,Integer carprice2
 			num = pageNum;
 		}
 		pm.setPageNum(num);
-PageHelper.startPage(num, 5, true);
+PageHelper.startPage(num, 10, true);
 List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
 	
 		
@@ -187,7 +187,54 @@ List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
 	return "user_buyCar";
 	
 }
-
+//根据车的类型，进行模糊搜索
+//根据车的价格，进行模糊搜索 
+@RequestMapping("/User_BuyCarSearch3")
+public String  BuyCarSearch3(Integer pageNum,String levelname,Model model) {
+	
+	//分页
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+PageHelper.startPage(num, 10, true);
+List<CarModel> list=car.BuyCarSearch3(levelname);
+	
+		
+		PageInfo pageinfo = new PageInfo(list);
+		int x = pageinfo.getStartRow();
+		int y = pageinfo.getEndRow();
+		long z = pageinfo.getTotal();
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+		model.addAttribute("pageInfo",pageinfo);
+		model.addAttribute("info",info);
+	    
+	model.addAttribute("listAll",list);
+	List<CarBrands> list2=car.CarbrandsAll();
+	List<Carlevel> list3=car.CarLevelAll();
+	List<CarMileAge> list4=car.CarmileageAll();
+	List<CarBrands> list5=car.CarbrandsAll0_10();
+	List<String> list6=car.CarlntimeAllYear();
+	List<String> list11=car.CarlntimeAllMonth();
+	List<CarColor> list7=car.CarcolorAll();
+	List<CarPop> list8=car.CarpopAll();
+	List<CarPower> list9=car.CarPowerAll();
+	List<CarPmethod> list10=car.CarPmethodAll();
+	model.addAttribute("CarbrandsAll",list2);
+	model.addAttribute("listlevel",list3);
+	model.addAttribute("carmileageAll",list4);
+	model.addAttribute("CarbrandsAll0_10",list5);
+	model.addAttribute("CarlntimeAllYear",list6);
+	model.addAttribute("CarlntimeAllMonth",list11);
+	model.addAttribute("CarColorAll",list7);
+	model.addAttribute("CarPopAll",list8);
+	model.addAttribute("CarPowerAll",list9);
+	model.addAttribute("CarPmethodAll",list10);
+	return "user_buyCar";
+	
+}
 
 //卖车主页
 @RequestMapping("/SaleCar")
@@ -232,5 +279,9 @@ public Integer PreserveCar(String username,CarModel carModel) {
 	}else {
 		return 0;
 	}
+}
+@RequestMapping("user_Manger")
+public String index111() {
+	return "Manger";
 }
 }
