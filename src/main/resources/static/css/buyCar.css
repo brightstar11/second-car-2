@@ -137,14 +137,30 @@ a:hover {
     background-color: #fff;
     width: 200px;
     border:1px solid #e5e5e5;
-    height: 100px;
     z-index: 2;
 }
 .mileage {
     background-color: #fff;
     width: 250px;
     border:1px solid #e5e5e5;
-    height: 100px;
+    z-index: 2;
+}
+.Car-pop {
+    background-color: #fff;
+    width: 200px;
+    border:1px solid #e5e5e5;
+    z-index: 2;
+}
+.Car-power {
+    background-color: #fff;
+    width: 200px;
+    border:1px solid #e5e5e5;
+    z-index: 2;
+}
+.Car-pmethod {
+    background-color: #fff;
+    width: 200px;
+    border:1px solid #e5e5e5;
     z-index: 2;
 }
 

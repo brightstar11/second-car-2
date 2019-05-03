@@ -6,7 +6,9 @@ public class Car {
  private String carname;
  private Integer cartypeid;
  private String carlnwhere;
- private Integer carlntimeid;
+ private String carlntime;
+ private Integer carbirthid;
+ private Integer caredition;
  private Integer carmileageid;
 
  private String cardisplacement;
@@ -29,6 +31,18 @@ public class Car {
  private Integer carvalidateid;
  private String carhavename;
  
+public Integer getCarbirthid() {
+	return carbirthid;
+}
+public void setCarbirthid(Integer carbirthid) {
+	this.carbirthid = carbirthid;
+}
+public Integer getCaredition() {
+	return caredition;
+}
+public void setCaredition(Integer caredition) {
+	this.caredition = caredition;
+}
 public String getCarhavename() {
 	return carhavename;
 }
@@ -65,11 +79,11 @@ public String getCarlnwhere() {
 public void setCarlnwhere(String carlnwhere) {
 	this.carlnwhere = carlnwhere;
 }
-public Integer getCarlntimeid() {
-	return carlntimeid;
+public String getCarlntime() {
+	return carlntime;
 }
-public void setCarlntimeid(Integer carlntimeid) {
-	this.carlntimeid = carlntimeid;
+public void setCarlntime(String carlntime) {
+	this.carlntime = carlntime;
 }
 public Integer getCarmileageid() {
 	return carmileageid;
@@ -188,7 +202,7 @@ public void setCarvalidateid(Integer carvalidateid) {
 @Override
 public String toString() {
 	return "Car [id=" + id + ", carbrandid=" + carbrandid + ", carname=" + carname + ", cartypeid=" + cartypeid
-			+ ", carlnwhere=" + carlnwhere + ", carlntimeid=" + carlntimeid + ", carmileageid=" + carmileageid
+			+ ", carlnwhere=" + carlnwhere + ", carlntime=" + carlntime + ", carmileageid=" + carmileageid
 			+ ", cardisplacement=" + cardisplacement + ", carmotor=" + carmotor + ", cardrive=" + cardrive + ", caroil="
 			+ caroil + ", carlong=" + carlong + ", carwide=" + carwide + ", carheight=" + carheight + ", carlevelid="
 			+ carlevelid + ", cartrunk=" + cartrunk + ", drivetypeid=" + drivetypeid + ", carprice=" + carprice + ", carno="

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.common.MD5Util;
 import com.xh.entity.Admin;
-
+import com.xh.entity.UserInfo;
 import com.xh.service.AdminService;
 import com.xh.web.model.PageModel;
 
@@ -41,27 +42,25 @@ public class Admin_AdminManagerController {
 	
 	//管理员管理
 	@RequestMapping("/adminmanage")
-	  public String usermanage(String pageNum,Model model) {
+	  public String usermanage(Integer pageNum,Model model) {
 		
-		List<Admin> list=adminService.adminSeletAll("1");
+		
 		//分页
 		 PageModel pm = new PageModel();
 			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
 			}
 			pm.setPageNum(num);
-			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<Admin> list=adminService.adminSeletAll("1");
+		
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
 		     model.addAttribute("list",list);
@@ -69,29 +68,27 @@ public class Admin_AdminManagerController {
 	}
 	//管理员管理
 		@RequestMapping("/searchAdminName")
-		  public String searchAdminName(String pageNum,Model model,@RequestParam("name") String name) {
+		  public String searchAdminName(Integer pageNum,Model model,@RequestParam("name") String name) {
 			Admin admin=new Admin();
 			admin.setAdminName(name);
 			admin.setAdminPermission("1");
-			List<Admin> list=adminService.searchAdminName(admin);
+			
 			//分页
 			 PageModel pm = new PageModel();
 				Integer num = 1;
-				try {
-					num=Integer.parseInt(pageNum);
-				} catch (Exception e) {
-					num=1;
+				if(pageNum != null && pageNum >= 0) {
+					num = pageNum;
 				}
 				pm.setPageNum(num);
-				pm.setPageNum(num);
+		    PageHelper.startPage(num, 5, true);
+		    List<Admin> list=adminService.searchAdminName(admin);
+			
 				
 				PageInfo pageinfo = new PageInfo(list);
-				
 				int x = pageinfo.getStartRow();
 				int y = pageinfo.getEndRow();
 				long z = pageinfo.getTotal();
-				
-				String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+				String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 				model.addAttribute("pageInfo",pageinfo);
 				model.addAttribute("info",info);
 			     model.addAttribute("list",list);

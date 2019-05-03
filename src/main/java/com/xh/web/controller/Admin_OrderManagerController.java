@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.entity.CarOrder;
+import com.xh.entity.UserInfo;
 import com.xh.service.OrderService;
 
 import com.xh.web.model.OrderModel;
@@ -27,63 +29,59 @@ public class Admin_OrderManagerController {
 	
 	
 	@RequestMapping("/Admin_OrderManage")
-	 public String CarselectAll(String pageNum,Model model) {
-		List<OrderModel> list= order.admin_OrderAll();
+	 public String CarselectAll(Integer pageNum,Model model) {
+		
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.admin_OrderAll();
 		for (int i = 0; i < list.size(); i++) {
 			OrderModel orderModel=(OrderModel)list.get(i);
 			System.out.println(orderModel.toString());
 		}
 		
-		//分页
-		 PageModel pm = new PageModel();
-			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
-			}
-			pm.setPageNum(num);
-			pm.setPageNum(num);
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
-		model.addAttribute("list",list);
+		     model.addAttribute("list",list);
 		return "admin_OrderManage";
 	 }
 	
 	@RequestMapping("/searchOrderNo")
-	 public String searchOrderNo(String pageNum,Model model,@RequestParam("name") Integer no) {
-		List<OrderModel> list= order.searchOrderNo(no);
+	 public String searchOrderNo(Integer pageNum,Model model,@RequestParam("name") Integer no) {
+		
 		
 		
 		//分页
 		 PageModel pm = new PageModel();
 			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
 			}
 			pm.setPageNum(num);
-			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.searchOrderNo(no);
+		
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
-		model.addAttribute("list",list);
+		     model.addAttribute("list",list);
 		return "admin_OrderManage";
 	 }
 	
@@ -119,98 +117,92 @@ public class Admin_OrderManagerController {
 	}
 	
 	@RequestMapping("/Admin_OrderManageFinish")
-	 public String Admin_OrderManageFinish(String pageNum,Model model) {
-		List<OrderModel> list= order.Admin_OrderManageFinish();
+	 public String Admin_OrderManageFinish(Integer pageNum,Model model) {
+		
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.Admin_OrderManageFinish();
 		for (int i = 0; i < list.size(); i++) {
 			OrderModel orderModel=(OrderModel)list.get(i);
 			System.out.println(orderModel.toString());
 		}
 		
-		//分页
-		 PageModel pm = new PageModel();
-			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
-			}
-			pm.setPageNum(num);
-			pm.setPageNum(num);
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
-		model.addAttribute("list",list);
+		     model.addAttribute("list",list);
 		return "admin_OrderManageFinish";
 	 }
 	
 	@RequestMapping("/Admin_OrderManageFail")
-	 public String Admin_OrderManageFail(String pageNum,Model model) {
-		List<OrderModel> list= order.Admin_OrderManageFail();
+	 public String Admin_OrderManageFail(Integer pageNum,Model model) {
+		
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.Admin_OrderManageFail();
 		for (int i = 0; i < list.size(); i++) {
 			OrderModel orderModel=(OrderModel)list.get(i);
 			System.out.println(orderModel.toString());
 		}
 		
-		//分页
-		 PageModel pm = new PageModel();
-			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
-			}
-			pm.setPageNum(num);
-			pm.setPageNum(num);
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
-		model.addAttribute("list",list);
+		     model.addAttribute("list",list);
 		return "admin_OrderManageFail";
 	 }
 	
 	@RequestMapping("/Admin_OrderManageOnGoing")
-	 public String Admin_OrderManageOnGoing(String pageNum,Model model) {
-		List<OrderModel> list= order.Admin_OrderManageOnGoing();
+	 public String Admin_OrderManageOnGoing(Integer pageNum,Model model) {
+		
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.Admin_OrderManageOnGoing();
 		for (int i = 0; i < list.size(); i++) {
 			OrderModel orderModel=(OrderModel)list.get(i);
 			System.out.println(orderModel.toString());
 		}
 		
-		//分页
-		 PageModel pm = new PageModel();
-			Integer num = 1;
-			try {
-				num=Integer.parseInt(pageNum);
-			} catch (Exception e) {
-				num=1;
-			}
-			pm.setPageNum(num);
-			pm.setPageNum(num);
 			
 			PageInfo pageinfo = new PageInfo(list);
-			
 			int x = pageinfo.getStartRow();
 			int y = pageinfo.getEndRow();
 			long z = pageinfo.getTotal();
-			
-			String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
-		model.addAttribute("list",list);
+		     model.addAttribute("list",list);
 		return "admin_OrderManageOnGoing";
 	 }
 	

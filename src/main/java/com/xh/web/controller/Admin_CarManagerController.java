@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xh.entity.UserInfo;
 import com.xh.service.CarService;
 import com.xh.service.SellCarService;
 import com.xh.web.model.CarModel;
@@ -36,62 +38,58 @@ public class Admin_CarManagerController {
 	
 	
  @RequestMapping("/Admin_CarManage")
- public String CarselectAll(String pageNum,Model model) {
-	List<CarModel> list= car.CarselectAll();
+ public String CarselectAll(Integer pageNum,Model model) {
+	
+	
+	//分页
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+ List<CarModel> list= car.CarselectAll();
 	for (int i = 0; i < list.size(); i++) {
 		CarModel carModel=(CarModel)list.get(i);
 		System.out.println(carModel.toString());
 	}
 	
-	//分页
-	 PageModel pm = new PageModel();
-		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
-		}
-		pm.setPageNum(num);
-		pm.setPageNum(num);
 		
 		PageInfo pageinfo = new PageInfo(list);
-		
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
-	model.addAttribute("list",list);
+	     model.addAttribute("list",list);
 	return "admin_CarManage";
  }
  
  @RequestMapping("/searchCarName")
- public String searchCarName(String pageNum,Model model,@RequestParam("name") String name) {
-	List<CarModel> list= car.searchCarName(name);
+ public String searchCarName(Integer pageNum,Model model,@RequestParam("name") String name) {
+	
 	
 	//分页
 	 PageModel pm = new PageModel();
 		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
 		}
 		pm.setPageNum(num);
-		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+ List<CarModel> list= car.searchCarName(name);
+	
 		
 		PageInfo pageinfo = new PageInfo(list);
-		
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
-	model.addAttribute("list",list);
+	     model.addAttribute("list",list);
 	return "admin_CarManage";
  }
  
@@ -136,65 +134,61 @@ public class Admin_CarManagerController {
 	 return 0;
  }
  @RequestMapping("/Admin_CarManageNo")
- public String Admin_CarManageNo(String pageNum,Model model) {
-	List<CarModel> list= car.CarselectNo();
+ public String Admin_CarManageNo(Integer pageNum,Model model) {
+	
+	
+	//分页
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+ List<CarModel> list= car.CarselectNo();
 	for (int i = 0; i < list.size(); i++) {
 		CarModel carModel=(CarModel)list.get(i);
 		System.out.println(carModel.toString());
 	}
 	
-	//分页
-	 PageModel pm = new PageModel();
-		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
-		}
-		pm.setPageNum(num);
-		pm.setPageNum(num);
 		
 		PageInfo pageinfo = new PageInfo(list);
-		
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
-	model.addAttribute("list",list);
+	     model.addAttribute("list",list);
 	return "admin_CarManageNo";
  }
  @RequestMapping("/Admin_CarManageYes")
- public String Admin_CarManageYes(String pageNum,Model model) {
-	List<CarModel> list= car.CarselectYes();
+ public String Admin_CarManageYes(Integer pageNum,Model model) {
+	
+	
+	//分页
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+ List<CarModel> list= car.CarselectYes();
 	for (int i = 0; i < list.size(); i++) {
 		CarModel carModel=(CarModel)list.get(i);
 		System.out.println(carModel.toString());
 	}
 	
-	//分页
-	 PageModel pm = new PageModel();
-		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
-		}
-		pm.setPageNum(num);
-		pm.setPageNum(num);
 		
 		PageInfo pageinfo = new PageInfo(list);
-		
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
-	model.addAttribute("list",list);
+	     model.addAttribute("list",list);
 	return "admin_CarManageYes";
  }
 }

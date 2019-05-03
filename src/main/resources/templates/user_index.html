@@ -16,41 +16,39 @@
 <body>
 <!--导航栏开始-->
 
+<!--导航栏开始-->
 <div class="container-fluid" style="background-color: #f8f8f8;">
     <div class="container">
         <div class="row" style="height: 36px;">
-            <div class="col-sm-11" style= "height: 36px">
+            <div class="col-sm-11" style="height: 36px">
                 <div class="row daohang" style="height: 100%;">
-                    <div class="col-sm-2" style="height: 100%;"><a href="/WebCar/userInfo/userindex" title="互联网汽车交易系统" >首页</a></div>
-                    <div class="col-sm-3"  style="height: 100%;"></div>
+                    <div class="col-sm-2" style="height: 100%;"><a href="/WebCar/userInfo/user_index" title="互联网汽车交易系统">首页</a></div>
+                    <div class="col-sm-3" style="height: 100%;"></div>
                     <div class="col-sm-7" style="height: 100%">
-                        <ul class="Right_nav" >
-                            <li style="background-color: #f8f8f8" width="25px">
-                            
-                           <p><p>欢迎</p><p th:text="${session.LoginUser.username}" id="NowUserName" name="NowUserName"></p><p>登录网站</p></p>
-                            
-                                   
+                        <ul class="Right_nav">
+                        <li style="background-color: #f8f8f8;width:300px">
+                            <p style="margin:0"><span>欢迎</span><span th:text="${session.LoginUser.username}" id="NowUserName" name="NowUserName"></span><span>登录网站</span></p>
                             </li>
                             <li class="dropdown" style="cursor:pointer;position: relative;z-index: 2;">
-                                <a href="#" class="dropdown-toggle">我的交易 <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
                                 <ul class="aa" style="display: none;position: absolute;">
                                     <li><a onclick="order()">二手车订单</a></li>
-                                  
                                     <li><a href="#">二手车服务</a></li>
                                     <li><a href="#">免费发车</a></li>
                                 </ul>
                             </li>
 
-                            <li style="cursor:pointer;"><a  data-toggle="modal"  onclick="lianxifangshi()">联系方式</a></li>
- 
+                            
+                            <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi()">联系方式</a></li>
+
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 daohang" style="height: 36px;"><a href="./user_newindex" style="line-height: 36px;">退出</a></div>
+            <div class="col-sm-1 daohang" style="height: 36px;"><a href="./user_newindex" style="line-height: 36px;">退出</a>
+            </div>
         </div>
     </div>
-
 
 </div>
 <!--导航栏结束-->
@@ -62,18 +60,7 @@
                 <a href="http://localhost:8088/index"><img th:src="@{/images/淘车.PNG}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
-        <div class="col-sm-7" style="height: 100%">
-            <div class="choose">
-                <a href="#">二手车</a>
-            </div>
-            <div class="search">
-                <input type="text" placeholder="搜'10-20万'大众试试" />
-                <button>搜索</button>
-            </div>
-        </div>
-        <!--<div class="col-sm-2" style="height: 100%">-->
-            <!--<a href="#" class="maiche">卖车</a>-->
-        <!--</div>-->
+     
     </div>
 </div>
 <!--搜索框结束-->
@@ -83,12 +70,12 @@
         <div class="container" style="height: 100%;">
             <div class="row">
                 <ul class="list">
-                    <li class="list-active"><a href="./userindex">首页</a></li>
-                    <li><a href="./buyCar">买车</a></li>
-                    <li><a href="#">卖车</a></li>
-                    <li><a href="#">置换</a></li>
+               <li class="list-active"><a href="./user_index">首页</a></li>
+                    <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
+                    <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
                     <li><a href="#">估价</a></li>
-                    <li><a href="#">新车</a></li>
+                    <li><a href="#">资讯</a></li>
+                    
                 </ul>
             </div>
         </div>
@@ -129,74 +116,69 @@
             <div class="col-sm-8" style="height: 100%;">
                 <div class="row" style="height: 70px;">
                     <div class="Buy-car">
-                        <a href="#">我要买车<span>></span></a>
+                        <a href="/WebCar/userInfo/buyCar">我要买车<span>></span></a>
                     </div>
                 </div>
                 <div class="row" style="height: 170px;padding: 0 0 20px;">
                     <ul class="Buy-carList">
                         <li class="tubiao">
-                            <a href="#" style="margin-left: 0;">
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=大众" style="margin-left: 0;">
                                     <img th:src="@{/images/大众.png}" alt="" />
                                     <span>大众</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=丰田"  >
                                 <img th:src="@{/images/丰田.png}" alt="" />
                                 <span>丰田</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=本田" >
                                 <img th:src="@{/images/本田.png}" alt="" />
                                 <span>本田</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=北汽威望"  >
                                 <img th:src="@{/images/北汽威望.png}" alt="" />
                                 <span>北汽威望</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=宝马"  >
                                 <img th:src="@{/images/宝马.png}" alt="" />
                                 <span>宝马</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=别克"  >
                                 <img th:src="@{/images/别克.png}" alt="" />
                                 <span>别克</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=日产"  >
                                 <img th:src="@{/images/日产.png}" alt="" />
                                 <span>日产</span></a>
-                            <a href="#" >
+                            <a href="/WebCar/userInfo/buyCar" >
                                 <i style="width: 40px;height: 40px;"></i>
                                 <span>查看全部</span></a>
                         </li>
                         <li class="Price">
-                            <a href="" style="margin-left: 0;">3万以下</a>
-                            <a href="">3-5万</a>
-                            <a href="">5-8万</a>
-                            <a href="">8-10万</a>
-                            <a href="">10-15万</a>
-                            <a href="">15-20万</a>
-                            <a href="">20-30万</a>
-                            <a href="">30-50万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=0&&carprice2=3" style="margin-left: 0;">3万以下</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=3&&carprice2=5">3-5万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=5&&carprice2=8">5-8万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=8&&carprice2=10">8-10万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=10&&carprice2=15">10-15万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=15&&carprice2=20">15-20万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=20&&carprice2=30">20-30万</a>
+                            <a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=30&&carprice2=50">30-50万</a>
                         </li>
                         <li class="Types">
-                            <a href="" style="margin-left: 0">准新车</a>
-                            <a href="">练手车</a>
-                            <a href="">SUV</a>
-                            <a href="">紧凑型车</a>
-                            <a href="">小型车</a>
-                            <a href="">MPV</a>
-                            <a href="">中型车</a>
-                            <a href="">中大型车</a>
+                            <a href="" style="margin-left: 0">两厢轿车</a>
+                            <a href="">三厢轿车</a>
+                            <a href="">跑车</a>
+                            <a href="">suv</a>
+                            <a href="">mpv</a>
+                            <a href="">面包车</a>
+                            <a href="">皮卡</a>
+                            
                         </li>
                     </ul>
                 </div>
             </div>
             <!--卖车-->
-            <div class="col-sm-4" style="height: 100%;">
+            <div class="col-sm-4" style="height: 100%;background:#00ff5a">
                 <div class="row" style="height: 70px;">
                     <div class="Selling-car">
                         <a href="#">我要卖车<span></span></a>
                     </div>
                 </div>
-                <div class="row" style="height: 170px;padding: 0 0 20px;">
-                    <div class="Selling-car-one">
-                        <div class="Selling-car-two">
-                            <input type="text" class="Input-account" placeholder="请输入你的账号" />
-                        </div>
-
-                    </div>
+                <div class="row" style="height: 170px;padding: 0 0 20px;background:#00ff5a">
+                  
                     <div class="Selling-car-one" >
                         <div class="Selling-car-two" style="background-color: #fff!important;">
                             <a href="" class="Selling-car-three">我要卖车</a>

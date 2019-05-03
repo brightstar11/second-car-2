@@ -7,7 +7,10 @@ public class CarModel {
 	 private String cartype;
 	 private String carlnwhere;
 	 private String carlntime;
-	 private String carmileage;
+	 private String carbirth;
+	 private String caredition;
+	 
+	private String carmileage;
 	 private String cardisplacement;
 	 private String carmotor;
 	 private String cardrive;
@@ -27,7 +30,18 @@ public class CarModel {
 	 private String caricon;
 	 private String carvalidate;
 	 private String carhavename;
-	 
+	 public String getCarbirth() {
+			return carbirth;
+		}
+		public void setCarbirth(String carbirth) {
+			this.carbirth = carbirth;
+		}
+		public String getCaredition() {
+			return caredition;
+		}
+		public void setCaredition(String caredition) {
+			this.caredition = caredition;
+		}
 	public String getCarhavename() {
 		return carhavename;
 	}

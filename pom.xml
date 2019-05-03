@@ -110,6 +110,12 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<!-- 对nekohtml的依赖： -->
+		<dependency>
+     <groupId>net.sourceforge.nekohtml</groupId>
+     <artifactId>nekohtml</artifactId>
+     <version>${nekohtml.version}</version>
+</dependency>
 		<!--  email-->
 <dependency>
 			<groupId>org.springframework.boot</groupId>

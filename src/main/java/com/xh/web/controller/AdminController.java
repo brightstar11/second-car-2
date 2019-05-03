@@ -6,15 +6,16 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xh.common.GlobalConstant;
 import com.xh.common.MD5Util;
@@ -107,24 +108,23 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 }
 //注册用户管理
 @RequestMapping("/usermanage")
-  public String usermanage(HttpSession session,String pageNum,Model model) {
-	List<UserInfo> list=adminService.usermanage();
+  public String usermanage(HttpSession session,Integer pageNum,Model model) {
 	//分页
 	 PageModel pm = new PageModel();
 		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
 		}
 		pm.setPageNum(num);
-		pm.setPageNum(num);
+    PageHelper.startPage(num, 5, true);
+	List<UserInfo> list=adminService.usermanage();
+	
 		
 		PageInfo pageinfo = new PageInfo(list);
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
 	     model.addAttribute("list",list);
@@ -133,26 +133,28 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 }
 //注册用户管理
 @RequestMapping(value = "/searchName")
-public String searchName(String pageNum,Model model,@RequestParam("name") String name) {
-	List<UserInfo> list=adminService.SerarchUsermanage(name);
+public String searchName(Integer pageNum,Model model,@RequestParam("name") String name) {
+	
+	
 	//分页
 	 PageModel pm = new PageModel();
 		Integer num = 1;
-		try {
-			num=Integer.parseInt(pageNum);
-		} catch (Exception e) {
-			num=1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
 		}
 		pm.setPageNum(num);
-		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+ List<UserInfo> list=adminService.SerarchUsermanage(name);
+	
 		
 		PageInfo pageinfo = new PageInfo(list);
 		int x = pageinfo.getStartRow();
 		int y = pageinfo.getEndRow();
 		long z = pageinfo.getTotal();
-		String info = "显示"+(x+1)+"到"+(y+1)+"共"+z+"条";
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
+	     model.addAttribute("list",list);
 	     model.addAttribute("list",list);
 	return "admin_usermanage";
 	
