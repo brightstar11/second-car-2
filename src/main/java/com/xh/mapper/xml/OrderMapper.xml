@@ -31,9 +31,14 @@
  <select id="Admin_OrderManageFail" resultMap="list">
  select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=3
  </select>
- 
- 
- 
+ <!-- 根据用户名查询订单信息 -->
+  <select id="user_OrderManage" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.ordericon from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.ordername=#{ordername}
+ </select>
+  <!-- 根据用户名删除订单信息 -->
+  <delete id="delectorderder" >
+   delete from orders where ordercarname=#{ordercarname} and ordermoney=#{ordermoney} and ordername=#{ordername} and orderbegintime=#{orderbegintime} and ordericon=#{ordericon}
+ </delete>
  
  
  
@@ -45,4 +50,8 @@
  <update id="Admin_OrderManageUpdate">
  update orders set orderendtime=#{orderendtime},orderstaticid=#{orderstaticid} where orderid=#{orderid}
  </update>
+ 
+ <insert id="orderinsertinsert">
+ insert into orders(ordercarname,ordercarhavename,orderhavetel,ordermoney,ordername,orderaddr,ordertel,orderbegintime,orderstaticid,ordericon) values(#{ordercarname},#{ordercarhavename},#{orderhavetel},#{ordermoney},#{ordername},#{orderaddr},#{ordertel},#{orderbegintime},#{orderstatic},#{ordericon})
+ </insert>
  </mapper>

@@ -36,7 +36,15 @@ public interface CarMapper {
    public List<CarModel> BuyCarSearch(String  brandname);
    public List<CarModel> BuyCarSearch2(Integer  carprice1,Integer  carprice2);
    public List<CarModel> BuyCarSearch3(String levelname);
+   public List<CarModel> BuyCarSearch4(String carmileage);
+   public List<CarModel> BuyCarSearch5(String carcolor);
+   public List<CarModel> BuyCarSearch6(String carpop);
+   public List<CarModel> BuyCarSearch7(String carpower);
+   public List<CarModel> BuyCarSearch8(String carpmethod);
    
+   public List<CarModel> BuyCarSearch21(Integer  carprice1,Integer  carprice2);
+   public List<CarModel> BuyCarSearch23();
+   public List<CarModel> BuyCarSearch24();
    //查询车的品牌，只使用carbrands表
    @Select("select * from carbrands limit 0,10")
    public List<CarBrands> CarbrandsAll0_10();
@@ -77,4 +85,7 @@ public interface CarMapper {
    //存储车信息
    public Integer  insertCar(CarModel carModel);
    public Integer insertCar_User(String carno,String username);
+   //更新car表热度
+   public Integer  insertcarheat(CarModel carModel);
+   
 }

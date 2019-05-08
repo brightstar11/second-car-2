@@ -44,5 +44,20 @@ OrderMapper order;
 		
 		return order.Admin_OrderManageFail();
 	}
+	@Override
+	public List<OrderModel> user_OrderManage(String ordername) {
+		// TODO Auto-generated method stub
+		return order.user_OrderManage(ordername);
+	}
+	@Override
+	public Integer delectorderder(OrderModel orderModel) {
+		// TODO Auto-generated method stub
+		return order.delectorderder(orderModel);
+	}
+	@Override
+	public Integer orderinsertinsert(OrderModel orderModel) {
+		// TODO Auto-generated method stub
+		return order.orderinsertinsert(orderModel);
+	}
 
 }

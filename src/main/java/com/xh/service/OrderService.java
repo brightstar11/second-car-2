@@ -15,4 +15,7 @@ public List<OrderModel> Admin_OrderManageFail();
 public List<OrderModel> searchOrderNo(Integer orderid);
 
 public Integer Admin_OrderManageUpdate(CarOrder carOrder);
+public List<OrderModel> user_OrderManage(String ordername);
+public Integer delectorderder(OrderModel orderModel);
+public Integer orderinsertinsert(OrderModel orderModel);
 }

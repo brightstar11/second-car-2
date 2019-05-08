@@ -30,7 +30,56 @@ public class Car {
  private String caricon;
  private Integer carvalidateid;
  private String carhavename;
+ private Integer carheat;
+ private String carmileages;
+ private String cariconone;
+ private String caricontwo;
+ private String cariconthree;
+ private String cariconfour;
+ private String cariconfive;
  
+public Integer getCarheat() {
+	return carheat;
+}
+public void setCarheat(Integer carheat) {
+	this.carheat = carheat;
+}
+public String getCarmileages() {
+	return carmileages;
+}
+public void setCarmileages(String carmileages) {
+	this.carmileages = carmileages;
+}
+public String getCariconone() {
+	return cariconone;
+}
+public void setCariconone(String cariconone) {
+	this.cariconone = cariconone;
+}
+public String getCaricontwo() {
+	return caricontwo;
+}
+public void setCaricontwo(String caricontwo) {
+	this.caricontwo = caricontwo;
+}
+public String getCariconthree() {
+	return cariconthree;
+}
+public void setCariconthree(String cariconthree) {
+	this.cariconthree = cariconthree;
+}
+public String getCariconfour() {
+	return cariconfour;
+}
+public void setCariconfour(String cariconfour) {
+	this.cariconfour = cariconfour;
+}
+public String getCariconfive() {
+	return cariconfive;
+}
+public void setCariconfive(String cariconfive) {
+	this.cariconfive = cariconfive;
+}
 public Integer getCarbirthid() {
 	return carbirthid;
 }

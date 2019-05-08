@@ -2,7 +2,9 @@
     margin: 0;
     padding: 0;
 }
-a {text-decoration:none;}
+a {
+	cursor:pointer;
+}
 /*导航栏开始*/
 .daohang {
     background: #f8f8f8;
@@ -374,9 +376,9 @@ li {
  .pcar {
      font-size: 12px;
      color: #b0b3b4;
-     /*line-height: 18px;*/
+     /*line-height: 12px;*/
      padding: 4px 14px 0;
-     height: 18px
+     height: 12px;
 }
 .car-price {
     width: 100%;

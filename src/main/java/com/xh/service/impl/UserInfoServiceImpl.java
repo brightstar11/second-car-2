@@ -40,5 +40,25 @@ UserInfoMapper UserInfo;
 		
 		return UserInfo.userpwdupdate(userInfo);
 	}
+	@Override
+	public Integer userinfohave(String username, String userpwd) {
+		// TODO Auto-generated method stub
+		return UserInfo.userinfohave(username, userpwd);
+	}
+	@Override
+	public Integer userinfoupup1(String userpwd, String username) {
+		// TODO Auto-generated method stub
+		return UserInfo.userinfoupup1(userpwd, username);
+	}
+	@Override
+	public Integer userinfoupup2(String userpwd, String username) {
+		// TODO Auto-generated method stub
+		return UserInfo.userinfoupup2(userpwd, username);
+	}
+	@Override
+	public List<com.xh.entity.UserInfo> selectuserinfo(String username) {
+		// TODO Auto-generated method stub
+		return UserInfo.selectuserinfo(username);
+	}
 
 }

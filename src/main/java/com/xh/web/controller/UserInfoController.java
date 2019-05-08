@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.xh.common.MD5Util;
 import com.xh.entity.UserInfo;
 import com.xh.entity.UserLogin;
+import com.xh.service.CarService;
 import com.xh.service.MailService;
 import com.xh.service.UserInfoService;
 import com.xh.service.User_LoginService;
+import com.xh.web.model.CarModel;
 
 import net.sf.ehcache.pool.Size;
 
@@ -33,6 +35,8 @@ private UserInfoService userInfoService;
 
    @Autowired
    private MailService mailService;
+   @Autowired
+   private CarService car;
    /**
     * 加载登录页
     */
@@ -42,8 +46,17 @@ private UserInfoService userInfoService;
    }
    
    @RequestMapping("/user_index")
-   public String index6() {
-	   
+   public String index6(Model model) {
+	   List<CarModel> list1=car.BuyCarSearch21(0,5);
+       model.addAttribute("listAll1",list1);
+       List<CarModel> list2=car.BuyCarSearch21(5,10);
+       model.addAttribute("listAll2",list2);
+       //2年
+       List<CarModel> list3=car.BuyCarSearch23();
+       model.addAttribute("listAll3",list3);
+       //中型车
+       List<CarModel> list4=car.BuyCarSearch24();
+       model.addAttribute("listAll4",list4);
    	 return "user_index";
    }
    @RequestMapping("/user_newindex")
@@ -75,19 +88,24 @@ private UserInfoService userInfoService;
    //登录------------------------------------------------------------------------------
    @RequestMapping("/dologin")
    @ResponseBody
-   public Integer userloginquery(UserLogin userLogin,HttpSession session ) {
+   public Integer userloginquery(UserLogin userLogin,HttpSession session,Model model ) {
 	   System.out.println(userLogin.getUsername()+""+userLogin.getUserpwd());
 	   //把密码进行MD5加密装换
 	   String userpwd=MD5Util.MD5(userLogin.getUserpwd());
 	   userLogin.setUserpwd(userpwd);
 	   List<UserLogin> list=User_LoginService.userloginquery(userLogin);
+	  
 //使用session 存储用户登录信息
 	  
          if(list.size()>0) {
         	 //把list 转换成 实体类
         	 
         	 UserLogin userLogin2= (UserLogin)list.get(0);
+        	 
+        	
         	 session.setAttribute("LoginUser", userLogin2);
+        	 List<CarModel> list3=car.BuyCarSearch21(0,5);
+              model.addAttribute("listAll",list3);
 		   System.out.println(userLogin2.getId());
 		        return 1;
 		   }else {
@@ -149,27 +167,7 @@ private UserInfoService userInfoService;
 			return "修改失败";
 		}
    }
-   //密码找回------------------------------------------------------------------------
-   
 
-//   @RequestMapping("userpwdupdate")
-//   public String userpwdupdate(UserInfo userInfo) {
-//	   
-//	   System.out.println(userInfo.getUseremail());
-//	   System.out.println(userInfo.getUserpwd());
-//	 //把密码进行MD5转换
-//		 String userpwd=  userInfo.getUserpwd();
-//		 userInfo.setUserpwd(MD5Util.MD5(userpwd));
-//	   int count=userInfoService.userpwdupdate(userInfo);
-//	   
-//	   if(count==1) {
-//	return "密码修改成功";
-//	   }else {
-//		   return "密码找回失败";
-//	   }
-//   }
-   //密码找回-验证用户
-   
  @RequestMapping("/pwdback")
 @ResponseBody
  public Integer pwdback(String username){

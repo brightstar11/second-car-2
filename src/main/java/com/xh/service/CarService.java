@@ -2,8 +2,7 @@ package com.xh.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+
 
 import com.xh.entity.CarBirth;
 import com.xh.entity.CarBrands;
@@ -33,6 +32,20 @@ public interface CarService {
 	   public List<CarModel> BuyCarSearch2(Integer  carprice1,Integer  carprice2);
 	   //类型
 	   public List<CarModel> BuyCarSearch3(String levelname);
+	   //里程
+	   public List<CarModel> BuyCarSearch4(String carmileage);
+	   //颜色
+	   public List<CarModel> BuyCarSearch5(String carcolor);
+	   //国家
+	   public List<CarModel> BuyCarSearch6(String carpop);
+	   //能源
+	   public List<CarModel> BuyCarSearch7(String carpower);
+	   //方式
+	   public List<CarModel> BuyCarSearch8(String carpmethod);
+	   //价格 前4
+	   public List<CarModel> BuyCarSearch21(Integer  carprice1,Integer  carprice2);
+	   public List<CarModel> BuyCarSearch23();
+	   public List<CarModel> BuyCarSearch24();
 	   
 	   
 	   
@@ -69,5 +82,7 @@ public interface CarService {
 	   //存储车信息
 	   public Integer  insertCar(CarModel carModel); 
 	   public Integer insertCar_User(String carno,String username);
+	   
+	   public Integer  insertcarheat(CarModel carModel);
 		
 }

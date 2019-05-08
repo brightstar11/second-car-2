@@ -28,16 +28,16 @@ $(function () {
     })
     // 轮播图结束
     //列表兰
-    // var index=0;
-    // $('.list  li').mouseover(function (e) {
-    //     if ($(this) == $('.list  li').eq(0)) {
-    //         $(this).siblings().attr('background', '#ff6402')
-    //     } else {
-    //         $(this).addClass('list-active')
-    //         $(this).siblings().removeClass('list-active')
-    //     }
-    //     // $('.list  li').eq(0).addClass('list-active')
-    // })
+//     var index=0;
+//     $('.list  li').mouseover(function (e) {
+//         if ($(this) == $('.list  li').eq(0)) {
+//             $(this).siblings().attr('background', '#ff6402')
+//         } else {
+//             $(this).addClass('list-active')
+//             $(this).siblings().removeClass('list-active')
+//         }
+//         // $('.list  li').eq(0).addClass('list-active')
+//     })
     $('.carPrice-left a').mouseover(function (e) {
         var index = $(this).attr('id');
         var parent = $(this).parent().siblings()
@@ -118,5 +118,75 @@ $(function () {
             $(this).addClass('meun-item-active')
             $(this).siblings().removeClass('meun-item-active')
         })
+    }
+    
+    var ismileage=false;
+    $('.car-mileage').click(function () {
+        $('.Car-age').css('display','none')
+        ismileage=!ismileage
+        if(ismileage){
+            $('.mileage').css('display','block')
+            var child=$('.mileage').children().children()
+            $(child).click(function (e) {
+                $('.mileage').css('display','none')
+            })
+        }
+        else{
+            $('.mileage').css('display','none')
+        }
+    })
+    var iscountry=false;
+    $('#country').click(function () {
+    	console.log(1111)
+        $('.country').css('display','none')
+        iscountry=!iscountry
+        if(iscountry){
+            $('.country').css('display','block')
+            var child=$('.country').children().children()
+            $(child).click(function (e) {
+                $('.country').css('display','none')
+            })
+        }
+        else{
+            $('.country').css('display','none')
+        }
+    })
+    var ispower=false;
+    $('#power').click(function () {
+    	console.log(1111)
+        $('.Car-power').css('display','none')
+        ispower=!ispower
+        if(ispower){
+            $('.Car-power').css('display','block')
+            var child=$('.Car-power').children().children()
+            $(child).click(function (e) {
+                $('.Car-power').css('display','none')
+            })
+        }
+        else{
+            $('.Car-power').css('display','none')
+        }
+    })
+    var ismethod=false;
+    $('#method').click(function () {
+    	console.log(1111)
+        $('.Car-pmethod').css('display','none')
+        ismethod=!ismethod
+        if(ismethod){
+            $('.Car-pmethod').css('display','block')
+            var child=$('.Car-pmethod').children().children()
+            $(child).click(function (e) {
+                $('.Car-pmethod').css('display','none')
+            })
+        }
+        else{
+            $('.Car-pmethod').css('display','none')
+        }
+    })
+    var qita=$('#qita li')
+    for(var i=0;i<qita.length;i++){
+    	$(qita[i]).click(function(e){
+    		$(this).siblings().children('ul').css('display','none')
+    	})
     }
 });

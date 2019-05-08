@@ -28,11 +28,11 @@
                             <p style="margin:0"><span>欢迎</span><span th:text="${session.LoginUser.username}" id="NowUserName" name="NowUserName"></span><span>登录网站</span></p>
                             </li>
                             <li class="dropdown" style="cursor:pointer;position: relative;z-index: 2;">
-                                <a href="#" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
+                                <a href="javascript:void(0)" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
                                 <ul class="aa" style="display: none;position: absolute;">
-                                     <li><a href="/WebCar/userInfo/user_Manger">修改密码</a></li>
-                                    <li><a href="/WebCar/userInfo/user_Manger">个人资料</a></li>
-                                    <li><a href="/WebCar/userInfo/user_Manger">我的订单</a></li>
+                                     <li><a  onclick="usermanage()">修改密码</a></li>
+                                    <li><a onclick="usermanage()">个人资料</a></li>
+                                    <li><a onclick="usermanage()">我的订单</a></li>
                                 </ul>
                             </li>
 
@@ -80,10 +80,9 @@
         <div class="container" style="height: 100%;">
             <div class="row">
                 <ul class="list">
-                    <li><a href="/WebCar/userInfo/user_index">首页</a></li>
-                    <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
+                    <li class="list-active"><a href="/WebCar/userInfo/user_index">首页</a></li>
+                    <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
-                    
                     <li><a href="#">估价</a></li>
                     <li><a href="#">资讯</a></li>
                 </ul>
@@ -126,7 +125,7 @@
             <div class="col-sm-8" style="height: 100%;">
                 <div class="row" style="height: 70px;">
                     <div class="Buy-car">
-                        <a href="/WebCar/userInfo/buyCar">我要买车<span>></span></a>
+                        <a href="/WebCar/userInfo/buyCar">我要买车</a>
                     </div>
                 </div>
                 <div class="row" style="height: 170px;padding: 0 0 20px;">
@@ -181,16 +180,16 @@
                 </div>
             </div>
             <!--卖车-->
-            <div class="col-sm-4" style="height: 100%;background:#00ff5a">
-                <div class="row" style="height: 70px;">
+            <div class="col-sm-4" style="height: 100%;background:#f8f8f8">
+                <div class="row" style="height: 178px;">
                     <div class="Selling-car">
-                        <a href="/WebCar/userInfo/SaleCar">我要卖车<span></span></a>
+                        <a href="/WebCar/userInfo/SaleCar">我要卖车</a>
                     </div>
                 </div>
-                <div class="row" style="height: 170px;padding: 0 0 20px;background:#00ff5a">
+                <div class="row" style="height: 170px;padding: 0 0 20px;">
                   
                     <div class="Selling-car-one" >
-                        <div class="Selling-car-two" style="background-color: #fff!important;">
+                        <div class="Selling-car-two">
                             <a href="/WebCar/userInfo/SaleCar" class="Selling-car-three">我要卖车</a>
                             <a href="" class="Selling-car-four" >免费估价</a>
                         </div>
@@ -207,10 +206,10 @@
         <div class="row recommend">
             <span class="recommend-left">淘车推荐</span>
             <ul class="carPrice">
-                <li class="carPrice-left " ><a href="" class="car-active" id="0">5万以内超值车</a></li>
-                <li class="carPrice-left" ><a href="" id="1">5万-10万超值车</a></li>
-                <li class="carPrice-left" ><a href="" id="2">2年以内超值车</a></li>
-                <li class="carPrice-left" ><a href="" id="3">精选suv</a></li>
+                <li class="carPrice-left " ><a  class="car-active" id="0" href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=3&&carprice2=5" >5万以内超值车</a></li>
+                <li class="carPrice-left" ><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=8&&carprice2=10"  id="1">5万-10万超值车</a></li>
+                <li class="carPrice-left" ><a href="/WebCar/userInfo/User_BuyCarSearch233"  id="2">2年以内超值车</a></li>
+                <li class="carPrice-left" ><a href="/WebCar/userInfo/User_BuyCarSearch3?levelname=中型车"  id="3">中型车</a></li>
             </ul>
         </div>
         <div class="row showcar">
@@ -219,139 +218,49 @@
             </div>
             <div class="col-sm-10" style="padding: 0">
                 <div class="showcar-right">
-                    <ul style="margin: 0;height: 100%" class="carf">
-                        <li>
-                            <a href=""><img thsrc="@{/images/雪佛兰.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
-                            <p class="pcar">上牌2012年｜里程5.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
-                            <p class="pcar">上牌2012年｜里程5.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
-                            <p class="pcar">上牌2012年｜里程5.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/雪佛兰.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">雪佛兰科鲁兹 2012款 1.8L SE AT</a></div>
-                            <p class="pcar">上牌2012年｜里程5.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.28</span>万</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul style="margin: 0;height: 100%;display: none" class="carf">
-                        <li>
-                            <a href=""><img th:src="@{/images/大众.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">大众POLO 2013款 1.6L 自动 舒适版</a></div>
-                            <p class="pcar">上牌2012年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">4.98</span>万</span>
-                            </div>
-                        </li><li>
-                        <a href=""><img th:src="@{/images/大众.jpg}" alt="" /></a>
-                        <div class="carname"><a href="">大众POLO 2013款 1.6L 自动 舒适版</a></div>
-                        <p class="pcar">上牌2012年｜里程6.00万公里</p>
+                    <ul style="margin: 0;height: 100%" class="carf" id="five">
+                    <li th:each="p:${listAll1}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt="" /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
                         <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber">4.98</span>万</span>
-                        </div>
-                    </li><li>
-                        <a href=""><img th:src="@{/images/大众.jpg}" alt="" /></a>
-                        <div class="carname"><a href="">大众POLO 2013款 1.6L 自动 舒适版</a></div>
-                        <p class="pcar">上牌2012年｜里程6.00万公里</p>
-                        <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber">4.98</span>万</span>
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
                         </div>
                     </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/大众.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">大众POLO 2013款 1.6L 自动 舒适版</a></div>
-                            <p class="pcar">上牌2012年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">4.98</span>万</span>
-                            </div>
-                        </li>
+                   </ul>
+                    <ul style="margin: 0;height: 100%;display: none" class="carf" id="ten">
+                          <li th:each="p:${listAll2}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt="" /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                        </div>
+                    </li>
                     </ul>
-                    <ul style="margin: 0;height: 100%;display: none" class="carf">
-                        <li>
-                            <a href=""><img th:src="@{/images/吉利.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">吉利远景X3 2017款 1.5L 自动 精英版</a></div>
-                            <p class="pcar">上牌2018年｜里程6000公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.95</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/吉利.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">吉利远景X3 2017款 1.5L 自动 精英版</a></div>
-                            <p class="pcar">上牌2018年｜里程6000公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.95</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/吉利.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">吉利远景X3 2017款 1.5L 自动 精英版</a></div>
-                            <p class="pcar">上牌2018年｜里程6000公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.95</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/吉利.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">吉利远景X3 2017款 1.5L 自动 精英版</a></div>
-                            <p class="pcar">上牌2018年｜里程6000公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">5.95</span>万</span>
-                            </div>
-                        </li>
+                    <ul style="margin: 0;height: 100%;display: none" class="carf" id="towyear">
+                          <li th:each="p:${listAll3}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt=""  /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                        </div>
+                    </li>
                     </ul>
-                    <ul style="margin: 0;height: 100%;display: none" class="carf">
-                        <li>
-                            <a href=""><img th:src="@{/images/本田.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">本田XR-V 2015款 1.8L EXi CVT 舒适版</a></div>
-                            <p class="pcar">上牌2015年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">11.80</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/本田.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">本田XR-V 2015款 1.8L EXi CVT 舒适版</a></div>
-                            <p class="pcar">上牌2015年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">11.80</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/本田.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">本田XR-V 2015款 1.8L EXi CVT 舒适版</a></div>
-                            <p class="pcar">上牌2015年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">11.80</span>万</span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href=""><img th:src="@{/images/本田.jpg}" alt="" /></a>
-                            <div class="carname"><a href="">本田XR-V 2015款 1.8L EXi CVT 舒适版</a></div>
-                            <p class="pcar">上牌2015年｜里程6.00万公里</p>
-                            <div class="car-price">
-                                <span class="carnumber">金额：</span><span><span class="carnumber">11.80</span>万</span>
-                            </div>
-                        </li>
+                    <ul style="margin: 0;height: 100%;display: none" class="carf" id="mind">
+                         <li th:each="p:${listAll4}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt="图片加载错误" /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                        </div>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -459,6 +368,16 @@ function order(){
 	var username=document.getElementById("NowUserName").innerHTML;
 	window.location.href="/WebCar/userInfo/User_order?username="+username;
 	
+}
+function usermanage(){
+	
+	var username=document.getElementById("NowUserName").innerHTML;
+	
+	window.location.href="/WebCar/userInfo/user_Manger?username="+username;
+}
+function IntoInformation(id){
+	
+	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;
 }
 </script>
 </html>

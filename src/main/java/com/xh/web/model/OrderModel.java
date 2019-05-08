@@ -15,6 +15,16 @@ public class OrderModel {
 	private String orderbegintime;
 	private String orderendtime;
 	private String orderstatic;
+	private String ordericon;
+	public String getOrdericon() {
+		return ordericon;
+	}
+	public void setOrdericon(String ordericon) {
+		this.ordericon = ordericon;
+	}
+	public void setOrderstatic(String orderstatic) {
+		this.orderstatic = orderstatic;
+	}
 	public Integer getOrderid() {
 		return orderid;
 	}

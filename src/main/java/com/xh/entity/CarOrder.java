@@ -12,6 +12,13 @@ private String ordertel;
 private String orderbegintime;
 private String orderendtime;
 private String orderstaticid;
+private String ordericon;
+public String getOrdericon() {
+	return ordericon;
+}
+public void setOrdericon(String ordericon) {
+	this.ordericon = ordericon;
+}
 public Integer getOrderid() {
 	return orderid;
 }

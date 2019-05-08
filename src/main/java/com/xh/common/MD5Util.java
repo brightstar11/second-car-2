@@ -73,6 +73,6 @@ public class MD5Util {
 		return MD5(key).equals(md5Str);
 	}
 	public static void main(String[] args) {
-		System.out.println(MD5Util.MD5(""));
+		System.out.println(MD5Util.MD5("123456"));
 	}
 }

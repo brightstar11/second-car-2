@@ -19,5 +19,12 @@ public interface OrderMapper {
 	
 	public Integer Admin_OrderManageUpdate(CarOrder carOrder);
 	
+	//根据当前用户名 查询当前用户的订单
+	public List<OrderModel> user_OrderManage(String ordername);
+	//根据xxx删除订单表
+	public Integer delectorderder(OrderModel orderModel);
+	//添加订单
+	public Integer orderinsertinsert(OrderModel orderModel);
+	
 	
 }

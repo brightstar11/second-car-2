@@ -17,7 +17,7 @@
 		<result property="useremail" column="useremail"/>
 		
 	</resultMap>
-	
+
 	<!-- 判断用户名是否重复 -->
 	<select id="usernameonly" resultMap="list">
 	select * from userinfo where username=#{username}

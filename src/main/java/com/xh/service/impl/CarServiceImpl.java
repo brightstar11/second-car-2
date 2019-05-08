@@ -143,5 +143,50 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		return CarMapper.BuyCarSearch3(levelname);
 	}
+	@Override
+	public List<CarModel> BuyCarSearch21(Integer  carprice1,Integer  carprice2) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch21(carprice1,carprice2);
+	}
+	@Override
+	public List<CarModel> BuyCarSearch23() {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch23();
+	}
+	@Override
+	public List<CarModel> BuyCarSearch24() {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch24();
+	}
+	@Override
+	public List<CarModel> BuyCarSearch4(String carmileage) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch4(carmileage);
+	}
+	@Override
+	public List<CarModel> BuyCarSearch5(String carcolor) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch5(carcolor);
+	}
+	@Override
+	public List<CarModel> BuyCarSearch6(String carpop) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch6(carpop);
+	}
+	@Override
+	public List<CarModel> BuyCarSearch7(String carpower) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch7(carpower);
+	}
+	@Override
+	public List<CarModel> BuyCarSearch8(String carpmethod) {
+		// TODO Auto-generated method stub
+		return CarMapper.BuyCarSearch8(carpmethod);
+	}
+	@Override
+	public Integer insertcarheat(CarModel carModel) {
+		// TODO Auto-generated method stub
+		return CarMapper.insertcarheat(carModel);
+	}
  
 }

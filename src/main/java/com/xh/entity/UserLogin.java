@@ -3,6 +3,7 @@ package com.xh.entity;
 public class UserLogin {
 private Integer id;
 private String username;
+
 @Override
 public String toString() {
 	return "UserLogin [userid=" +id + ", username=" + username + ", userpwd=" + userpwd + "]";

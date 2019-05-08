@@ -88,13 +88,13 @@ a:hover {
     height: 45px;
     border-bottom: 1px solid rgb(229, 229, 229);
 }
-.brand-list  li {
+.brand-list li {
     float: left;
     position: relative;
     /*width: 48px;*/
-    margin-left: 22px;
+    margin-left: 18px;
 }
-.brand-list  li  a{
+.brand-list li a{
     color: #111;
 }
 .brand-list  li  a:hover {
@@ -139,7 +139,7 @@ a:hover {
     border:1px solid #e5e5e5;
     z-index: 2;
 }
-.mileage {
+.mileage,.country {
     background-color: #fff;
     width: 250px;
     border:1px solid #e5e5e5;
@@ -243,4 +243,26 @@ a:hover {
     color:#fff;
     background:#00002e;
     border-color:#00002e;
+}
+#fenye ul li {
+	float:left;
+	width:60px;
+	margin-left:15px;
+	border:1px solid #f50013;
+	text-align:center;
+}
+#fenye ul li:hover {
+	cursor:pointer;
+	background-color:#FFFFFF;
+	color:#333;
+}
+#fenye ul li a:hover {
+	text-decoration:none;
+}
+.fenye {
+	height:30px;;
+	line-height:30px;
+	display:flex;
+	justify-content:center;
+	
 }
