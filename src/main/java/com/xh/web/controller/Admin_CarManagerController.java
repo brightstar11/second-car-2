@@ -2,7 +2,7 @@ package com.xh.web.controller;
 
 import java.util.List;
 
-import org.hibernate.loader.custom.Return;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import com.xh.entity.UserInfo;
 import com.xh.service.CarService;
 import com.xh.service.SellCarService;
+import com.xh.service.UserInfoService;
 import com.xh.web.model.CarModel;
 import com.xh.web.model.PageModel;
 
@@ -27,6 +28,8 @@ public class Admin_CarManagerController {
 	CarService car;
 	@Autowired
 	SellCarService sellcar;
+	@Autowired
+	UserInfoService u;
 	@RequestMapping("admin_CarManageupdateSuccess")
 	public String index1(){
 		return "admin_CarManageupdateSuccess";
@@ -48,12 +51,9 @@ public class Admin_CarManagerController {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list= car.CarselectAll();
-	for (int i = 0; i < list.size(); i++) {
-		CarModel carModel=(CarModel)list.get(i);
-		System.out.println(carModel.toString());
-	}
+
 	
 		
 		PageInfo pageinfo = new PageInfo(list);
@@ -78,7 +78,7 @@ public class Admin_CarManagerController {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list= car.searchCarName(name);
 	
 		
@@ -144,7 +144,7 @@ public class Admin_CarManagerController {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list= car.CarselectNo();
 	for (int i = 0; i < list.size(); i++) {
 		CarModel carModel=(CarModel)list.get(i);
@@ -173,7 +173,7 @@ public class Admin_CarManagerController {
 			num = pageNum;
 		}
 		pm.setPageNum(num);
- PageHelper.startPage(num, 5, true);
+ PageHelper.startPage(num, 10, true);
  List<CarModel> list= car.CarselectYes();
 	for (int i = 0; i < list.size(); i++) {
 		CarModel carModel=(CarModel)list.get(i);

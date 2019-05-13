@@ -15,21 +15,26 @@
  <result property="orderbegintime" column="orderbegintime"/>
  <result property="orderendtime" column="orderendtime"/>
  <result property="orderstatic" column="orderstatic"/>
+ <result property="orderpeople" column="orderpeople"/>
  </resultMap>
  <select id="admin_OrderAll" resultMap="list">
- select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid
  </select>
  <!-- 查询未交易完成订单 -->
  <select id="Admin_OrderManageOnGoing" resultMap="list">
- select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=2
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=2
  </select>
  <!-- 查询交易完成订单 -->
  <select id="Admin_OrderManageFinish" resultMap="list">
- select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=1
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=1
  </select>
  <!-- 查询交易失败订单 -->
  <select id="Admin_OrderManageFail" resultMap="list">
- select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=3
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=3
+ </select>
+  <!-- 查询新订单 -->
+ <select id="Admin_OrderManageNew" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderstaticid=4
  </select>
  <!-- 根据用户名查询订单信息 -->
   <select id="user_OrderManage" resultMap="list">

@@ -101,7 +101,13 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 						admin2.setAdminMenus(menus);
 					    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
 					    return "admin_index";
-		}
+		}else if(admin2.getAdminPermission().equals("3")) {
+			// 登录成功,查询用户的菜单列表
+			List<AdminMenu> menus = ad.findMenu1ByUserId(admin2.getAdminPermission()+"");
+			admin2.setAdminMenus(menus);
+		    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
+		    return "admin_index";
+}
 		return "adminlogin";
 		
 	
@@ -175,7 +181,10 @@ public String usermanageupdate(Model model,Integer id) {
 @RequestMapping("/usermanageupdate2")
 public String usermanageupdate2(UserInfo userInfo) {
 	System.out.println("进入修改");
-	System.out.println(userInfo.toString());
+	System.out.println(userInfo.getUsericon());
+	String usericon=userInfo.getUsericon();
+	usericon="/images/icon/icon"+usericon+".png";
+	userInfo.setUsericon(usericon);
 		//修改用户信息
 		String userpwd=MD5Util.MD5(userInfo.getUserpwd());
 		userInfo.setUserpwd(userpwd);

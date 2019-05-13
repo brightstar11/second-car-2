@@ -11,6 +11,7 @@ public List<OrderModel> admin_OrderAll();
 public List<OrderModel> Admin_OrderManageOnGoing();
 public List<OrderModel> Admin_OrderManageFinish();
 public List<OrderModel> Admin_OrderManageFail();
+public List<OrderModel> Admin_OrderManageNew();
 
 public List<OrderModel> searchOrderNo(Integer orderid);
 

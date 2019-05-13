@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>基于互联网+的二手车交易系统</title>
+        <link rel="icon" th:href="@{/images/favicon.ico}" />
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <!--引入bootstrap样式-->
+   <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+  
+    <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Manger.css}"/>
+</head>
+<body>
+<!--导航栏开始-->
+<!--导航栏开始-->
+<div class="container-fluid" style="background-color: #f8f8f8;">
+    <div class="container">
+        <div class="row" style="height: 36px;">
+            <div class="col-sm-11" style="height: 36px">
+                <div class="row daohang" style="height: 100%;">
+                    <div class="col-sm-2" style="height: 100%;"><a href="/WebCar/userInfo/user_index" title="互联网汽车交易系统">首页</a></div>
+                    <div class="col-sm-3" style="height: 100%;"></div>
+                    <div class="col-sm-7" style="height: 100%">
+                        <ul class="Right_nav">
+                        <li style="background-color: #f8f8f8;width:300px">
+                            <p style="margin:0"><span>欢迎</span><span th:text="${session.LoginUser.username}" id="NowUserName" name="NowUserName"></span><span>登录网站</span></p>
+                            </li>
+                            <li class="dropdown" style="cursor:pointer;position: relative;z-index: 2;">
+                                <a href="#" class="dropdown-toggle">我的管理 <span class="caret"></span></a>
+                                <ul class="aa" style="display: none;position: absolute;">
+                                     <li><a href="/WebCar/userInfo/user_Manger">修改密码</a></li>
+                                    <li><a href="/WebCar/userInfo/user_Manger">个人资料</a></li>
+                                    <li><a href="/WebCar/userInfo/user_Manger">我的订单</a></li>
+                                </ul>
+                            </li>
+
+                            
+                            <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi2()">联系方式</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 daohang" style="height: 36px;"><a href="./user_newindex" style="line-height: 36px;">退出</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--导航栏结束-->
+<!--搜索框开始-->
+<div class="container">
+    <div class="row" style="height: 123px;">
+        <div class="col-sm-3" style="height: 100%">
+            <div class="logo">
+                <a href=""><img th:src="@{/images/淘车.PNG}" alt="" title="二手车交易市场" /></a>
+            </div>
+        </div>
+       <h3 align="center" style="color:blue;font-size:50px;margin-top:35px">进入我的管理</h3>
+    </div>
+</div>
+<!--搜索框结束-->
+<!--列表栏开始-->
+<div class="container-fluid">
+    <div class="row" style="background-color: #ff6402;height: 36px;">
+        <div class="container" style="height: 100%;">
+            <div class="row">
+                <ul class="list">
+                    <li><a href="/WebCar/userInfo/user_index">首页</a></li>
+                    <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
+                    <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
+                    
+                    <li><a href="#">估价</a></li>
+                    <li><a href="#">资讯</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--列表栏结束-->
+<div class="container-fluid">
+    <div class="container" style="height: 100%;">
+        <div class="row">
+            <div id="wrap">
+                <!-- 左侧菜单栏目块 -->
+                <div class="leftMeun" id="leftMeun" >
+                    <div class="user-photo-box">
+                        <div id="user-photo">
+                            <img th:src="@{/images/user-photo1.png}" alt="" class="user_photo_bg">
+                            <img th:src="@{${user_MangerList.usericon}}" alt="" class="photo">
+                        </div>
+                        <div class="userName"><span th:text="${session.LoginUser.username}" id="usernameusername"/></div>
+                    </div>
+                    <div class="meun-item meun-item-active" href="#chan" aria-controls="chan" role="tab" data-toggle="tab">
+                        修改密码
+                    </div>
+                    <div class="meun-item" href="#imforamtion" aria-controls="regu" role="tab" data-toggle="tab">
+                        个人资料
+                    </div>
+                    <div class="meun-item" href="#order" aria-controls="regu" role="tab" data-toggle="tab">
+                        二手车订单
+                    </div>
+                    </div>
+                <!-- 右侧具体内容 -->
+                <div id="rightContent">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- 修改密码模块 -->
+                        <div role="tabpanel" class="tab-pane active" id="chan" style="padding-top: 50px;">
+                            <div style="margin-left: 50px;" class="title"><h2>密码修改</h2></div>
+                            <div style="padding: 50px 0;margin-top: 50px;background-color: #fff; text-align: right;width: 420px;margin-left: 50px;">
+                                <form class="form-horizontal" >
+                                    <div class="form-group">
+                                        <label class="col-xs-4 control-label">原密码：</label>
+                                        <div class="col-xs-5">
+                                            <input type="password" class="form-control input-sm duiqi" id="oldpassword" placeholder=""
+                                                   style="margin-top: 7px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="col-xs-4 control-label">新密码：</label>
+                                        <div class="col-xs-5">
+                                            <input type="password" class="form-control input-sm duiqi"  placeholder="" id="newpassword1"
+                                                   style="margin-top: 7px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-4 control-label">重复密码：</label>
+                                        <div class="col-xs-5">
+                                            <input type="password" class="form-control input-sm duiqi" id="newpassword2" placeholder=""
+                                                   style="margin-top: 7px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <div class="col-xs-offset-4 col-xs-5" style="margin-left: 169px;">
+                                            <button type="reset" class="btn btn-xs btn-white">取 消</button>
+                                            <button type="button" class="btn btn-xs btn-green" onclick="xiugaipassword()">保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--个人资料模块-->
+                        <div role="tabpanel" class="tab-pane" id="imforamtion" style="padding-top: 50px;">
+                            <div style="margin-left: 50px;" class="title"><h2>个人资料</h2></div>
+                            <div style="padding: 50px 0;margin-top: 50px;background-color: #fff; text-align: right;width: 100%;margin-left: 50px;">
+                                <div class="table-text-show" style="display:block">
+                                    <ul class="table-ul">
+                                        <li class="table-li">
+                                            <div class="txt">昵        称</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.username}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">姓        名</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.userrealname}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">性        别</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.usersex}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">电       话 </div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.userphone}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">邮       箱</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.useremail}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">地       址</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.useraddress}></i></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="user-btn-box">
+                                        <a href="javascript:;" class="btn-org" id="editTable">编辑</a>
+                                    </div>
+                                </div>
+                                <div class="table-text-input" style="display: none">
+                                    <ul class="table-ul">
+                                        <li class="table-li">
+                                            <div class="txt">昵        称</div>
+                                            <div class="info">
+                                                <span><i th:text=${user_MangerList.username}></i></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">姓        名</div>
+                                            <div class="info">
+                                                <span><input type="text" id="namenamename"></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">性        别</div>
+                                            <div class="info">
+                                                <span>
+                                                    <select name="" id="sex">
+                                                        <option selected="selected" value="男">男</option>
+                                                        <option  value="女">女</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">电       话 </div>
+                                            <div class="info">
+                                                <span><input type="text" id="phone"></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">邮       箱</div>
+                                            <div class="info">
+                                                <span><input type="email" id="email"></span>
+                                            </div>
+                                        </li>
+                                        <li class="table-li">
+                                            <div class="txt">地       址</div>
+                                            <div class="info">
+                                                <span>
+                                                    <textarea name="address" id="address" cols="30" rows="10">
+                                                    </textarea>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="user-btn-box">
+                                        <a href="javascript:;" class="btn-org" id="saveTable" onclick="saveinformation()">保存</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--订单模块-->
+                        <div role="tabpanel" class="tab-pane" id="order" style="padding-top: 50px;">
+                            <div style="margin-left: 50px;" class="title"><h2>订单</h2></div>
+                            <div style="margin-top: 50px;background-color: #fff;width: 100%;margin-left: 50px;min-height: 400px">
+                               <div class="order-header row" style="margin: 0;width: 100%;">
+                                   <li class="col-sm-4">车源信息</li>
+                                   <li class="col-sm-2">卖家报价</li>
+                                   <li class="col-sm-2">下单时间</li>
+                                   <li class="col-sm-2">状态</li>
+                                   <li class="col-sm-2">操作</li>
+                               </div>
+                                <div class="order-list">
+                                    <li class="row" style="margin: 0;width: 100%;" th:each="p:${user_OrderManage}">
+                                       <div class="col-sm-6">
+                                          <img th:src="@{${p.ordericon}}" alt="" id="ordericonordericon">
+                                           <div class="car-info">
+                                               <span class="car-source" style="bottom: 0;">线下车源</span>
+                                                <span class="car-source" style="bottom: 0;"><p th:text=${p.ordercarname} id="ordercarnameordercarname"></p></span>
+                                               <span class="car-source" style="top: 0;">卖家报价 <span class="order-price"><p th:text=${p.ordermoney} id="ordermoneyordermoney"></p></span></span>
+                                           </div>
+                                          </div>
+                                          
+                                       <div class="col-sm-2"><p th:text=${p.orderbegintime} id="orderbegintimeorderbegintime"></p></div>
+                                       <div class="col-sm-2"><p th:text=${p.orderstatic} id="orderstaticorderstatic"></p></div>
+                                       <div class="col-sm-2">
+                                           <span onclick="delectorderder()" class="cancel">取消订单</span>
+                                       </div>
+                                    </li>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background-color:#f8f8f8;height: 25px"></div>
+</body>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">网站联系方式</h4>
+</div>
+
+<div class="modal-body">
+<h2>联系电话888-888-8888</h2>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+<script type="text/javascript">
+
+
+function lianxifangshi2(){
+
+$('#myModal').modal().show();
+}
+
+function xiugaipassword(){
+	var username=document.getElementById("NowUserName").innerHTML;
+	var oldpassword=document.getElementById("oldpassword").value;
+	var newpassword1=document.getElementById("newpassword1").value;
+	var newpassword2=document.getElementById("newpassword2").value;
+	
+	if(newpassword1 == newpassword2){
+		$.ajax({
+			 type: "POST",//方法类型
+		     url: "/WebCar/userInfo/xiugaipassword" ,//url
+		     data:{
+		    	 username:username,
+		    	 oldpassword:oldpassword,
+		    	 newpassword1:newpassword1
+		     },
+		     success: function (reslut) {
+		          if (reslut=='1') {
+		         	alert("修改成功");
+		         	window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+		         	
+		         };
+		         if(reslut=='0'){
+		        	 alert("账号密码验证不通过");
+		        	 window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+		         };
+		         if(reslut=='2'){
+		        	 alert("修改失败");
+		        	 window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+		         };
+		     },
+		     error : function () { 
+		         alert("异常！");
+		         window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+		     }
+		 });
+	}else{
+		alert("两次输入密码不相同,请重新输入");
+		var newpassword1=document.getElementById("newpassword1").value="";
+		var newpassword2=document.getElementById("newpassword2").value="";
+	}
+}
+function delectorderder(){
+	var username=document.getElementById("usernameusername").innerHTML;
+	var ordermoney=document.getElementById("ordermoneyordermoney").innerHTML;
+	var orderbegintime=document.getElementById("orderbegintimeorderbegintime").innerHTML;
+	var ordericon=document.getElementById("ordericonordericon").src;
+	var ordercarname=document.getElementById("ordercarnameordercarname").innerHTML;
+	
+	
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/delectorderder" ,//url
+	     data:{
+	    	 username:username,
+	    	 ordermoney:ordermoney,
+	    	 orderbegintime:orderbegintime,
+	    	 ordericon:ordericon,
+	    	 ordercarname:ordercarname
+	     },
+	     success: function (reslut) {
+	          if (reslut=='1') {
+	         	alert("取消成功");
+	         	window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+	         	
+	         };
+	         if(reslut=='0'){
+	        	 alert("取消失败，请联系客服");
+	        	 window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+	         };
+	     },
+	     error : function() {
+	         alert("异常！");
+	         window.location.href = "/WebCar/userInfo/user_Manger?username="+username;
+	     }
+		 
+		 
+		 
+		 
+		 
+		 
+	 });
+}
+	$('#editTable').click(function (e) {
+		
+        $('.table-text-show').css('display','none')
+        $('.table-text-input').css('display','block')
+    })
+    $('#saveTable').click(function (e) {
+        $('.table-text-input').css('display','none')
+        $('.table-text-show').css('display','block')
+    })
+function saveinformation(){
+		var userrealname=document.getElementById("namenamename").value;
+		var usersex=document.getElementById("sex").value;
+		var userphone=document.getElementById("phone").value;
+		var useremail=document.getElementById("email").value;
+		var useraddress=document.getElementById("address").value;
+		$.ajax({
+			 type: "POST",//方法类型
+		     url: "/WebCar/userInfo/saveinformation" ,//url
+		     data:{
+		    	 userrealname:userrealname,
+		    	 usersex:usersex,
+		    	 userphone:userphone,
+		    	 useremail:useremail,
+		    	 useraddress:useraddress
+		     },
+		     success: function (reslut) {
+		          if (reslut=='1') {
+		         	alert("修改成功");
+		         	
+		         	
+		         };
+		         if(reslut=='0'){
+		        	 alert("取消失败，请联系客服");
+		        	
+		         };
+		     },
+		     error : function() {
+		         alert("异常！");
+		         
+		     }
+		});
+	}
+</script>
+</body>
+</html>

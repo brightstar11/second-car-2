@@ -501,8 +501,8 @@ public String salecar(Model model) {
 @RequestMapping("/PreserveCar")
 @ResponseBody
 public Integer PreserveCar(String username,CarModel carModel) {
-	System.out.println("aa"+username+"aa");
-	System.out.println(carModel.getCarno());
+	
+	
 	Integer count=car.insertCar(carModel);//存车信息
 	String carno=carModel.getCarno();
 	Integer count2=car.insertCar_User(carno, username);//更新汽车用户表

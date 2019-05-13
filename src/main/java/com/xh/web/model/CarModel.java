@@ -30,6 +30,7 @@ public class CarModel {
 	 private String caricon;
 	 private String carvalidate;
 	 private String carhavename;
+	 private String carhavenamenum;
 	 private Integer carheat;
 	 private String carmileages;
 	 private String cariconone;
@@ -38,7 +39,13 @@ public class CarModel {
 	 private String cariconfour;
 	 private String cariconfive;
 	 
-	 public Integer getCarheat() {
+	 public String getCarhavenamenum() {
+		return carhavenamenum;
+	}
+	public void setCarhavenamenum(String carhavenamenum) {
+		this.carhavenamenum = carhavenamenum;
+	}
+	public Integer getCarheat() {
 		return carheat;
 	}
 	public void setCarheat(Integer carheat) {

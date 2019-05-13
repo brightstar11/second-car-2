@@ -109,6 +109,7 @@
 					<thead>
 						<tr>
 						<td></td>
+							<td>管理员账号</td>
 							<td>管理员名字</td>
 							<td>管理员密码</td>
 							<td>管理员电话</td>
@@ -120,6 +121,7 @@
 
 							<td th:test="${p.adminId}" type="hidden"></td>
 							<td th:text="${p.adminName}"></td>
+							<td th:text="${p.realName}"></td>
 							<td th:text="${p.adminPwd}"></td>
 							<td th:text="${p.adminPhone}"></td>
 							
@@ -184,6 +186,9 @@
 					<td>账号:</td>
 					<td><input type="text" name="adminName" id="adminNameAdd"/></td>
 					</tr>
+					<td>真实名字:</td>
+					<td><input type="text" name="realName" id="realNameAdd"/></td>
+					</tr>
 					<tr>
 					<td>密码:</td>
 					<td><input type="text" name="adminPwd" id="adminPwdAdd"/></td>
@@ -239,13 +244,20 @@ $.ajax({
 function update(){
 	
 	var adminName = $('#adminNameAdd').val();
+	var realName = $('#realNameAdd').val();
 	var adminPwd = $('#adminPwdAdd').val();
 	var adminPhone = $('#adminPhoneAdd').val();
 	var adminPermission =1;
 	$.ajax({
 		type: "post",
 		url: "/WebCar/admin/adminmanageAdd",
-		data: {"adminName":adminName,"adminPwd":adminPwd,"adminPhone":adminPhone,"adminPermission":adminPermission},
+		data: {
+			"adminName":adminName,
+			"realName":realName,
+			"adminPwd":adminPwd,
+			"adminPhone":adminPhone,
+			"adminPermission":adminPermission
+			},
 		dataType: "json",
 		
 		success : function(result) {

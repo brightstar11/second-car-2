@@ -138,6 +138,7 @@ public class Admin_AdminManagerController {
 	@ResponseBody
 	public Integer adminmanageAdd(Admin admin) {
 		//判断名字唯一
+		
 		 String adminName=admin.getAdminName();
 		 List<Admin> list=adminService.adminSeletOne2(adminName);
 		 //list.size=1  表示存在该用户     

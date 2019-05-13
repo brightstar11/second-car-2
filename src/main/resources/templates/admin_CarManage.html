@@ -135,7 +135,8 @@
 							
 							<td>汽车图片</td>
 							<td>是否通过验证</td>
-							<td>汽车拥有人用户名</td>
+							<td>汽车拥有人名字</td>
+							<td>汽车拥有人电话</td>
 							<td>你可以进行的操作</td>
 						</tr>
 					</thead>
@@ -168,6 +169,7 @@
 							<td th:text="${p.carpmethod}"></td>
 							<td th:text="${p.caricon}"></td>
 							<td th:text="${p.carvalidate}"></td>
+							<td th:text="${p.carhavename}"></td>
 							<td th:text="${p.carhavename}"></td>
 							<td><input type="button" value="修改汽车验证状态" name="button"
 								th:onclick="'openwin(\''+${p.id}+'\')'" /> 
@@ -213,7 +215,7 @@
 </body>
 <script type="text/javascript">
 function help(){
-	alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+	alert("请查看自己的管理员权限！销售经理可以实现：（1）对于汽车信息的修改，删除。对于订单信息的修改。（2）销售人员可以实现：（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
 	}
 function deletea(id){
 	

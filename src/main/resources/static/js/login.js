@@ -159,7 +159,11 @@ function checkAmount(route) {
             success: function (reslut) {
                 if (reslut=='1') {
                 	
-                    window.location.href = "/WebCar/userInfo/user_index";
+                	window.location.href = "/WebCar/userInfo/user_index";
+                }if(reslut=='0'){
+                	alert("账号密码错误");
+                	 var usernameValue = username.value="";
+                	    var passwordVlaue = password.value="000";
                 };
             },
             error : function() {

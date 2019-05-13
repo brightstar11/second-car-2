@@ -13,53 +13,73 @@ private String adminId;
   private String adminPwd;
   private String adminPhone;
   private String adminPermission;
-  /**
+  private String realName;
+	
+/**
 	 * 用户的菜单集合
 	 */
   private  List<AdminMenu> adminMenus;
-	
 
-  public List<AdminMenu> getAdminMenus() {
+public String getAdminId() {
+	return adminId;
+}
+
+public void setAdminId(String adminId) {
+	this.adminId = adminId;
+}
+
+public String getAdminName() {
+	return adminName;
+}
+
+public void setAdminName(String adminName) {
+	this.adminName = adminName;
+}
+
+public String getAdminPwd() {
+	return adminPwd;
+}
+
+public void setAdminPwd(String adminPwd) {
+	this.adminPwd = adminPwd;
+}
+
+public String getAdminPhone() {
+	return adminPhone;
+}
+
+public void setAdminPhone(String adminPhone) {
+	this.adminPhone = adminPhone;
+}
+
+public String getAdminPermission() {
+	return adminPermission;
+}
+
+public void setAdminPermission(String adminPermission) {
+	this.adminPermission = adminPermission;
+}
+
+public String getRealName() {
+	return realName;
+}
+
+public void setRealName(String realName) {
+	this.realName = realName;
+}
+
+public List<AdminMenu> getAdminMenus() {
 	return adminMenus;
 }
+
 public void setAdminMenus(List<AdminMenu> adminMenus) {
 	this.adminMenus = adminMenus;
 }
 
-@Override
-public String toString() {
-	return "Admin [adminId=" + adminId + ", adminName=" + adminName + ", adminPwd=" + adminPwd + ", adminPhone="
-			+ adminPhone + ", adminPermission=" + adminPermission + "]";
+public static long getSerialversionuid() {
+	return serialVersionUID;
 }
-public String getAdminId() {
-	return adminId;
-}
-public void setAdminId(String adminId) {
-	this.adminId = adminId;
-}
-public String getAdminName() {
-	return adminName;
-}
-public void setAdminName(String adminName) {
-	this.adminName = adminName;
-}
-public String getAdminPwd() {
-	return adminPwd;
-}
-public void setAdminPwd(String adminPwd) {
-	this.adminPwd = adminPwd;
-}
-public String getAdminPhone() {
-	return adminPhone;
-}
-public void setAdminPhone(String adminPhone) {
-	this.adminPhone = adminPhone;
-}
-public String getAdminPermission() {
-	return adminPermission;
-}
-public void setAdminPermission(String adminPermission) {
-	this.adminPermission = adminPermission;
-}
+
+
 
 }

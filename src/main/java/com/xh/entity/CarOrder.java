@@ -13,6 +13,13 @@ private String orderbegintime;
 private String orderendtime;
 private String orderstaticid;
 private String ordericon;
+private Integer orderpeople;
+public Integer getOrderpeople() {
+	return orderpeople;
+}
+public void setOrderpeople(Integer orderpeople) {
+	this.orderpeople = orderpeople;
+}
 public String getOrdericon() {
 	return ordericon;
 }

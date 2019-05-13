@@ -40,12 +40,12 @@
  <result property="cariconthree" column="cariconthree"/>
  <result property="cariconfour" column="cariconfour"/>
  <result property="cariconfive" column="cariconfive"/>
- 
+  <result property="userphone" column="userphone"/>
  </resultMap>
 
 <!-- 查询所用车辆信息 -->
 <select id="CarselectAll" resultMap="list">
-select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,c.carlntime,cbt.carbirth,cdt.caredition,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carbirth cbt,caredition cdt,carlevels cll,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid   and c.carbirthid=cbt.carbirthid and c.caredition=cdt.careditionid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid                       
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,c.carlntime,cbt.carbirth,cdt.caredition,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename from  car c,carbrands cb,carbirth cbt,caredition cdt,carlevels cll,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid   and c.carbirthid=cbt.carbirthid and c.caredition=cdt.careditionid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid                      
 </select>
 <!-- 品牌查找 -->
 <select id="searchCarName" resultMap="list">

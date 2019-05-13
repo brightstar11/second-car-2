@@ -8,7 +8,7 @@
 	
 	<!-- 注册 -->
 	<insert id="adminregister" >
-	insert into admin(adminname,adminpwd,adminphone,adminpermission) values(#{adminName},#{adminPwd},#{adminPhone},1)
+	insert into admin(adminname,adminpwd,adminphone,adminpermission,realname) values(#{adminName},#{adminPwd},#{adminPhone},1,#{realname})
 	</insert>
 	<!-- 修改个人信息 -->
 	<update id="adminupdate" >

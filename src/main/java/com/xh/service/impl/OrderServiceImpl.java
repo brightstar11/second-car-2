@@ -59,5 +59,10 @@ OrderMapper order;
 		// TODO Auto-generated method stub
 		return order.orderinsertinsert(orderModel);
 	}
+	@Override
+	public List<OrderModel> Admin_OrderManageNew() {
+		// TODO Auto-generated method stub
+		return order.Admin_OrderManageNew();
+	}
 
 }

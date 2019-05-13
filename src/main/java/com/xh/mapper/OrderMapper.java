@@ -16,7 +16,7 @@ public interface OrderMapper {
 	public List<OrderModel> Admin_OrderManageOnGoing();
 	public List<OrderModel> Admin_OrderManageFinish();
 	public List<OrderModel> Admin_OrderManageFail();
-	
+	public List<OrderModel> Admin_OrderManageNew();
 	public Integer Admin_OrderManageUpdate(CarOrder carOrder);
 	
 	//根据当前用户名 查询当前用户的订单

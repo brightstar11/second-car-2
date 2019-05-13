@@ -48,12 +48,12 @@ public interface AdminMapper {
 	   @Select("select * from admin where adminName=#{adminName}")
 	   public List<Admin> adminSeletOne2(String adminName);
 	   //修改管理员信息
-	   @Update("update admin set adminname=#{adminName},adminpwd=#{adminPwd},adminphone=#{adminPhone} where adminid=#{adminId}")
+	   @Update("update admin set adminname=#{adminName},adminpwd=#{adminPwd},adminphone=#{adminPhone},realname=#{realName} where adminid=#{adminId}")
 	   public Integer adminUpdate(Admin admin);
 	   //删除管理员
 	   @Delete("delete from admin where adminName=#{adminName}")
 	   public Integer adminmanagedelect(String adminName);
 	   //添加管理员
-	   @Insert("insert into admin(adminname,adminpwd,adminphone,adminPermission) values(#{adminName},#{adminPwd},#{adminPhone},#{adminPermission})")
+	   @Insert("insert into admin(adminname,adminpwd,adminphone,adminPermission,realname) values(#{adminName},#{adminPwd},#{adminPhone},#{adminPermission},#{realName})")
 	   public Integer adminmanageAdd(Admin admin);
 }

@@ -93,10 +93,10 @@ public class Admin_OrderManagerController {
 	public Integer Admin_OrderManageUpdate(Integer orderid,String orderstatic) {
 		System.out.println(orderid+" "+orderstatic);
 		CarOrder carOrder=new CarOrder();
-		if(orderstatic.equals("1")||orderstatic.equals("2")||orderstatic.equals("3")) {
+		if(orderstatic.equals("1")||orderstatic.equals("2")||orderstatic.equals("3")||orderstatic.equals("4")) {
 			carOrder.setOrderid(orderid);
 			carOrder.setOrderstaticid(orderstatic);
-			if(orderstatic.equals("2")) {
+			if(orderstatic.equals("2")||orderstatic.equals("4")) {
 			carOrder.setOrderendtime(null);
 			int count=order.Admin_OrderManageUpdate(carOrder);
 			if(count==1){
@@ -115,6 +115,36 @@ public class Admin_OrderManagerController {
 	}
 		return 0;
 	}
+	
+	@RequestMapping("/Admin_OrderManageNew")
+	 public String Admin_OrderManageNew(Integer pageNum,Model model) {
+		
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	    PageHelper.startPage(num, 5, true);
+	    List<OrderModel> list= order.Admin_OrderManageNew();
+		for (int i = 0; i < list.size(); i++) {
+			OrderModel orderModel=(OrderModel)list.get(i);
+			System.out.println(orderModel.toString());
+		}
+		
+			
+			PageInfo pageinfo = new PageInfo(list);
+			int x = pageinfo.getStartRow();
+			int y = pageinfo.getEndRow();
+			long z = pageinfo.getTotal();
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+			model.addAttribute("pageInfo",pageinfo);
+			model.addAttribute("info",info);
+		     model.addAttribute("list",list);
+		return "admin_OrderManage";
+	 }
 	
 	@RequestMapping("/Admin_OrderManageFinish")
 	 public String Admin_OrderManageFinish(Integer pageNum,Model model) {
@@ -143,7 +173,7 @@ public class Admin_OrderManagerController {
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
 		     model.addAttribute("list",list);
-		return "admin_OrderManageFinish";
+		return "admin_OrderManage";
 	 }
 	
 	@RequestMapping("/Admin_OrderManageFail")
@@ -173,7 +203,7 @@ public class Admin_OrderManagerController {
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
 		     model.addAttribute("list",list);
-		return "admin_OrderManageFail";
+		return "admin_OrderManage";
 	 }
 	
 	@RequestMapping("/Admin_OrderManageOnGoing")
@@ -203,7 +233,7 @@ public class Admin_OrderManagerController {
 			model.addAttribute("pageInfo",pageinfo);
 			model.addAttribute("info",info);
 		     model.addAttribute("list",list);
-		return "admin_OrderManageOnGoing";
+		return "admin_OrderManage";
 	 }
 	
 	
