@@ -14,7 +14,16 @@ private String adminId;
   private String adminPhone;
   private String adminPermission;
   private String realName;
+  private String adminaddress;
 	
+public String getAdminaddress() {
+	return adminaddress;
+}
+
+public void setAdminaddress(String adminaddress) {
+	this.adminaddress = adminaddress;
+}
+
 /**
 	 * 用户的菜单集合
 	 */

@@ -188,5 +188,20 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		return CarMapper.insertcarheat(carModel);
 	}
+	@Override
+	public List<CarModel> Car_Sellpeoplecarallocation() {
+		// TODO Auto-generated method stub
+		return CarMapper.Car_Sellpeoplecarallocation();
+	}
+	@Override
+	public Integer Car_Sellpeoplecarallocation2(Integer id) {
+		// TODO Auto-generated method stub
+		return CarMapper.Car_Sellpeoplecarallocation2(id);
+	}
+	@Override
+	public Integer updatecarsell(CarModel carModel) {
+		// TODO Auto-generated method stub
+		return CarMapper.updatecarsell(carModel);
+	}
  
 }

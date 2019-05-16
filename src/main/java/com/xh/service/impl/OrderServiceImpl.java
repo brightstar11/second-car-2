@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xh.entity.CarOrder;
+import com.xh.entity.Sellpeople_order;
 import com.xh.mapper.OrderMapper;
 import com.xh.service.OrderService;
 import com.xh.web.model.OrderModel;
@@ -63,6 +64,21 @@ OrderMapper order;
 	public List<OrderModel> Admin_OrderManageNew() {
 		// TODO Auto-generated method stub
 		return order.Admin_OrderManageNew();
+	}
+	@Override
+	public Integer order_sellpeopleAdd(Sellpeople_order sellpeople_order) {
+		// TODO Auto-generated method stub
+		return order.order_sellpeopleAdd(sellpeople_order);
+	}
+	@Override
+	public Integer order_sellpeopleUpdate(Integer orderid) {
+		// TODO Auto-generated method stub
+		return order.order_sellpeopleUpdate(orderid);
+	}
+	@Override
+	public List<OrderModel> Sellpeople_Orderselect(Integer orderid) {
+		// TODO Auto-generated method stub
+		return order.Sellpeople_Orderselect(orderid);
 	}
 
 }

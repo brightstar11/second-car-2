@@ -9,13 +9,16 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.xh.entity.Admin;
+import com.xh.entity.Sellpeople_car;
 import com.xh.entity.UserInfo;
 
 @Mapper
 public interface AdminMapper {
 	@Select("select * from admin where adminName=#{adminName} and adminPwd=#{adminPwd}")
 	 public List<Admin> adminquery(Admin admin);
-	
+	//查询状态为4的销售人员
+	@Select("select * from admin where adminpermission=4")
+	 public List<Admin> adminquery_adminpermission4();
 	@Select("select * from admin where adminPermission=#{adminPermission} and adminName=#{adminName}")
 	 public List<Admin> searchAdminName(Admin admin);
 	
@@ -53,7 +56,24 @@ public interface AdminMapper {
 	   //删除管理员
 	   @Delete("delete from admin where adminName=#{adminName}")
 	   public Integer adminmanagedelect(String adminName);
+	   
+	   @Delete("delete from admin where adminId=#{adminId}")
+	   public Integer adminmanagedelect2(String adminId);
 	   //添加管理员
 	   @Insert("insert into admin(adminname,adminpwd,adminphone,adminPermission,realname) values(#{adminName},#{adminPwd},#{adminPhone},#{adminPermission},#{realName})")
 	   public Integer adminmanageAdd(Admin admin);
+	   
+	   //添加管理员
+	   @Insert("insert into admin(adminname,adminpwd,adminphone,adminPermission,realname,adminaddress) values(#{adminName},#{adminPwd},#{adminPhone},#{adminPermission},#{realName},#{adminaddress})")
+	   public Integer adminmanageAdd2(Admin admin);
+	   
+	   
+	   
+	   
+	   
+	   
+	   //这里为后台车辆的审核管理操作
+	   //添加车辆信息和审核员的关联
+	   @Insert("insert into sellpeople_car(carid,sellpeopleid) values(#{carid},#{sellpeopleid})")
+	   public Integer car_sellpeopleAdd(Sellpeople_car sellpeople_car);
 }

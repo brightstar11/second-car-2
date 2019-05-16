@@ -257,14 +257,13 @@ function send_number() {
     $.ajax({
         //几个参数需要注意一下
         type: "POST",//方法类型
-       // dataType: "json",//预期服务器返回的数据类型
+//        dataType: "json",//预期服务器返回的数据类型
         url: '/WebCar/userInfo/email' ,//url
         data: data,
         success: function (reslut) {
-           // var code=JSON.parse(reslut)
-            console.log(result);//打印服务端返回的数据(调试用)
+//            var code=JSON.parse(reslut)
+            console.log(reslut);//打印服务端返回的数据(调试用)
             if(reslut!=0){
-            $('#determine').attr('data-number',code)
                 // window.location.href = "http://localhost:8088/index";
             }
             else{
@@ -281,13 +280,26 @@ function send_number() {
 }
 //确定
 function determine() {
+	
     var inputEmail=$('#inputEmail').val()
-    var number=$('#determine').attr('data-number')
-    if(number==inputEmail){
-        $('#numberone').css('display','none');
-        $('#numbertwo').css('display','block');
-        $('#determine').attr('data-dismiss','modal')
-    }
+    var data = 'inputEmail='+inputEmail
+    $('#numberone').css('display','none');
+    $('#numbertwo').css('display','block');
+    $.ajax({
+    	type: "POST",//方法类型
+       // dataType: "json",//预期服务器返回的数据类型
+        url: '/WebCar/userInfo/email2' ,//url
+        data: data,
+        success: function (reslut) {
+        	if(reslut==1){
+        		 $('#numberone').css('display','none');
+        	     $('#numbertwo').css('display','block');
+        	     $('#determine').attr('data-dismiss','modal')
+        	}else {
+        		alert('服務異常')
+        	}
+        }
+    })
 }
 $(function () {
     var btn = $("#confirm_btn");

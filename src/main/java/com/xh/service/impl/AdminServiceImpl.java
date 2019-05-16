@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xh.entity.Admin;
+import com.xh.entity.Sellpeople_car;
 import com.xh.entity.UserInfo;
 import com.xh.mapper.AdminMapper;
 import com.xh.service.AdminService;
@@ -111,5 +112,29 @@ public class AdminServiceImpl implements AdminService{
 	public List<Admin> searchAdminName(Admin admin) {
 		
 		return admindao.searchAdminName(admin);
+	}
+
+	@Override
+	public List<Admin> adminquery_adminpermission4() {
+		// TODO Auto-generated method stub
+		return admindao.adminquery_adminpermission4();
+	}
+
+	@Override
+	public Integer car_sellpeopleAdd(Sellpeople_car sellpeople_car) {
+		// TODO Auto-generated method stub
+		return admindao.car_sellpeopleAdd(sellpeople_car);
+	}
+
+	@Override
+	public Integer adminmanagedelect2(String adminId) {
+		// TODO Auto-generated method stub
+		return admindao.adminmanagedelect2(adminId);
+	}
+
+	@Override
+	public Integer adminmanageAdd2(Admin admin) {
+		// TODO Auto-generated method stub
+		return admindao.adminmanageAdd2(admin);
 	}
 }

@@ -37,7 +37,21 @@ public class Car {
  private String cariconthree;
  private String cariconfour;
  private String cariconfive;
+ private String  carallocation;
+ private String  carsell;
  
+public String getCarallocation() {
+	return carallocation;
+}
+public void setCarallocation(String carallocation) {
+	this.carallocation = carallocation;
+}
+public String getCarsell() {
+	return carsell;
+}
+public void setCarsell(String carsell) {
+	this.carsell = carsell;
+}
 public Integer getCarheat() {
 	return carheat;
 }

@@ -26,6 +26,11 @@ public interface CarMapper {
    
    public List<CarModel> CarselectYes();
    public List<CarModel> CarselectNo();
+   //后台审核
+   public List<CarModel> Car_Sellpeoplecarallocation();
+   @Update("update car set carallocation='是' where id=#{id}")
+   public Integer Car_Sellpeoplecarallocation2(Integer id);
+   //后台 审核
    public List<CarModel> CarselectOne(Integer id);
    public Integer Admin_CarManageDelect(Integer id);
    @Update("update car set carvalidateid=#{carvalidateid} where id=#{id}")
@@ -87,5 +92,6 @@ public interface CarMapper {
    public Integer insertCar_User(String carno,String username);
    //更新car表热度
    public Integer  insertcarheat(CarModel carModel);
+   public Integer  updatecarsell(CarModel carModel);
    
 }

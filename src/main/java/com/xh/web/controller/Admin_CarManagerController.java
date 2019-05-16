@@ -1,7 +1,11 @@
 package com.xh.web.controller;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +16,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xh.entity.UserInfo;
+import com.xh.common.GlobalConstant;
+import com.xh.entity.Admin;
+import com.xh.entity.Sellpeople_car;
+
+import com.xh.service.AdminService;
 import com.xh.service.CarService;
+import com.xh.service.Car_SellpeopleService;
 import com.xh.service.SellCarService;
 import com.xh.service.UserInfoService;
 import com.xh.web.model.CarModel;
@@ -30,6 +39,10 @@ public class Admin_CarManagerController {
 	SellCarService sellcar;
 	@Autowired
 	UserInfoService u;
+	@Autowired
+	AdminService a;
+	@Autowired 
+	Car_SellpeopleService cc;
 	@RequestMapping("admin_CarManageupdateSuccess")
 	public String index1(){
 		return "admin_CarManageupdateSuccess";
@@ -160,7 +173,8 @@ public class Admin_CarManagerController {
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
 	     model.addAttribute("list",list);
-	return "admin_CarManageNo";
+	     
+	return "admin_CarManage";
  }
  @RequestMapping("/Admin_CarManageYes")
  public String Admin_CarManageYes(Integer pageNum,Model model) {
@@ -189,6 +203,145 @@ public class Admin_CarManagerController {
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
 	     model.addAttribute("list",list);
-	return "admin_CarManageYes";
+	return "admin_CarManage";
  }
+ @RequestMapping("/Car_Sellpeoplecarallocation")
+ public String Car_Sellpeoplecarallocation(Integer pageNum,Model model) {
+	 List<Admin> list2=a.adminquery_adminpermission4();
+	
+	//分页
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 10, true);
+ List<CarModel> list= car.Car_Sellpeoplecarallocation();
+	for (int i = 0; i < list.size(); i++) {
+		CarModel carModel=(CarModel)list.get(i);
+		System.out.println(carModel.toString());
+	}
+	
+		
+		PageInfo pageinfo = new PageInfo(list);
+		int x = pageinfo.getStartRow();
+		int y = pageinfo.getEndRow();
+		long z = pageinfo.getTotal();
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+		model.addAttribute("pageInfo",pageinfo);
+		model.addAttribute("info",info);
+	     model.addAttribute("list",list);
+	     model.addAttribute("list2",list2);
+	return "admin_CarManage";
+ }
+ @RequestMapping("/car_sellpeopleAdd")
+ @ResponseBody
+ public Integer car_sellpeopleAdd(Sellpeople_car sellpeople_car) {
+	 
+	 int count=a.car_sellpeopleAdd(sellpeople_car);
+	 if(count==1) {
+		 int count2=car.Car_Sellpeoplecarallocation2(sellpeople_car.getCarid());
+		 return count2;
+	 }
+	return 0;
+	 
+ }
+ //车辆分配查看，销售人员工作
+ @RequestMapping("/Car_look")
+ public String Car_look(Integer pageNum,Model model,HttpSession session,HttpServletRequest request) {
+	
+	 
+	
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	 PageHelper.startPage(num, 10, true);
+	 session = request.getSession(false);
+	 Object vakue = session.getAttribute(GlobalConstant.LOGIN_KEY);
+	 Admin admin=(Admin)vakue;
+	 
+	 Integer sellpeopleid=Integer.valueOf(admin.getAdminId());
+	 List<Integer>list4= cc.carcarid(sellpeopleid);
+	 List<CarModel> slist = new ArrayList<CarModel>();
+	 for(int i=0;i<list4.size();i++) {
+		 Integer carid=(Integer)list4.get(i);
+		 List<CarModel> carModels=car.CarselectOne(carid);
+		 CarModel carModel2=carModels.get(0);
+		 if(carModel2.getCarvalidate().equals("未通过")) {
+		 slist.add(carModel2);
+		 }
+	 }
+		for (int i = 0; i < slist.size(); i++) {
+			CarModel carModel=(CarModel)slist.get(i);
+			System.out.println(carModel.toString());
+		}
+		
+			
+			PageInfo pageinfo = new PageInfo(slist);
+			int x = pageinfo.getStartRow();
+			int y = pageinfo.getEndRow();
+			long z = pageinfo.getTotal();
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+			model.addAttribute("pageInfo",pageinfo);
+			model.addAttribute("info",info);
+		     model.addAttribute("list",slist);
+		    return "admin_CarManage"; 
+ }
+ //已处理，销售人员工作
+ @RequestMapping("/Car_look2")
+ public String Car_look2(Integer pageNum,Model model,HttpSession session,HttpServletRequest request) {
+	
+	 
+	
+		
+		//分页
+		 PageModel pm = new PageModel();
+			Integer num = 1;
+			if(pageNum != null && pageNum >= 0) {
+				num = pageNum;
+			}
+			pm.setPageNum(num);
+	 PageHelper.startPage(num, 10, true);
+	 session = request.getSession(false);
+	 Object vakue = session.getAttribute(GlobalConstant.LOGIN_KEY);
+	 Admin admin=(Admin)vakue;
+	 
+	 Integer sellpeopleid=Integer.valueOf(admin.getAdminId());
+	 List<Integer>list4= cc.carcarid(sellpeopleid);
+	 List<CarModel> slist = new ArrayList<CarModel>();
+	 for(int i=0;i<list4.size();i++) {
+		 Integer carid=(Integer)list4.get(i);
+		 List<CarModel> carModels=car.CarselectOne(carid);
+		 CarModel carModel2=carModels.get(0);
+		 if(carModel2.getCarvalidate().equals("通过")) {
+		 slist.add(carModel2);
+		 }
+	 }
+		for (int i = 0; i < slist.size(); i++) {
+			CarModel carModel=(CarModel)slist.get(i);
+			System.out.println(carModel.toString());
+		}
+		
+			
+			PageInfo pageinfo = new PageInfo(slist);
+			int x = pageinfo.getStartRow();
+			int y = pageinfo.getEndRow();
+			long z = pageinfo.getTotal();
+			String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+			model.addAttribute("pageInfo",pageinfo);
+			model.addAttribute("info",info);
+		     model.addAttribute("list",slist);
+		    return "admin_CarManage"; 
+ }
+ 
+ 
+ 
+ 
+ 
 }

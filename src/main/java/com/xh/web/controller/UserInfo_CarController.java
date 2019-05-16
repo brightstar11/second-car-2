@@ -2,7 +2,7 @@ package com.xh.web.controller;
 
 
 import java.util.List;
-
+import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,7 +143,14 @@ public String  BuyCarSearch(Integer pageNum,String brandname,Model model) {
 //根据车的价格，进行模糊搜索 
 @RequestMapping("/User_BuyCarSearch2")
 public String  BuyCarSearch2(Integer pageNum,Integer carprice1,Integer carprice2,Model model) {
-	System.out.println(carprice1+ carprice2);
+	if(carprice1 == null) {
+		carprice1 = 0;
+	}
+	if(carprice2 == null) {
+		carprice2 = 1000;
+	}
+	String queyrString = "&carprice1="+carprice1+"&carprice2="+carprice2;
+	
 	//分页
 	 PageModel pm = new PageModel();
 		Integer num = 1;
@@ -162,6 +169,7 @@ List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
 		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
 		model.addAttribute("pageInfo",pageinfo);
 		model.addAttribute("info",info);
+		model.addAttribute("queyrString",queyrString);
 	    
 	model.addAttribute("listAll",list);
 	List<CarBrands> list2=car.CarbrandsAll();

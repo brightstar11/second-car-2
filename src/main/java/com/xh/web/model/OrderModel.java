@@ -17,6 +17,14 @@ public class OrderModel {
 	private String orderstatic;
 	private String ordericon;
 	private Integer orderpeople;
+	private Integer carid;
+	
+	public Integer getCarid() {
+		return carid;
+	}
+	public void setCarid(Integer carid) {
+		this.carid = carid;
+	}
 	public Integer getOrderpeople() {
 		return orderpeople;
 	}

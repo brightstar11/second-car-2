@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.xh.entity.Admin;
+import com.xh.entity.Sellpeople_car;
 import com.xh.entity.UserInfo;
 
 
@@ -44,6 +45,12 @@ public interface AdminService {
 		   public Integer adminUpdate(Admin admin);
 		   //删除管理员信息
 		   public Integer adminmanagedelect(String adminName);
+		   public Integer adminmanagedelect2(String adminId);
 		   //添加管理员
 		   public Integer adminmanageAdd(Admin admin);
+		   public Integer adminmanageAdd2(Admin admin);
+		   
+		   public List<Admin> adminquery_adminpermission4();
+		   
+		   public Integer car_sellpeopleAdd(Sellpeople_car sellpeople_car);
 }

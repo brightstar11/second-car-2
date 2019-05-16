@@ -16,6 +16,7 @@
  <result property="orderendtime" column="orderendtime"/>
  <result property="orderstatic" column="orderstatic"/>
  <result property="orderpeople" column="orderpeople"/>
+ <result property="carid" column="carid	"/>
  </resultMap>
  <select id="admin_OrderAll" resultMap="list">
  select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.orderpeople from orders o,orderstatic os where o.orderstaticid=os.orderstaticid
@@ -49,7 +50,7 @@
  
  
   <select id="searchOrderNo" resultMap="list">
- select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderid=#{orderid}
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.carid from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderid=#{orderid}
  </select>
  
  <update id="Admin_OrderManageUpdate">
@@ -57,6 +58,18 @@
  </update>
  
  <insert id="orderinsertinsert">
- insert into orders(ordercarname,ordercarhavename,orderhavetel,ordermoney,ordername,orderaddr,ordertel,orderbegintime,orderstaticid,ordericon) values(#{ordercarname},#{ordercarhavename},#{orderhavetel},#{ordermoney},#{ordername},#{orderaddr},#{ordertel},#{orderbegintime},#{orderstatic},#{ordericon})
+ insert into orders(ordercarname,ordercarhavename,orderhavetel,ordermoney,ordername,orderaddr,ordertel,orderbegintime,orderstaticid,ordericon,carid) values(#{ordercarname},#{ordercarhavename},#{orderhavetel},#{ordermoney},#{ordername},#{orderaddr},#{ordertel},#{orderbegintime},#{orderstatic},#{ordericon},#{carid})
  </insert>
+ <!-- 销售人员与订单关联  1.关联销售人员与订单  2。修改订单状态为处理中 -->
+ <insert id="order_sellpeopleAdd">
+ insert into sellpeople_order(sellpeopleid,orderid) values(#{sellpeopleid},#{orderid})
+ </insert>
+  <update id="order_sellpeopleUpdate">
+ update orders set orderstaticid=2 where orderid=#{orderid}
+ </update>
+ <!--  -->
+ <!-- 销售人员   根据id 查询分配到的订单 -->
+  <select id="Sellpeople_Orderselect" resultMap="list">
+ select o.orderid,o.ordercarname,o.ordercarhavename,o.orderhavetel,o.ordermoney,o.ordername,o.orderaddr,o.ordertel,o.orderbegintime,o.orderendtime,os.orderstatic,o.ordericon from orders o,orderstatic os where o.orderstaticid=os.orderstaticid and o.orderid=#{orderid}
+ </select>
  </mapper>

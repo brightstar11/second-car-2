@@ -124,6 +124,7 @@
 					</thead>
 					<tbody th:each="p:${list}">
 						<tr>
+						    
 						    <td th:text="${p.orderid}"></td>
                             <td th:text="${p.ordercarname}"></td>
 							<td th:text="${p.ordercarhavename}"></td>
@@ -137,8 +138,10 @@
 							<td th:text="${p.orderstatic}"></td>
 							<td>
 								<!-- 按钮触发模态框 -->
-       <button  data-toggle="modal" data-target="#myModal" th:onclick="'openwin(\''+${p.orderid}+'\')'"  >修改订单状态</button>
+       <button  data-toggle="modal" data-target="#myModal" th:onclick="'openwin(\''+${p.orderid}+'\')'">修改订单状态</button>
+       <button data-toggle="modal" data-target="#myModal2"  class="EVA11"  style="display:none" th:onclick="'EAV(\''+${p.orderid}+'\')'">订单审核分配</button>
 								</td>
+								
 						</tr>
 					</tbody>
 				</table>
@@ -169,6 +172,7 @@
 
 						</div>
 					</div>
+					<p th:text="${session.LOGIN_KEY.adminPermission}" hidden="hidden" id="p111">
 					<div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
 						Copyright © 2018</div>
 				</div>
@@ -190,12 +194,13 @@
 <center>
 <select name="selectorderstatic" id="selectorderstatic">   
         <option value="1">完成</option>   
-        <option value="2">正在处理中</option>   
+        <option value="2" id="41">正在处理中</option>   
         <option value="3">失败</option> 
-        <option value="4">新的</option>   
+        <option value="4" id="42">新的</option>   
         </select>
         </center>
 </div>
+
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 <button type="button" class="btn btn-primary" onclick="ordersubmit()">提交更改</button>
@@ -203,9 +208,60 @@
 </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">选择审核人员</h4>
+</div>
+
+<div class="modal-body">
+<input type="hidden" value="" name="carid" id="carid"  />
+<center>
+ <div class="bs-example" data-example-id="hoverable-table">
+                                <table class="table table-hover" id="btable" >
+                                    <thead>
+                                    <tr>
+ 
+                                       
+                                        <th>姓名</th>
+                                        <th>电话</th>
+                                        <th>所在地</th>
+                                         <th>选择</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tableble" th:each="p:${list2}">
+ 
+                                    <tr id="1" >
+                                    <td th:text="${p.adminId}" style="display:none">
+                                    <td th:text="${p.realName}"></td>
+                                    <td th:text="${p.adminPhone}"></td>
+                                    <td th:text="${p.adminaddress}"></td>
+                                    <td ><button type="button" class="btn btn-primary" th:onclick="'EVAsubmit(\''+${p.adminId}+'\')'">选择</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+ 
+                            </div>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
 <script type="text/javascript">
 function help(){
-	alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+	var obj = document.getElementById("p111");
+	 if(obj.innerHTML==3){
+	    	alert("销售经理，主要负责: 1.对于订单的分配  2.对于销售人员的管理  3.对于车辆的管理");
+	    }if(obj.innerHTML==4){
+	    	alert("销售人员，主要负责：1.对于分配到自己的订单处理  2.对于分配到自己的车辆的处理");
+	    }
 	}
 
 function openwin(id){
@@ -219,6 +275,7 @@ function ordersubmit(){
 		 type: "POST",//方法类型
 	     url: "/WebCar/admin/Admin_OrderManageUpdate" ,//url
 	     data:{
+	    	 
 	    	 orderid:orderid,
 	    	 orderstatic:orderstatic
 	     },
@@ -227,14 +284,62 @@ function ordersubmit(){
 	         console.log(reslut);//打印服务端返回的数据(调试用)
 	         if (reslut=='1') {
 	         	alert("修改成功");
-	         	window.location.href = "/WebCar/admin/Admin_OrderManage";
+	         	window.location.reload();
 	         };
 	     },
 	     error : function() {
 	         alert("异常！");
-	         window.location.href = "/WebCar/admin/Admin_OrderManage";
+	         window.location.reload();
 	     }
 	});
+	
+}
+function EAV(id){
+	
+	$('#myModal2').modal().show();
+	var orderName =$('#carid').val(id)
+}
+function EVAsubmit(id){
+	var orderid=$('#carid').val();
+	var sellpeopleid=id;
+	
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/admin/order_sellpeopleAdd" ,//url
+	     data:{
+	    	 orderid:orderid,
+	    	 sellpeopleid:sellpeopleid
+	     },
+	     success: function (reslut) {
+	         
+	         console.log(reslut);//打印服务端返回的数据(调试用)
+	         if (reslut=='1') {
+	         	alert("订单审核分配成功");
+	         	 window.location.reload();
+	         }else{
+	        	 alert("订单审核分配失败");
+	        	 window.location.reload();
+	         };
+	         
+	     },
+	     error : function() {
+	         alert("异常！");
+	        
+	     }
+	});
+	$('#myModal2').modal().hide();
+}
+window.onload=function(){
+	var url = window.location.href;
+	var obj = document.getElementById("p111");
+	if(url=="http://localhost:8888/WebCar/admin/Admin_OrderManageNew"){
+		$(".EVA11").show();
+	}
+	if(obj.innerHTML==4){
+		$('#41').hide();
+		$('#42').hide();
+	}
+	
 	
 }
 </script>

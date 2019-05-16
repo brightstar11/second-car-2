@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import net.sf.ehcache.pool.Size;
 @Controller
 @RequestMapping("WebCar/userInfo")
 public class UserInfoController {
+	StringBuilder sb;
    @Autowired
 private UserInfoService userInfoService;
    @Autowired
@@ -187,9 +189,9 @@ private UserInfoService userInfoService;
 //密码找回-邮箱找回
  @RequestMapping("/email")
  @ResponseBody
- public String email(String useremail) {
+ public Integer email(String useremail) {
 	 String str="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	 StringBuilder sb=new StringBuilder(4);
+	 sb=new StringBuilder(4);
 	 for(int i=0;i<4;i++)
 	 {
 	 //public int nextInt(int n) 该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值，包含0而不包含n。
@@ -213,14 +215,29 @@ private UserInfoService userInfoService;
 	 			System.out.println(userInfo2.getUserpwd());
 	 			//设置收件人和消息内容
 	 		mailService.sendMail(useremail,"密码找回","二手车交易系统提醒您请勿回复本邮件.你的验证码为:"+sb.toString());
- 		       return sb.toString();
+ 		       return 1;
  		     //返回找回密码成功界面
 		 	}
 	 		//返回找回密码失败界面，邮箱未注册
 	
 	 		//返回找回密码失败界面，邮箱未注册
-	return "0";
+	return 0;
 	 
  }
+//密码找回-邮箱找回
+@RequestMapping("/email2")
+@ResponseBody
+public Integer email2(StringBuilder inputEmail) {
+	System.out.println(inputEmail);
+	System.out.println(sb);
+	String sb2=sb.toString();
+	String inputEmail2=inputEmail.toString();
+	if(sb2.equals(inputEmail2)) {
+	     System.out.println(111);
+	     return 1;
+	}else {
+		return 0;
+	}
+}
 }
 

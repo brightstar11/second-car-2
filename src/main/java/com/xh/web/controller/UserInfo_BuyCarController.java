@@ -74,6 +74,7 @@ public Integer new_order(OrderModel orderModel,Integer id) {
 				orderModel.setOrdername(ordername);
 				orderModel.setOrderaddr(orderaddr);
 				orderModel.setOrdertel(ordertel);
+				orderModel.setCarid(id);
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String orderbegintime=df.format(new Date());
 				orderModel.setOrderbegintime(orderbegintime);

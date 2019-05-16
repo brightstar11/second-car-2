@@ -1,5 +1,6 @@
 package com.xh.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +29,7 @@ import com.xh.entity.UserInfo;
 import com.xh.entity.UserLogin;
 import com.xh.service.AdminMenuService;
 import com.xh.service.AdminService;
+import com.xh.service.Car_SellpeopleService;
 import com.xh.service.UserInfoService;
 import com.xh.service.User_LoginService;
 import com.xh.web.model.PageModel;
@@ -44,6 +47,8 @@ private AdminMenuService ad;
 private UserInfoService user;
 @Autowired
 private User_LoginService User_LoginService;
+@Autowired
+Car_SellpeopleService cc;
 /**
  * 加载登录页
  */
@@ -85,7 +90,7 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 			return "adminlogin";
 	   }
 		Admin admin2 = list.get(0);
-		System.out.println(admin2.getAdminPermission());
+		
 		if (admin2.getAdminPermission().equals("2")) {
 			
 			// 登录成功,查询用户的菜单列表
@@ -102,6 +107,12 @@ public String userinfoQuery(Admin admin,HttpSession session,Model model) {
 					    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
 					    return "admin_index";
 		}else if(admin2.getAdminPermission().equals("3")) {
+			// 登录成功,查询用户的菜单列表
+			List<AdminMenu> menus = ad.findMenu1ByUserId(admin2.getAdminPermission()+"");
+			admin2.setAdminMenus(menus);
+		    session.setAttribute(GlobalConstant.LOGIN_KEY, admin2);
+		    return "admin_index";
+        }else if(admin2.getAdminPermission().equals("4")) {
 			// 登录成功,查询用户的菜单列表
 			List<AdminMenu> menus = ad.findMenu1ByUserId(admin2.getAdminPermission()+"");
 			admin2.setAdminMenus(menus);
@@ -260,7 +271,75 @@ public Integer usermanageAdd(UserInfo userInfo) {
 	}
 	   
 }
-
+@RequestMapping("/Admin_sellpeople")
+public String Admin_sellpeople(Model model,Integer pageNum) {
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+	List<Admin> list=adminService.adminquery_adminpermission4();
+	
+		
+		PageInfo pageinfo = new PageInfo(list);
+		int x = pageinfo.getStartRow();
+		int y = pageinfo.getEndRow();
+		long z = pageinfo.getTotal();
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+		model.addAttribute("pageInfo",pageinfo);
+		model.addAttribute("info",info);
+	     model.addAttribute("list",list);
+	return "admin_sellpeople";
+	
+}
+@RequestMapping("/Admin_sellpeople2")
+public String Admin_sellpeople2(Model model,Integer pageNum,@RequestParam("name") String name) {
+	 PageModel pm = new PageModel();
+		Integer num = 1;
+		if(pageNum != null && pageNum >= 0) {
+			num = pageNum;
+		}
+		pm.setPageNum(num);
+ PageHelper.startPage(num, 5, true);
+	List<Admin> list=adminService.adminquery_adminpermission4();
+	List<Admin> list2=new ArrayList<Admin>();
+	   for(int i=0;i<list.size();i++) {
+	   Admin admin=list.get(i);
+	   if(admin.getRealName().equals(name)) {
+		   list2.add(admin);
+	   }
+	   
+	   }
+		
+		PageInfo pageinfo = new PageInfo(list);
+		int x = pageinfo.getStartRow();
+		int y = pageinfo.getEndRow();
+		long z = pageinfo.getTotal();
+		String info = "显示"+(x)+"到"+(y)+"共"+z+"条";
+		model.addAttribute("pageInfo",pageinfo);
+		model.addAttribute("info",info);
+	     model.addAttribute("list",list2);
+	return "admin_sellpeople";
+	
+}
+@RequestMapping("/adminmanagedelect2")
+@ResponseBody
+public Integer adminmanagedelect2(String adminId) {
+	System.out.println(Integer.valueOf(adminId));
+	cc.delectsellpeople_car(Integer.valueOf(adminId));
+	cc.delectsellpeople_order(Integer.valueOf(adminId));
+	return adminService.adminmanagedelect2(adminId);
+}
+@RequestMapping("/adminmanageAdd2")
+@ResponseBody
+public Integer adminmanageAdd2(Admin admin) {
+	String pwd=MD5Util.MD5(admin.getAdminPwd());
+	admin.setAdminPwd(pwd);
+	return adminService.adminmanageAdd2(admin);
+	
+}
 
 }
 

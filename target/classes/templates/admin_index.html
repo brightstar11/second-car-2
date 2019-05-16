@@ -99,7 +99,7 @@
 			<div class="my-3 my-md-5">
 				<!-- 首页展示 -->
 				<div class="card-header">
-                    <h3 class="card-title">欢迎：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>你是：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminPermission}+级管理员" ></small>
+                    <h3 class="card-title">欢迎：<small class="text-muted d-block mt-1" th:text="${session.LOGIN_KEY.adminName}"></small>你是：<p th:text="${session.LOGIN_KEY.adminPermission}" hidden="hidden" id="p111"></p><p id="p222"></p>
                          使用二手车后端管理平台</h3>
                   </div>
                   
@@ -136,7 +136,34 @@
 </body>
 <script type="text/javascript">
 function help(){
-	alert("请查看自己的管理员权限！1级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加。（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。2级管理员可以实现：（1）对于用户信息的管理，包括用户信息的修改，增加，还有删除（2）对于汽车信息的修改，增加，删除。对于订单信息的修改。（3）对于一级管理员的信息的修改，增加，删除。");
+	var obj = document.getElementById("p111");
+	 if(obj.innerHTML==1){
+	    	alert("管理员 主要负责，管理用户");
+	    }if(obj.innerHTML==2){
+	    	alert("总管理员，你是老大，管理人员");
+	    }if(obj.innerHTML==3){
+	    	alert("销售经理，主要负责: 1.对于订单的分配  2.对于销售人员的管理  3.对于车辆的管理");
+	    }if(obj.innerHTML==4){
+	    	alert("销售人员，主要负责：1.对于分配到自己的订单处理  2.对于分配到自己的车辆的处理");
+	    }
 	}
+window.onload=function(){
+	
+	var obj = document.getElementById("p111");
+    
+    var obj2 = document.getElementById("p222");
+    if(obj.innerHTML==1){
+    	obj2.innerHTML= "1级管理员";
+    }if(obj.innerHTML==2){
+    	obj2.innerHTML= "2级总管理员 ";
+    }if(obj.innerHTML==3){
+    	obj2.innerHTML= "销售经理";
+    }if(obj.innerHTML==4){
+    	obj2.innerHTML= "销售人员";
+    }
+    
+
+      }
+      
 </script>
 </html>
