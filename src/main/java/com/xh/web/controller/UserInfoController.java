@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.loader.custom.Return;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -23,8 +23,6 @@ import com.xh.service.MailService;
 import com.xh.service.UserInfoService;
 import com.xh.service.User_LoginService;
 import com.xh.web.model.CarModel;
-
-import net.sf.ehcache.pool.Size;
 
 @Controller
 @RequestMapping("WebCar/userInfo")
