@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8" />
+<div th:include="common/head"></div>
+<head>
+  <style>
+  pre{
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    }
+
+</style>
+</head>
+<body class="">
+
+	<div class="page-main">
+		<div class="header py-4">
+			<div class="container">
+				<div class="d-flex">
+					<a class="header-brand" href="./index.html"> <img
+						th:src="@{${application.logo}}" class="header-brand-img" /> <span
+						th:text="${application.title}"></span>
+					</a>
+					<div class="d-flex order-lg-2 ml-auto">
+						<div class="dropdown d-none d-md-flex">
+							<a class="nav-link icon" data-toggle="dropdown"> <i
+								class="fe fe-bell"></i> <span class="nav-unread"></span>
+							</a>
+
+						</div>
+						<div class="dropdown">
+							<a href="#" class="nav-link pr-0 leading-none"
+								data-toggle="dropdown"> 
+								<span class="ml-2 d-none d-lg-block"> <span
+									class="text-default" th:text="${session.LOGIN_KEY.adminName}"></span>
+									<small class="text-muted d-block mt-1"
+									th:text="${session.LOGIN_KEY.adminName}"></small>
+							</span>
+							</a>
+							<div
+								class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+								
+								<div class="dropdown-divider"></div>
+								<button class="dropdown-item"  onclick="help()"> <i
+									class="dropdown-icon fe fe-help-circle"></i> 帮助?
+								</button> <a class="dropdown-item" href="/WebCar/admin/logout"> <i
+									class="dropdown-icon fe fe-log-out"></i> 退出
+								</a>
+							</div>
+						</div>
+					</div>
+					<a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0"
+						data-toggle="collapse" data-target="#headerMenuCollapse"> <span
+						class="header-toggler-icon"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-lg-3 ml-auto">
+						<form class="input-icon my-3 my-lg-0">
+
+							<div class="input-icon-addon"></div>
+						</form>
+					</div>
+					<div class="col-lg order-lg-first">
+						<ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+							<li class="nav-item"
+								th:each="menu,menuStat:${session.LOGIN_KEY.adminMenus}">
+								<div th:if="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link"> <i th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.adminMenus}"
+											th:text="${m2.menuName}"> </a>
+									</div>
+								</div>
+								<div th:unless="${menu.menus.size() == 0}">
+									<a th:text="${menu.menuName}" th:href="${menu.menuUrl}"
+										class="nav-link" data-toggle="dropdown"> <i
+										th:class="${menu.menuIcon}"></i>
+									</a>
+									<div class="dropdown-menu dropdown-menu-arrow"
+										th:if="${menu.menus.size()!=0}">
+										<a th:href="${m2.menuUrl}" class="dropdown-item "
+											th:each="m2,m2Stat:${menu.menus}" th:text="${m2.menuName}">
+										</a>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 首页内容 -->
+		<pre th:utext="${list}"></pre>
+
+
+
+	</div>
+
+
+
+	<div class="col-6 col-md-3">
+
+
+		<footer class="footer">
+			<div class="container">
+				<div class="row align-items-center flex-row-reverse">
+					<div class="col-auto ml-lg-auto">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<ul class="list-inline list-inline-dots mb-0">
+
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					
+					<div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+						Copyright © 2018</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+
+<script type="text/javascript">
+
+
+
+
+
+function help(){
+	var obj = document.getElementById("p111");
+	 if(obj.innerHTML==3){
+	    	alert("销售经理，主要负责: 1.对于订单的分配  2.对于销售人员的管理  3.对于车辆的管理");
+	    }if(obj.innerHTML==4){
+	    	alert("销售人员，主要负责：1.对于分配到自己的订单处理  2.对于分配到自己的车辆的处理");
+	    }
+	}
+
+
+
+</script>
+
+</html>
