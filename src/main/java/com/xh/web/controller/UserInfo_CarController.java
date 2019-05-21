@@ -80,17 +80,17 @@ public List<CarModel> buyCar1() {
 	return list;
 	
 }
-//搜索框搜索
-@RequestMapping("/User_BuyCarSearch124")
-@ResponseBody
-public List<CarModel> buyCarjinque(String search) {
-	 
-	
-	
-	
-	return list;
-	
-}
+////搜索框搜索
+//@RequestMapping("/User_BuyCarSearch124")
+//@ResponseBody
+//public List<CarModel> buyCarjinque(String search) {
+//	 
+//	
+//	
+//	
+//	return list;
+//	
+//}
  //根据车的关键字段，进行模糊搜索 
 @RequestMapping("/User_BuyCarSearch123")
 @ResponseBody
