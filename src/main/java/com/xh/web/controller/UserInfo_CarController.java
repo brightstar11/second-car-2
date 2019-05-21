@@ -2,6 +2,8 @@ package com.xh.web.controller;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,6 +36,90 @@ public class UserInfo_CarController {
 	private static String REGEX_CHINESE = "[\u4e00-\u9fa5]";
 	@Autowired
 	CarService car;
+	
+	//排序升序 
+	public static List<CarModel> sortup(List<CarModel> list,String paixubiaoshi){
+		if(paixubiaoshi.equals("jgup")) {
+			//排序升序
+			 Collections.sort(list, new Comparator(){
+					@Override
+					public int compare(Object o1, Object o2) {
+						CarModel stu1=(CarModel)o1;
+						CarModel stu2=(CarModel)o2;
+						return stu1.getCarprice().compareTo(stu2.getCarprice());
+					}	    	
+			    });
+			
+			    System.out.println("/////////////排序之后///////////////");
+			    List<CarModel> list2=new ArrayList<>();
+			    for(int i=0;i<list.size();i++){
+			    	CarModel st=(CarModel)list.get(i);
+			    	list2.add(st);
+			    	
+			    }
+             return list2;
+		}else if(paixubiaoshi.equals("jgdown")) {
+			//排序降序
+			 Collections.sort(list, new Comparator(){
+					@Override
+					public int compare(Object o1, Object o2) {
+						CarModel stu1=(CarModel)o1;
+						CarModel stu2=(CarModel)o2;
+						return stu1.getCarprice().compareTo(stu2.getCarprice());
+					}	    	
+			    });
+			
+			    System.out.println("/////////////排序之后///////////////");
+			    List<CarModel> list2=new ArrayList<>();
+			    for(int i=list.size()-1;i<=0;i--){
+			    	CarModel st=(CarModel)list.get(i);
+			    	list2.add(st);
+			    	
+			    }
+            return list2;
+		}else if(paixubiaoshi.equals("lcup")) {
+			//排序升序
+			 Collections.sort(list, new Comparator(){
+					@Override
+					public int compare(Object o1, Object o2) {
+						CarModel stu1=(CarModel)o1;
+						CarModel stu2=(CarModel)o2;
+						return stu1.getCarmileages().compareTo(stu2.getCarmileages());
+					}	    	
+			    });
+			
+			    System.out.println("/////////////排序之后///////////////");
+			    List<CarModel> list2=new ArrayList<>();
+			    for(int i=0;i<list.size();i++){
+			    	CarModel st=(CarModel)list.get(i);
+			    	list2.add(st);
+			    	
+			    }
+            return list2;
+		}else {
+			//排序升序
+			 Collections.sort(list, new Comparator(){
+					@Override
+					public int compare(Object o1, Object o2) {
+						CarModel stu1=(CarModel)o1;
+						CarModel stu2=(CarModel)o2;
+						return stu1.getCarlntime().compareTo(stu2.getCarlntime());
+					}	    	
+			    });
+			
+			    System.out.println("/////////////排序之后///////////////");
+			    List<CarModel> list2=new ArrayList<>();
+			    for(int i=list.size()-1;i<=0;i--){
+			    	CarModel st=(CarModel)list.get(i);
+			    	list2.add(st);
+			    	
+			    }
+           return list2;
+		}
+		
+		
+	}
+
 @RequestMapping("/buyCar")
 public String buyCar(Integer pageNum,Model model) {
 	
@@ -99,9 +185,10 @@ public List<CarModel> buyCar1() {
 @RequestMapping("/User_BuyCarSearch123")
 @ResponseBody
 public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
-	System.out.println("111");
+	//这里ajax pageNo 没有传过来
+	
 	CarModel carModel=page.getObj();//前端传的实体
-	System.out.println("222");
+	
 	Page<CarModel> result = new Page<>();
 	if(carModel.getCarprice().equals("不限")) {	
 	}else {
@@ -129,19 +216,112 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 			    	
 				}
 	}
-	
+	//备注  每次点击除品牌 品牌不为不限
+	//carModel.setBrandname("不限");
 	List<CarModel> list=car.CarselectAlldong(carModel);
+	
+	//对查出的数据进行排序
+	String paixubiaoshi=carModel.getPaixubiaoshi();
+	if(paixubiaoshi!="null"&&paixubiaoshi!="") {
+	List<CarModel> list2=sortup(list, paixubiaoshi);
+	System.out.println(list2.size());
+	List<CarModel> list3=new ArrayList<CarModel>();
+	result.setTotal(list2.size());//总数
+	Integer pages=page.getPageNo();//获取当前页
+	Integer pageSize=page.getPageSise();//获取每页显示数量
+	int Allpage=(list2.size()/pageSize);//当前查询的总页数
+	if(list2.size()%pageSize!=0) {
+		Allpage=Allpage+1;
+	}
+	System.out.println(list2.size());
+	System.out.println(Allpage);
+	System.out.println(pages);
+	System.out.println(pageSize);
+	
+	if(Allpage<pages) {
+			return result;
+		}else if(Allpage-1>=pages){
+			for(int k=0;k<pageSize;k++) {
+				list2.add(list2.get(k+(pages-1)*pageSize));
+			
+			}
+			
+			result.setDataList(list3);
+			return result;
+		}else if(Allpage>=pages&&pages>=(Allpage-1)){
+			int num=list2.size()%pageSize;
+			if(num==0) {
+				for(int k=0;k<pageSize;k++) {
+					list3.add(list2.get(k+(pages-1)*pageSize));
+				
+				
+				}
+				result.setDataList(list3);
+				return result;
+			}else {
+			for(int k=0;k<num;k++) {
+				list3.add(list2.get(k+(pages-1)*pageSize));
+				
+			}
+			result.setDataList(list3);
+			return result;
+		}
+		}
+        
+	
+	return result;
+	
+	
+	}
+	System.out.println(list.size());
 	List<CarModel> list2=new ArrayList<CarModel>();
 	result.setTotal(list.size());//总数
 	Integer pages=page.getPageNo();//获取当前页
-	Integer pageSize=page.getPageSise();//获取当前页
-	for(int i=0;i<10;i++) {
-		list2.add(list.get(i+(pages-1)*pageSize));
-         
+	Integer pageSize=page.getPageSise();//获取每页显示数量
+	int Allpage=(list.size()/pageSize);//当前查询的总页数
+	if(list.size()%pageSize!=0) {
+		Allpage=Allpage+1;
 	}
-	result.setDataList(list2);
+	System.out.println(list.size());
+	System.out.println(Allpage);
+	System.out.println(pages);
+	System.out.println(pageSize);
+	
+	if(Allpage<pages) {
+			return result;
+		}else if(Allpage-1>=pages){
+			for(int k=0;k<pageSize;k++) {
+				list2.add(list.get(k+(pages-1)*pageSize));
+			
+			}
+			
+			result.setDataList(list2);
+			return result;
+		}else if(Allpage>=pages&&pages>=(Allpage-1)){
+			int num=list.size()%pageSize;
+			if(num==0) {
+				for(int k=0;k<pageSize;k++) {
+					list2.add(list.get(k+(pages-1)*pageSize));
+				
+				
+				}
+				result.setDataList(list2);
+				return result;
+			}else {
+			for(int k=0;k<num;k++) {
+				list2.add(list.get(k+(pages-1)*pageSize));
+				
+			}
+			result.setDataList(list2);
+			return result;
+		}
+		}
+        
 	
 	return result;
+	
+	
+	
 	
 }
 //public List<CarModel>  BuyCarSearch(CarModel carModel) {

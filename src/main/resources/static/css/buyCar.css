@@ -1,5 +1,5 @@
 a:hover {
-    color:#f50013
+    color:#f50013;
 }
 .start-search a {
     color: #686868;
@@ -99,6 +99,7 @@ a:hover {
 }
 .brand-list  li  a:hover {
     color: #ff6402;
+    text-decoration:none;
 }
 .fuhao {
     margin-left: 5px;

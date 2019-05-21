@@ -26,12 +26,16 @@ a {
 
 a:visited {
     text-decoration: none;
+    color: #686868;
 }
 
 a:link {
     text-decoration: none;
+    color: #686868;
 }
-
+a:active {
+	color: #686868;
+}
 li {
     list-style-type: none;
 }

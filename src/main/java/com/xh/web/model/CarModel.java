@@ -43,8 +43,15 @@ public class CarModel {
 	 
 	 private String  carpriceleft;
 	 private String  carpriceright;
+	 private String  paixubiaoshi;
 	 
-	 public String getCarpriceleft() {
+	 public String getPaixubiaoshi() {
+		return paixubiaoshi;
+	}
+	public void setPaixubiaoshi(String paixubiaoshi) {
+		this.paixubiaoshi = paixubiaoshi;
+	}
+	public String getCarpriceleft() {
 		return carpriceleft;
 	}
 	public void setCarpriceleft(String carpriceleft) {
