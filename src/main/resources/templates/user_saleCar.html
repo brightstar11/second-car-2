@@ -189,6 +189,11 @@
                      <span>车架号：</span>
                  <input type="text"  placeholder="请输入车架号" onblur="queryCar()" id="carnono">
                 </div>
+                <div class="write-box">
+                 <span>12312</span>
+                 <input type="file" id="carImage" name="carImage" multiple="multiple" />
+                 <input type="text"  placeholder="请输入车架号" onblur="queryCar()" id="carnono">
+                </div>
                 </div>
                 <button id="sale" name="sale" class="sell-submit" onclick="salecarfinish()" >提交
                 </button>
@@ -309,109 +314,137 @@
 
 function salecarfinish(){
 	
-	var obj1=document.getElementById("carbandband");
-	var index1 = obj1.selectedIndex;
-	var brandname=obj1.options[index1].text;
+// 	var obj1=document.getElementById("carbandband");
+// 	var index1 = obj1.selectedIndex;
+// 	var brandname=obj1.options[index1].text;
 	
-	var obj2=document.getElementById("cartypetype");
-	var index2 = obj2.selectedIndex;
-	var cartype=obj2.options[index2].text;
+// 	var obj2=document.getElementById("cartypetype");
+// 	var index2 = obj2.selectedIndex;
+// 	var cartype=obj2.options[index2].text;
 	
-	var obj3=document.getElementById("carbirthbirth");
-	var index3 = obj3.selectedIndex;
-	var carbrith=obj3.options[index3].text;
+// 	var obj3=document.getElementById("carbirthbirth");
+// 	var index3 = obj3.selectedIndex;
+// 	var carbrith=obj3.options[index3].text;
 	
-	var obj4=document.getElementById("careditiondition");
-	var index4 = obj4.selectedIndex;
-	var caredition=obj4.options[index4].text;
+// 	var obj4=document.getElementById("careditiondition");
+// 	var index4 = obj4.selectedIndex;
+// 	var caredition=obj4.options[index4].text;
 	
-	var obj5=document.getElementById("carmileagemileage");
-	var index5 = obj5.selectedIndex;
-	var carmileage=obj5.options[index5].text;
+// 	var obj5=document.getElementById("carmileagemileage");
+// 	var index5 = obj5.selectedIndex;
+// 	var carmileage=obj5.options[index5].text;
 	
-	var obj6=document.getElementById("cardrivedrive");
-	var index6 = obj6.selectedIndex;
-	var cardrive=obj6.options[index6].text;
+// 	var obj6=document.getElementById("cardrivedrive");
+// 	var index6 = obj6.selectedIndex;
+// 	var cardrive=obj6.options[index6].text;
 	
-	var obj7=document.getElementById("carlevellevel");
-	var index7 = obj7.selectedIndex;
-	var levelname=obj7.options[index7].text;
+// 	var obj7=document.getElementById("carlevellevel");
+// 	var index7 = obj7.selectedIndex;
+// 	var levelname=obj7.options[index7].text;
 	
-	var obj8=document.getElementById("drivetypetype");
-	var index8 = obj8.selectedIndex;
-	var drivetype=obj8.options[index8].text;
+// 	var obj8=document.getElementById("drivetypetype");
+// 	var index8 = obj8.selectedIndex;
+// 	var drivetype=obj8.options[index8].text;
 	
-	var obj9=document.getElementById("carcolorcolor");
-	var index9 = obj9.selectedIndex;
-	var carcolor=obj9.options[index9].text;
+// 	var obj9=document.getElementById("carcolorcolor");
+// 	var index9 = obj9.selectedIndex;
+// 	var carcolor=obj9.options[index9].text;
 	
-    var obj10=document.getElementById("carpoppop");
-	var index10 = obj10.selectedIndex;
-	var carpop=obj10.options[index10].text;
+//     var obj10=document.getElementById("carpoppop");
+// 	var index10 = obj10.selectedIndex;
+// 	var carpop=obj10.options[index10].text;
 	
-	var obj11=document.getElementById("carpowerpower");
-	var index11 = obj11.selectedIndex;
-	var carpower=obj11.options[index11].text;
+// 	var obj11=document.getElementById("carpowerpower");
+// 	var index11 = obj11.selectedIndex;
+// 	var carpower=obj11.options[index11].text;
 
-    var obj12=document.getElementById("carpmethodmethod");
-	var index12 = obj12.selectedIndex;
-	var carpmethod=obj12.options[index12].text;
+//     var obj12=document.getElementById("carpmethodmethod");
+// 	var index12 = obj12.selectedIndex;
+// 	var carpmethod=obj12.options[index12].text;
 
-	var carname=document.getElementById("carnamecarname").value;  
-	var carlnwhere=document.getElementById("carlnwherecarlnwhere").value;  
-	var carlntime=document.getElementById("carlntimecarlntime").value; 
+// 	var carname=document.getElementById("carnamecarname").value;  
+// 	var carlnwhere=document.getElementById("carlnwherecarlnwhere").value;  
+// 	var carlntime=document.getElementById("carlntimecarlntime").value; 
 	
-	var cardisplacement=document.getElementById("cardisplacementcardisplacement").value;
-	var carmotor=document.getElementById("carmotorcarmotor").value; 
-	var caroil=document.getElementById("caroilcaroil").value; 
-	var carprice=document.getElementById("carpricecarprice").value; 
-	var carno=document.getElementById("carnono").value; 
+// 	var cardisplacement=document.getElementById("cardisplacementcardisplacement").value;
+// 	var carmotor=document.getElementById("carmotorcarmotor").value; 
+// 	var caroil=document.getElementById("caroilcaroil").value; 
+// 	var carprice=document.getElementById("carpricecarprice").value; 
+// 	var carno=document.getElementById("carnono").value; 
 	var username=document.getElementById("NowUserName").innerText;
 	
-	if(carlntime==""){
-		alert("上牌时间不能为空！！！！！！！");
-	}else{
+// 	if(carlntime==""){
+// 		alert("上牌时间不能为空！！！！！！！");
+// 	}else{
 	
+// 	$.ajax({
+// 		type:"post",
+// 		url:"/WebCar/userInfo/PreserveCar?username="+username,
+// 		dataType:"json",
+// 		data:{
+// 			brandname:brandname,
+// 			cartype:cartype,
+// 			carbrith:carbrith,
+// 			caredition:caredition,
+// 			carmileage:carmileage,
+// 			cardrive:cardrive,
+// 			levelname:levelname,
+// 			drivetype:drivetype,
+// 		    carcolor:carcolor,
+// 			carpop:carpop,
+// 			carpower:carpower,
+// 			carpmethod:carpmethod,
+// 			carname:carname,
+// 			carlnwhere:carlnwhere,
+// 			carlntime:carlntime,
+// 			cardisplacement:cardisplacement,
+// 			carmotor:carmotor,
+// 		    caroil:caroil,
+// 			carprice:carprice,
+// 			carno:carno
+// 		},
+// 		success:function(reslut){
+// 			   if (reslut=='1') {
+// 		         	alert("登记成功，等待验证");
+// 		         	window.location.href = "/WebCar/userInfo/buyCar";
+// 		         };
+// 		     },
+// 		     error : function() {
+// 		         alert("登记失败！");
+// 		         window.location.href = "/WebCar/userInfo/SaleCar";
+// 		     }
+		
+		
+// 	});
+// 	}
+
+alert(username)
+var data = new FormData();
+console.log($('#carImage')[0].files);
+for(var i=0;i<$('#carImage')[0].files.length;i++){
+	data.append("carImage",$('#carImage')[0].files[i]);
+}
+data.append("username",username);
 	$.ajax({
-		type:"post",
-		url:"/WebCar/userInfo/PreserveCar?username="+username,
-		dataType:"json",
-		data:{
-			brandname:brandname,
-			cartype:cartype,
-			carbrith:carbrith,
-			caredition:caredition,
-			carmileage:carmileage,
-			cardrive:cardrive,
-			levelname:levelname,
-			drivetype:drivetype,
-		    carcolor:carcolor,
-			carpop:carpop,
-			carpower:carpower,
-			carpmethod:carpmethod,
-			carname:carname,
-			carlnwhere:carlnwhere,
-			carlntime:carlntime,
-			cardisplacement:cardisplacement,
-			carmotor:carmotor,
-		    caroil:caroil,
-			carprice:carprice,
-			carno:carno
-		},
-		success:function(reslut){
-			   if (reslut=='1') {
-		         	alert("登记成功，等待验证");
-		         	window.location.href = "/WebCar/userInfo/buyCar";
-		         };
-		     },
-		     error : function() {
-		         alert("登记失败！");
-		         window.location.href = "/WebCar/userInfo/SaleCar";
-		     }
-		
-		
-	});
-	}
+        url: "/WebCar/userInfo/PreserveCar",
+        type: 'POST',
+        cache: false,
+        data: data,
+        processData: false,
+        contentType: false,
+        dataType:"json",
+//         beforeSend: function(){
+//             uploading = true;
+//         },
+        success : function(data) {
+            if (data.code == 1) {
+                $("#logo").attr("src", data.msg);
+            } else {
+//                 showError(data.msg);
+            }
+            uploading = false;
+        }
+    });
 }
 
 </script>

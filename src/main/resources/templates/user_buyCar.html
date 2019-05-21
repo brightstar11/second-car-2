@@ -506,9 +506,8 @@ $('#brand-name').children('li').find('a').click(function(e){
       brandName=$(this)[0].innerHTML;
       var params ={
     		  pageNo:1,
-    		  pageSize:10,
-    		  obj:{
-    		    	 brandname:brandName,
+    		  pageSize:5,
+    		  obj:{'brandname':brandName,
     		    	 levelname:levelName,
     		    	 carmileage:mileageName,
     		    	 carprice:pricename,
@@ -544,10 +543,12 @@ function ajaxPost(params){
 	$.ajax({
 		 type: "POST",//方法类型
 	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
-	     data:params,
+	     dateType:'json',
+	     data:JSON.stringify(params),
+	     contentType:'application/json',
 	     success: function (data) {
 	    	 $('#car-list').empty()
-	    	 addlist(data)
+	    	 addlist(data.dataList)
 	     }
 	});
 }

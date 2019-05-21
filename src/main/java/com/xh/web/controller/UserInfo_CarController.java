@@ -9,8 +9,12 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.xh.common.Page;
 import com.xh.entity.CarBirth;
@@ -94,7 +98,7 @@ public List<CarModel> buyCar1() {
  //根据车的关键字段，进行模糊搜索 
 @RequestMapping("/User_BuyCarSearch123")
 @ResponseBody
-public List<CarModel>  BuyCarSearch(Page<CarModel> page) {
+public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 	System.out.println("111");
 	CarModel carModel=page.getObj();//前端传的实体
 	System.out.println("222");
@@ -130,14 +134,14 @@ public List<CarModel>  BuyCarSearch(Page<CarModel> page) {
 	List<CarModel> list2=new ArrayList<CarModel>();
 	result.setTotal(list.size());//总数
 	Integer pages=page.getPageNo();//获取当前页
+	Integer pageSize=page.getPageSise();//获取当前页
 	for(int i=0;i<10;i++) {
-		list2.add(list.get(i+(pages-1)*10));
+		list2.add(list.get(i+(pages-1)*pageSize));
          
 	}
 	result.setDataList(list2);
 	
-	result.getPageNo();
-	return list;
+	return result;
 	
 }
 //public List<CarModel>  BuyCarSearch(CarModel carModel) {
@@ -209,7 +213,7 @@ public String salecar(Model model) {
 //存车信息
 @RequestMapping("/PreserveCar")
 @ResponseBody
-public Integer PreserveCar(String username,CarModel carModel) {
+public Integer PreserveCar(@RequestParam(name="carImage",required=false)MultipartFile[] file,@RequestParam(name="username",required=false)String username,CarModel carModel) {
 	
 	
 	Integer count=car.insertCar(carModel);//存车信息
