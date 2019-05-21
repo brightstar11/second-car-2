@@ -280,11 +280,9 @@ function send_number() {
 }
 //确定
 function determine() {
-	
+
     var inputEmail=$('#inputEmail').val()
     var data = 'inputEmail='+inputEmail
-    $('#numberone').css('display','none');
-    $('#numbertwo').css('display','block');
     $.ajax({
     	type: "POST",//方法类型
        // dataType: "json",//预期服务器返回的数据类型
@@ -294,7 +292,8 @@ function determine() {
         	if(reslut==1){
         		 $('#numberone').css('display','none');
         	     $('#numbertwo').css('display','block');
-        	     $('#determine').attr('data-dismiss','modal')
+        	 	 $("#myModal").modal("hide");
+        	 	 $('.close').click();
         	}else {
         		alert('服務異常')
         	}

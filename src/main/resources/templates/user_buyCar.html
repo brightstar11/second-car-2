@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>基于互联网+的二手车交易系统</title>
-    <link rel="icon" th:href="@{/images/favicon.ico}" />
+    <link rel="icon" th:href="@{/images/fal.png}" />
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/index.js}"></script>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/buyCar.css}"/>
 
 </head>
-<body>
+<body onload="loading()">
 <!--导航栏开始-->
 <div class="container-fluid" style="background-color: #f8f8f8;">
     <div class="container">
@@ -36,9 +36,7 @@
                                     <li><a onclick="usermanage()">个人资料</a></li>
                                     <li><a onclick="usermanage()">我的订单</a></li>
                                 </ul>
-                            </li>
-
-                            
+                            </li>                          
                             <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi2()">联系方式</a></li>
 
                         </ul>
@@ -58,7 +56,7 @@
     <div class="row" style="height: 123px;">
         <div class="col-sm-3" style="height: 100%">
             <div class="logo">
-                <a href=""><img th:src="@{/images/淘车.PNG}" alt="" title="二手车交易市场" /></a>
+                <a href=""><img th:src="@{/images/used-car4.jpg}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
         <div class="col-sm-7" style="height: 100%">
@@ -117,7 +115,7 @@
                     <div class="brand-name"><span>品牌</span></div>
                     <div class="brand">
                         <ul class="brand-list Sort" id="brand-name">
-                            <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                            <li><a class="aSort">不限</a></li>
                             <li th:each="p1:${CarbrandsAll0_10}" style="white-space:nowrap;"><a href="javascript:void(0)"  th:text="${p1.brandname}" class="searcchbrand"></a></li>
                             <li id="select-brand"><a href="#"></a></li>
                             <li id="ALL"><span class="dropdown-toggle">全部<span class="caret" ></span></span>
@@ -126,8 +124,7 @@
                                         <ul data-role="letterNav" class="o-b-list " id="Sort">
                                             <li class="clearfix" th:each="p1:${CarbrandsAll}">
                                                 <div> <a  href="javascript:void(0)"  th:text="${p1.brandname}"  class="searcchbrand"></a> </div>
-                                            </li>
-                                           
+                                            </li>  
                                         </ul>
                                     </div>
                                 </ul>
@@ -140,17 +137,17 @@
                     <div class="brand-name"><span>车价</span></div>
                     <div class="brand">
                         <ul class="brand-list Sort" id="pricename">
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=0&&carprice2=1000" class="aSort">不限</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=0&&carprice2=3">3万内</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=3&&carprice2=5">3-5万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=5&&carprice2=8">5-8万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=8&&carprice2=10">8-10万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=10&&carprice2=15">10-15万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=15&&carprice2=20">15-20万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=20&&carprice2=30">20-30万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=30&&carprice2=50">30-50万</a></li>
-                            <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=50&&carprice2=100">50-100万</a></li>
-                           <li><a href="/WebCar/userInfo/User_BuyCarSearch2?carprice1=100&&carprice2=1000">100万以上</a></li>
+                            <li><a  class="aSort">不限</a></li>
+                            <li><a >3万内</a></li>
+                            <li><a >3-5万内</a></li>
+                            <li><a >5-8万内</a></li>
+                            <li><a >8-10万内</a></li>
+                            <li><a >10-15万内</a></li>
+                            <li><a >15-20万内</a></li>
+                            <li><a >20-30万内</a></li>
+                            <li><a >30-50万内</a></li>
+                            <li><a >50-100万内</a></li>
+                           <li><a >100万以上</a></li>
                         </ul>
 
                     </div>
@@ -159,7 +156,7 @@
                     <div class="brand-name"><span>车型</span></div>
                     <div class="brand" >
                         <ul class="brand-list Sort" id="level_name">
-                            <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                            <li><a  class="aSort">不限</a></li>
                             <li th:each="p2:${listlevel}"><a href="javascript:void(0)" th:text="${p2.levelname}" ></a></li>
                            
                         </ul>
@@ -169,7 +166,7 @@
                     <div class="brand-name"><span>里程</span></div>
                     <div class="brand">
                         <ul class="brand-list Sort" id="mileages">
-                            <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                            <li><a  class="aSort">不限</a></li>
                             <li th:each="p3:${carmileageAll}"><a href="javascript:void(0)" th:text="${p3.carmileage}" class="searchcarmileage"></a></li>
                           
                         </ul>
@@ -184,7 +181,7 @@
                             <li style="width: 48px;"><a href="javascript:void(0)" class="car-mileage">颜色 <span
                                     class="caret"></span></a>
                                 <ul class="mileage Sort" style="display: none;position: absolute" id="colors">
-                                    <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                                    <li><a  class="aSort">不限</a></li>
                                     <li th:each="p5:${CarColorAll}"><a href="#" th:text="${p5.carcolor}"></a></li>
                                     
                                 </ul>
@@ -193,7 +190,7 @@
                              <li style="width: 48px;"><a href="javascript:void(0)" class="" id="country">国家 <span
                                     class="caret"></span></a>
                                 <ul class="country Sort" style="display: none;position: absolute" id="pops">
-                                    <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                                    <li><a  class="aSort">不限</a></li>
                                     <li th:each="p6:${CarPopAll}"><a href="#" th:text="${p6.carpop}"></a></li>
                                     
                                 </ul>
@@ -202,7 +199,7 @@
                             <li style="width: 48px;"><a href="javascript:void(0)" id="power">能源 <span
                                     class="caret"></span></a>
                                 <ul class="Car-power Sort" style="display: none;position: absolute" id="powers">
-                                    <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                                    <li><a  class="aSort">不限</a></li>
                                     <li th:each="p7:${CarPowerAll}"><a href="#" th:text="${p7.carpower}"></a></li>
                                     
                                 </ul>
@@ -211,7 +208,7 @@
                              <li style="width: 48px;"><a href="javascript:void(0)" id="method">方式 <span
                                     class="caret"></span></a>
                                 <ul class="Car-pmethod Sort" style="display: none;position: absolute" id="methods">
-                                    <li><a href="/WebCar/userInfo/buyCar" class="aSort">不限</a></li>
+                                    <li><a  class="aSort">不限</a></li>
                                     <li th:each="p8:${CarPmethodAll}"><a href="#" th:text="${p8.carpmethod}"></a></li>
                                     
                                 </ul>
@@ -243,52 +240,21 @@
         <div class="row showbuy_car" >
             <div class="showcar-right" style="height:100%;padding: 0">
             
-                <ul  style="margin: 0;height: 298px"  class="carf" >
-                    <li th:each="p:${listAll}">
-                        <a th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt="" /></a>
-                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
-                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
-                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
-                        <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
-                        </div>
-                    </li>
-                   
+                <ul  style="margin: 0;height: 298px"  id="car-list" class="carf" >
+                                  
                 </ul>
               
             </div>
-           
+          <div class="pages">
+                <a href="#">首页</a>
+                <a href="#">上一页</a>
+                <a href="#">下一页</a>
+                <a href="#">最后一页</a>
+                <a href="#">共3页</a>
+           </div>
         </div>
-       
-        <div class="row fenye">
-        <div class="col-sm-12 col-md-5" >
-				<div style="text-indent:2em;" th:text="${info}" class="dataTables_info"
-					id="bootstrap-data-table_info" role="status" aria-live="polite"></div>
-			</div>
-        <div id="fenye">
-				<ul style="list-style: none" >
-				
-					<li class="paginate_button page-item previous "><a
-						th:href="@{'?pageNum=1'+${queyrString}}"
-						aria-controls="bootstrap-data-table"
-						class="page-link"> 首页</a></li>
-					<li th:unless="${pageInfo.pageNum==1}"
-						class="paginate_button page-item previous "><a
-						th:href="@{'?pageNum='+${pageInfo.prePage}+${queyrString}}"
-						aria-controls="bootstrap-data-table" 
-						class="page-link"> 上一页</a></li>
-					<li th:unless="${pageInfo.pageNum==pageInfo.pages}"
-						class="paginate_button page-item next "><a
-						th:href="@{'?pageNum='+${pageInfo.nextPage}+${queyrString}}"
-						aria-controls="bootstrap-data-table" 
-						class="page-link"> 下一页</a></li>
-					<li class="paginate_button page-item next "><a
-						th:href="@{'?pageNum='+${pageInfo.pages}+${queyrString}}"
-						aria-controls="bootstrap-data-table" 
-						class="page-link"> 尾页</a></li>
-				</ul>
-			</div>
-        </div>
+    
+     
 
     </div>
     
@@ -508,55 +474,277 @@ $(function(){
 	
 }
    function BCSearch(){
-	  var brandname=$('#BuyCarSearch').val();
-	 
-	  window.location.href="/WebCar/userInfo/User_BuyCarSearch?brandname="+brandname;
+	  var search=$('#BuyCarSearch').val();
+	  $.ajax({
+			 type: "POST",//方法类型
+		     url: "/WebCar/userInfo/User_BuyCarSearch124",//url
+		     data:{
+		    	 search:search
+		     },
+		     success: function (data) {
+		    	 $('#car-list').empty()
+		    	 addlist(data)
+		     }
+		});
+	  
    }
    
    
    
-   
-  
+var brandName =$('#brand-name').children('li').find("a[class='aSort']").text()
+var levelName =$('#level_name').children('li').find("a[class='aSort']").text()
+var mileageName =$('#mileages').children('li').find("a[class='aSort']").text()
+var pricename=$('#pricename').children('li').find("a[class='aSort']").text()
+var colors= $('#colors').children('li').find("a[class='aSort']").text()
+var pops= $('#pops').children('li').find("a[class='aSort']").text()
+var powers= $('#powers').children('li').find("a[class='aSort']").text()
+var methods=$('#methods').children('li').find("a[class='aSort']").text()
+var data='brandname='+brandName+'&&levelname='+levelName+'&&carmileage='+mileageName+
+'&&carprice='+pricename+'&&carpop='+pops+'&&carcolor='+colors+'&&carpower='+powers+'&&carpmethod='+methods
+
 $('#brand-name').children('li').find('a').click(function(e){
+      brandName=$(this)[0].innerHTML;
+      var params ={
+    		  pageNo:1,
+    		  pageSize:10,
+    		  obj:{
+    		    	 brandname:brandName,
+    		    	 levelname:levelName,
+    		    	 carmileage:mileageName,
+    		    	 carprice:pricename,
+    		    	 carpop:pops,
+    		    	 carcolor:colors,
+    		    	 carpower:powers,
+    		    	 carpmethod:methods
+    		     }
+      }
+      ajaxPost(params);
+// 	$.ajax({
+// 		 type: "POST",//方法类型
+// 	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
+// 	     data:{
+// 	    	 brandname:brandName,
+// 	    	 levelname:levelName,
+// 	    	 carmileage:mileageName,
+// 	    	 carprice:pricename,
+// 	    	 carpop:pops,
+// 	    	 carcolor:colors,
+// 	    	 carpower:powers,
+// 	    	 carpmethod:methods
+// 	     },
+// 	     success: function (data) {
+// 	    	 $('#car-list').empty()
+// 	    	 addlist(data)
+// 	     }
+// 	});
+	})
 	
-	console.log($(this)[0].innerHTML)
-	var brandname=$(this)[0].innerHTML;
-	window.location.href="/WebCar/userInfo/User_BuyCarSearch?brandname="+brandname;
-})
+	
+function ajaxPost(params){
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
+	     data:params,
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+}
+function addlist(lists) {
+	 var str = ''
+   	 lists.forEach(function (list) {
+            str =str + '<li>'+
+            '<a onclick="IntoInformation('+list.id+')"><img src="'+list.caricon+'" alt=""></a>'+
+            '<div class="carname"><a href="">'+list.carname+list.carbirth+list.cardisplacement+list.drivetype+list.carlnwhere+list.caredition+'</a></div>'+
+            '<p class="pcar">上牌时间：'+list.carlntime+'</p>'+
+            '<p class="pcar">行驶里程：'+list.carmileage+'</p>'+
+            '<div class="car-price">'+
+                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span>万</span>'+
+            '</div>'+
+        '</li>'
+          
+        })
+        $('#car-list').append(str);
+}
+
+function loading(){
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/buyCar1" ,//url
+	     data:{
+	    	 
+	     },
+	     success: function (data) {
+	    	  
+	    	 addlist(data)
+	     }
+	});
+}
 
 $('#level_name').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
 	var levelname=$(this)[0].innerHTML;
-	window.location.href="/WebCar/userInfo/User_BuyCarSearch3?levelname="+levelname;
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelname,
+	    	 carmileage:mileageName,
+	    	 carprice:pricename,
+	    	 carpop:pops,
+	    	 carcolor:colors,
+	    	 carpower:powers,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+
+})
+$('#pricename').children('li').find('a').click(function(e){
+	var pricename=$(this)[0].innerHTML;
+	var zz=$('#brand-name').children('li').children('a').attr('class')
+	console.log(zz)
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:mileageName,
+	    	 carprice:pricename,
+	    	 carpop:pops,
+	    	 carcolor:colors,
+	    	 carpower:powers,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+
 })
 
 $('#mileages').children('li').find('a').click(function(e){
 	console.log($(this)[0].innerHTML)
 	var carmileage=$(this)[0].innerHTML;
-	 window.location.href="/WebCar/userInfo/User_BuyCarSearch4?carmileage="+carmileage
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:carmileage,
+	    	 carprice:pricename,
+	    	 carpop:pops,
+	    	 carcolor:colors,
+	    	 carpower:powers,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+	
 })
 $('#colors').children('li').find('a').click(function(e){
 	console.log($(this)[0].innerHTML)
 	var carcolor=$(this)[0].innerHTML;
-	 window.location.href="/WebCar/userInfo/User_BuyCarSearch5?carcolor="+carcolor
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:carmileage,
+	    	 carprice:pricename,
+	    	 carpop:pops,
+	    	 carcolor:carcolor,
+	    	 carpower:powers,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+	 
 })
 $('#pops').children('li').find('a').click(function(e){
 	console.log($(this)[0].innerHTML)
 	var carpop=$(this)[0].innerHTML;
-	 window.location.href="/WebCar/userInfo/User_BuyCarSearch6?carpop="+carpop
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:carmileage,
+	    	 carprice:pricename,
+	    	 carpop:carpop,
+	    	 carcolor:carcolor,
+	    	 carpower:powers,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+	
 })
 $('#powers').children('li').find('a').click(function(e){
 	console.log($(this)[0].innerHTML)
 	var carpower=$(this)[0].innerHTML;
-	 window.location.href="/WebCar/userInfo/User_BuyCarSearch7?carpower="+carpower
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:carmileage,
+	    	 carprice:pricename,
+	    	 carpop:carpop,
+	    	 carcolor:carcolor,
+	    	 carpower:carpower,
+	    	 carpmethod:methods
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+	
 })
 $('#methods').children('li').find('a').click(function(e){
 	console.log($(this)[0].innerHTML)
 	var carpmethod=$(this)[0].innerHTML;
-	 window.location.href="/WebCar/userInfo/User_BuyCarSearch8?carpmethod="+carpmethod
+	$.ajax({
+		 type: "POST",//方法类型
+	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
+	     data:{
+	    	 brandname:brandName,
+	    	 levelname:levelName,
+	    	 carmileage:carmileage,
+	    	 carprice:pricename,
+	    	 carpop:carpop,
+	    	 carcolor:carcolor,
+	    	 carpower:carpower,
+	    	 carpmethod:carpmethod
+	     },
+	     success: function (data) {
+	    	 $('#car-list').empty()
+	    	 addlist(data)
+	     }
+	});
+	
 })
 function IntoInformation(id){
-	
 	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;
 }
 function usermanage(){

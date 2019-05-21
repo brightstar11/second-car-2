@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>基于互联网+的二手车交易系统</title>
-        <link rel="icon" th:href="@{/images/favicon.ico}" />
+        <link rel="icon" th:href="@{/images/fal.png}" />
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/index.js}"></script>
@@ -57,7 +57,7 @@
     <div class="row" style="height: 123px;">
         <div class="col-sm-3" style="height: 100%">
             <div class="logo">
-                <a href=""><img th:src="@{/images/淘车.PNG}" alt="" title="二手车交易市场" /></a>
+                <a href=""><img th:src="@{/images/used-car4.jpg}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
        <h3 align="center" style="color:blue;font-size:50px;margin-top:35px">进入我的管理</h3>
@@ -261,9 +261,8 @@
                                        <div class="col-sm-6">
                                           <img th:src="@{${p.ordericon}}" alt="" id="ordericonordericon">
                                            <div class="car-info">
-                                               <span class="car-source" style="bottom: 0;">线下车源</span>
-                                                <span class="car-source" style="bottom: 0;"><p th:text=${p.ordercarname} id="ordercarnameordercarname"></p></span>
-                                               <span class="car-source" style="top: 0;">卖家报价 <span class="order-price"><p th:text=${p.ordermoney} id="ordermoneyordermoney"></p></span></span>
+                                                <span class="car-source" style="bottom: 0;" th:text=${p.ordercarname} id="ordercarnameordercarname"></span>
+                                               <span class="car-source" style="top: 0;">卖家报价 <span class="order-price" th:text=${p.ordermoney} id="ordermoneyordermoney"></span></span>
                                            </div>
                                           </div>
                                           

@@ -43,6 +43,8 @@
   <result property="userphone" column="userphone"/>
    <result property="carsell" column="carsell"/>
     <result property="carallocation" column="carallocation"/>
+    <result property="carpriceleft" column="carpriceleft"/>
+   <result property="carpriceright" column="carpriceright"/>
  </resultMap>
 
 <!-- 查询所用车辆信息 -->
@@ -88,7 +90,8 @@ select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,c.carlntime,cbt.carbi
 
 <!-- 车价格  进行模糊搜索 选择前4个 根据carheat字段 -->
 <select id="BuyCarSearch21" resultMap="list">
-select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,c.carlntime,cbt.carbirth,cdt.caredition,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename,c.carheat from  car c,carbrands cb,carbirth cbt,caredition cdt,carlevels cll,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid   and c.carbirthid=cbt.carbirthid and c.caredition=cdt.careditionid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid and  c.carvalidateid=1 and c.carsell='否' and #{arg0} &lt;= c.carprice and    #{arg1} &gt;= c.carprice  order by c.carheat desc limit 0,4	          
+select c.id,cb.brandname,c.carname,ct.cartype,c.carlnwhere,c.carlntime,cbt.carbirth,cdt.caredition,cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,c.carhavename,c.carheat from  car c,carbrands cb,carbirth cbt,caredition cdt,carlevels cll,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,carpmethod cpm,carvalidate cvl,drivetype dt where c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid   and c.carbirthid=cbt.carbirthid and c.caredition=cdt.careditionid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid and  c.carvalidateid=1 and c.carsell='否' 
+and #{arg0} &lt;= c.carprice and    #{arg1} &gt;= c.carprice  order by c.carheat desc limit 0,4	          
 </select>
 
 <select id="BuyCarSearch23" resultMap="list">
@@ -149,4 +152,45 @@ insert into sellcar(carid,userinfoid) values((select id from car where carno=#{a
 <update id="updatecarsell">
 update car set carsell='是' where id=#{id}
 </update>
+<!-- 动态多条件查询 -->
+<select id="CarselectAlldong" resultMap="list">
+select c.id,cb.brandname,c.carname,ct.cartype,
+c.carlnwhere,c.carlntime,cbt.carbirth,cdt.caredition,
+cm.carmileage,c.cardisplacement,c.carmotor,c.cardrive,
+c.caroil,c.carlong,c.carwide,c.carheight,cll.levelname,
+c.cartrunk,dt.drivetype,c.carprice,c.carno,cc.carcolor,
+cp.carpower,cpp.carpop,cpm.carpmethod,c.caricon,cvl.carvalidate,
+c.carhavename from  car c,carbrands cb,carbirth cbt,caredition cdt,
+carlevels cll,carmileage cm,cartype ct,carcolor cc,carpower cp,carpop cpp,
+carpmethod cpm,carvalidate cvl,drivetype dt 
+<where>
+ c.cartypeID=ct.cartypeid and c.carmileageid=cm.carmileageid  and c.carbrandid=cb.carbrandid and c.carlevelid=cll.levelid   and c.carbirthid=cbt.carbirthid and c.caredition=cdt.careditionid and c.carcolorid=cc.carcolorid and c.carpowerid=cp.carpowerid and c.carpopid=cpp.carpopid and c.carpmethodid=cpm.carpmethodid and c.carvalidateid=cvl.carvalidateid and c.drivetypeid=dt.drivetypeid  and c.carvalidateid=1 and c.carsell='否'                    
+<if test="brandname !='不限'">
+and cb.brandname=#{brandname}
+</if>
+<if test="levelname !='不限'">
+and cll.levelname=#{levelname}
+</if>
+<if test="carcolor !='不限'">
+and cc.carcolor=#{carcolor}
+</if>
+<if test="carpower !='不限'">
+and cp.carpower=#{carpower}
+</if>
+<if test="carpop !='不限'">
+and cpp.carpop=#{carpop}
+</if>
+<if test="carpmethod !='不限'">
+and cpm.carpmethod=#{carpmethod}
+</if>
+<if test="carmileage !='不限'">
+and cm.carmileage=#{carmileage}
+</if>
+<if test="carprice !='不限'">
+and #{carpriceleft} &lt;= c.carprice and    #{carpriceright} &gt;= c.carprice
+</if>
+</where>
+</select>
+
+
 </mapper>

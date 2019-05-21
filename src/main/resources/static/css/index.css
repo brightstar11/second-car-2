@@ -80,7 +80,10 @@ li {
     height: 95px;
     padding: 14px;
 }
-
+.logo img {
+	width: 150px;
+    height: 95px;
+}
 .choose {
     width: 100px;
     margin-top: 20px;

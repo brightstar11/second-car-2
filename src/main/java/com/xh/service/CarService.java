@@ -90,4 +90,7 @@ public interface CarService {
 	   
 	   public Integer  insertcarheat(CarModel carModel);
 	   public Integer  updatecarsell(CarModel carModel);
+	   
+	   
+	   public List<CarModel> CarselectAlldong(CarModel carModel);
 }

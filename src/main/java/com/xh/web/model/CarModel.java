@@ -41,7 +41,22 @@ public class CarModel {
 	 private String  carallocation;
 	 private String  carsell;
 	 
-	 public String getCarallocation() {
+	 private String  carpriceleft;
+	 private String  carpriceright;
+	 
+	 public String getCarpriceleft() {
+		return carpriceleft;
+	}
+	public void setCarpriceleft(String carpriceleft) {
+		this.carpriceleft = carpriceleft;
+	}
+	public String getCarpriceright() {
+		return carpriceright;
+	}
+	public void setCarpriceright(String carpriceright) {
+		this.carpriceright = carpriceright;
+	}
+	public String getCarallocation() {
 		return carallocation;
 	}
 	public void setCarallocation(String carallocation) {

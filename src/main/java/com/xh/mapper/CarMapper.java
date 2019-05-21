@@ -94,4 +94,6 @@ public interface CarMapper {
    public Integer  insertcarheat(CarModel carModel);
    public Integer  updatecarsell(CarModel carModel);
    
+   //动态查询 汽车
+   public List<CarModel> CarselectAlldong(CarModel carModel);
 }
