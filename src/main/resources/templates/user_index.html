@@ -83,7 +83,7 @@
                     <li class="list-active"><a href="/WebCar/userInfo/user_index">首页</a></li>
                     <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
-                    <li><a href="#">估价</a></li>
+                    <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
                 </ul>
             </div>
@@ -131,13 +131,13 @@
                 <div class="row" style="height: 170px;padding: 0 0 20px;">
                     <ul class="Buy-carList" id="brand-name">
                         <li class="tubiao" >
-                            <a href="javascript:void(0)" style="margin-left: 0;">
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=大众" style="margin-left: 0;">
                                     <img th:src="@{/images/大众.png}" alt="" />
                                     <span>大众</span></a>
-                            <a href="javascript:void(0)"  >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=丰田"  >
                                 <img th:src="@{/images/丰田.png}" alt="" />
                                 <span>丰田</span></a>
-                            <a href="javascript:void(0)" >
+                            <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=本田">
                                 <img th:src="@{/images/本田.png}" alt="" />
                                 <span>本田</span></a>
                             <a href="/WebCar/userInfo/User_BuyCarSearch?brandname=北汽威望"  >
@@ -191,7 +191,7 @@
                     <div class="Selling-car-one" >
                         <div class="Selling-car-two">
                             <a href="/WebCar/userInfo/SaleCar" class="Selling-car-three">我要卖车</a>
-                            <a href="" class="Selling-car-four" >免费估价</a>
+                            <a href="/WebCar/userInfo/CarEvaluation" class="Selling-car-four" >免费估价</a>
                         </div>
                     </div>
                 </div>
@@ -369,60 +369,7 @@ function order(){
 	window.location.href="/WebCar/userInfo/User_order?username="+username;
 	
 }
-$('#brand-name li a').click(function(e){
-	brandName=$(this).children('span')[0].innerHTML;
-	console.log(brandName)
-     var params ={
-  		  pageNo:1,
-  		  pageSize:5,
-  		  obj:{'brandname':brandName,
-  		    	 levelname:'不限',
-  		    	 carmileage:'不限',
-  		    	 carprice:'不限',
-  		    	 carpop:'不限',
-  		    	 carcolor:'不限',
-  		    	 carpower:'不限',
-  		    	 carpmethod:'不限'
-  		     }
-    }
-    ajaxPost(params); 
-})
-function ajaxPost(params){
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
-	     dateType:'json',
-	     data:JSON.stringify(params),
-	     contentType:'application/json',
-	     success: function (data) {
-	    	 window.location.href="/WebCar/userInfo/buyCar";
-	    	 
-	    	 $('#car-list').empty()
-	    	 addlist(data.dataList)
-	     }
-	});
-}
-function addlist(lists) {
-	if(lists==null) {
-		var div=$('<div>1123</div>')
-		$('#car-list').append(div)
-	}else {
-		var str = ''
-		   	 lists.forEach(function (list) {
-		            str =str + '<li>'+
-		            '<a onclick="IntoInformation('+list.id+')"><img src="'+list.caricon+'" alt=""></a>'+
-		            '<div class="carname"><a href="">'+list.carname+list.carbirth+list.cardisplacement+list.drivetype+list.carlnwhere+list.caredition+'</a></div>'+
-		            '<p class="pcar">上牌时间：'+list.carlntime+'</p>'+
-		            '<p class="pcar">行驶里程：'+list.carmileage+'</p>'+
-		            '<div class="car-price">'+
-		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span>万</span>'+
-		            '</div>'+
-		        '</li>'
-		          
-		        })
-		$('#car-list').append(str);
-	}	 
-}
+
 function usermanage(){
 	
 	var username=document.getElementById("NowUserName").innerHTML;

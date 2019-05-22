@@ -2,7 +2,7 @@ package com.xh.service;
 
 import java.util.List;
 
-
+import org.apache.ibatis.annotations.Select;
 
 import com.xh.entity.CarBirth;
 import com.xh.entity.CarBrands;
@@ -93,4 +93,9 @@ public interface CarService {
 	   
 	   
 	   public List<CarModel> CarselectAlldong(CarModel carModel);
+	   
+	  
+	   public List<String> Carcartype();
+	   
+	   public List<String>  Carcarname();
 }

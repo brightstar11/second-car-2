@@ -86,7 +86,10 @@ public interface CarMapper {
    //查询车架号
    @Select("select carno from car")
    public List<String> Carnono();
-   
+   @Select("select cartype from cartype")
+   public List<String> Carcartype();
+   @Select("select carname from car")
+   public List<String> Carcarname();
    //存储车信息
    public Integer  insertCar(CarModel carModel);
    public Integer insertCar_User(String carno,String username);

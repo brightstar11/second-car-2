@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.xh.common.Page;
+import com.xh.common.Secondwork;
+
 import com.xh.entity.CarBirth;
 import com.xh.entity.CarBrands;
 import com.xh.entity.CarColor;
@@ -170,17 +169,61 @@ public List<CarModel> buyCar1() {
 	return list;
 	
 }
-////搜索框搜索
-//@RequestMapping("/User_BuyCarSearch124")
-//@ResponseBody
-//public List<CarModel> buyCarjinque(String search) {
-//	 
-//	
-//	
-//	
-//	return list;
-//	
-//}
+//搜索框搜索
+@RequestMapping("/User_BuyCarSearch124")
+@ResponseBody
+public List<CarModel> buyCarjinque(String search) {
+	 Secondwork secondwork=new Secondwork();
+	 String[] strings=new String[100];
+	  strings=secondwork.fenci(search);
+	 CarModel carModel=new CarModel();
+	 carModel.setBrandname("不限");
+		carModel.setLevelname("不限");
+		carModel.setCarcolor("不限");
+		carModel.setCarpower("不限");
+		carModel.setCarpop("不限");
+		carModel.setCarmileage("不限");
+		carModel.setCarpmethod("不限");
+		carModel.setCarprice("不限");
+	 List<CarBrands> carBrands=car.CarbrandsAll();
+	List<CarBirth> carBirths=car.Carbirth();
+	List<String> carname=car.Carcarname();
+	List<String> cartype=car.Carcartype();
+	for(int i=0;i<strings.length;i++) {
+	         String s=strings[i];
+	         if(s!=null||s!="") {
+	        for(int j=0;j<carBrands.size();j++) {
+	        	if(carBrands.get(j).getBrandname().equals(s)) {
+	        		carModel.setBrandname(s);
+	        		
+	        	}
+	        }
+	        for(int r=0;r<carBirths.size();r++) {
+	        	if((carBirths.get(r).getCarbirth()+"").equals(s)) {
+	        		carModel.setCarbirth(s);
+	        		
+	        	}
+	        }
+	        for(int w=0;w<carname.size();w++) {
+	        	if(carname.get(w).equals(s)) {
+	        		carModel.setCarname(s);
+	        		
+	        	}
+	        }
+	        for(int e=0;e<cartype.size();e++) {
+	        	if(cartype.get(e).equals(s)) {
+	        		carModel.setCartype(s);
+	        		
+	        	}
+	        }
+	        }     
+	}
+	
+	List<CarModel> list=car.CarselectAlldong(carModel);
+	
+	return list;
+	
+}
  //根据车的关键字段，进行模糊搜索 
 @RequestMapping("/User_BuyCarSearch123")
 @ResponseBody
@@ -222,23 +265,27 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 	
 	//对查出的数据进行排序
 	String paixubiaoshi=carModel.getPaixubiaoshi();
-	if(paixubiaoshi!="null"&&paixubiaoshi!="") {
+	System.out.println(paixubiaoshi);
+	if(paixubiaoshi!=null&&paixubiaoshi!="") {
 	List<CarModel> list2=sortup(list, paixubiaoshi);
 	System.out.println(list2.size());
 	List<CarModel> list3=new ArrayList<CarModel>();
 	result.setTotal(list2.size());//总数
 	Integer pages=page.getPageNo();//获取当前页
+	
 	Integer pageSize=page.getPageSise();//获取每页显示数量
 	int Allpage=(list2.size()/pageSize);//当前查询的总页数
+	result.setPagetotal(Allpage);
 	if(list2.size()%pageSize!=0) {
 		Allpage=Allpage+1;
+		result.setPagetotal(Allpage);
 	}
-	System.out.println(list2.size());
-	System.out.println(Allpage);
-	System.out.println(pages);
-	System.out.println(pageSize);
+	System.out.println("--------------------");
+	System.out.println(pages+"aaaa");
+	System.out.println("--------------------");
 	
 	if(Allpage<pages) {
+		page.setPageNo(pages);
 			return result;
 		}else if(Allpage-1>=pages){
 			for(int k=0;k<pageSize;k++) {
@@ -247,6 +294,7 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 			}
 			
 			result.setDataList(list3);
+			page.setPageNo(pages);
 			return result;
 		}else if(Allpage>=pages&&pages>=(Allpage-1)){
 			int num=list2.size()%pageSize;
@@ -257,6 +305,7 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 				
 				}
 				result.setDataList(list3);
+				page.setPageNo(pages);
 				return result;
 			}else {
 			for(int k=0;k<num;k++) {
@@ -264,11 +313,12 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 				
 			}
 			result.setDataList(list3);
+			page.setPageNo(pages);
 			return result;
 		}
 		}
         
-	
+	page.setPageNo(pages);
 	return result;
 	
 	
@@ -279,15 +329,22 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 	Integer pages=page.getPageNo();//获取当前页
 	Integer pageSize=page.getPageSise();//获取每页显示数量
 	int Allpage=(list.size()/pageSize);//当前查询的总页数
+	result.setPagetotal(Allpage);
 	if(list.size()%pageSize!=0) {
+		
 		Allpage=Allpage+1;
+		
+		result.setPagetotal(Allpage);
 	}
 	System.out.println(list.size());
 	System.out.println(Allpage);
 	System.out.println(pages);
 	System.out.println(pageSize);
-	
+	System.out.println("--------------------");
+	System.out.println(page.getPageNo()+"aaaa");
+	System.out.println("--------------------");
 	if(Allpage<pages) {
+		page.setPageNo(pages);
 			return result;
 		}else if(Allpage-1>=pages){
 			for(int k=0;k<pageSize;k++) {
@@ -296,6 +353,7 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 			}
 			
 			result.setDataList(list2);
+			page.setPageNo(pages);
 			return result;
 		}else if(Allpage>=pages&&pages>=(Allpage-1)){
 			int num=list.size()%pageSize;
@@ -306,6 +364,7 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 				
 				}
 				result.setDataList(list2);
+				page.setPageNo(pages);
 				return result;
 			}else {
 			for(int k=0;k<num;k++) {
@@ -313,11 +372,12 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 				
 			}
 			result.setDataList(list2);
+			page.setPageNo(pages);
 			return result;
 		}
 		}
         
-	
+	page.setPageNo(pages);
 	return result;
 	
 	
@@ -359,8 +419,105 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 //	
 //	
 //}
+//根据车的品牌，进行模糊搜索 
+@RequestMapping("/User_BuyCarSearch")
 
+public String  BuyCarSearch(String brandname,Model model) {
+	List<CarModel> list=car.BuyCarSearch(brandname);
+	model.addAttribute("listAll",list);
+	List<CarBrands> list2=car.CarbrandsAll();
+	List<Carlevel> list3=car.CarLevelAll();
+	List<CarMileAge> list4=car.CarmileageAll();
+	List<CarBrands> list5=car.CarbrandsAll0_10();
+	List<String> list6=car.CarlntimeAllYear();
+	List<String> list11=car.CarlntimeAllMonth();
+	List<CarColor> list7=car.CarcolorAll();
+	List<CarPop> list8=car.CarpopAll();
+	List<CarPower> list9=car.CarPowerAll();
+	List<CarPmethod> list10=car.CarPmethodAll();
+	model.addAttribute("CarbrandsAll",list2);
+	model.addAttribute("listlevel",list3);
+	model.addAttribute("carmileageAll",list4);
+	model.addAttribute("CarbrandsAll0_10",list5);
+	model.addAttribute("CarlntimeAllYear",list6);
+	model.addAttribute("CarlntimeAllMonth",list11);
+	model.addAttribute("CarColorAll",list7);
+	model.addAttribute("CarPopAll",list8);
+	model.addAttribute("CarPowerAll",list9);
+	model.addAttribute("CarPmethodAll",list10);
+	return "user_buyCar";
+	
+}
+//根据车的价格，进行模糊搜索 
+@RequestMapping("/User_BuyCarSearch2")
+public String  BuyCarSearch2(Integer pageNum,Integer carprice1,Integer carprice2,Model model) {
+	if(carprice1 == null) {
+		carprice1 = 0;
+	}
+	if(carprice2 == null) {
+		carprice2 = 1000;
+	}
+	String queyrString = "&carprice1="+carprice1+"&carprice2="+carprice2;
+	List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
+	//分页
+	
+		
+		model.addAttribute("queyrString",queyrString);
+	    
+	model.addAttribute("listAll",list);
+	List<CarBrands> list2=car.CarbrandsAll();
+	List<Carlevel> list3=car.CarLevelAll();
+	List<CarMileAge> list4=car.CarmileageAll();
+	List<CarBrands> list5=car.CarbrandsAll0_10();
+	List<String> list6=car.CarlntimeAllYear();
+	List<String> list11=car.CarlntimeAllMonth();
+	List<CarColor> list7=car.CarcolorAll();
+	List<CarPop> list8=car.CarpopAll();
+	List<CarPower> list9=car.CarPowerAll();
+	List<CarPmethod> list10=car.CarPmethodAll();
+	model.addAttribute("CarbrandsAll",list2);
+	model.addAttribute("listlevel",list3);
+	model.addAttribute("carmileageAll",list4);
+	model.addAttribute("CarbrandsAll0_10",list5);
+	model.addAttribute("CarlntimeAllYear",list6);
+	model.addAttribute("CarlntimeAllMonth",list11);
+	model.addAttribute("CarColorAll",list7);
+	model.addAttribute("CarPopAll",list8);
+	model.addAttribute("CarPowerAll",list9);
+	model.addAttribute("CarPmethodAll",list10);
+	return "user_buyCar";
+	
+}
+//根据车的类型，进行模糊搜索
 
+@RequestMapping("/User_BuyCarSearch3")
+
+public String  BuyCarSearch3(String levelname,Model model) {
+	List<CarModel> list=car.BuyCarSearch3(levelname);
+	model.addAttribute("listAll",list);
+	List<CarBrands> list2=car.CarbrandsAll();
+	List<Carlevel> list3=car.CarLevelAll();
+	List<CarMileAge> list4=car.CarmileageAll();
+	List<CarBrands> list5=car.CarbrandsAll0_10();
+	List<String> list6=car.CarlntimeAllYear();
+	List<String> list11=car.CarlntimeAllMonth();
+	List<CarColor> list7=car.CarcolorAll();
+	List<CarPop> list8=car.CarpopAll();
+	List<CarPower> list9=car.CarPowerAll();
+	List<CarPmethod> list10=car.CarPmethodAll();
+	model.addAttribute("CarbrandsAll",list2);
+	model.addAttribute("listlevel",list3);
+	model.addAttribute("carmileageAll",list4);
+	model.addAttribute("CarbrandsAll0_10",list5);
+	model.addAttribute("CarlntimeAllYear",list6);
+	model.addAttribute("CarlntimeAllMonth",list11);
+	model.addAttribute("CarColorAll",list7);
+	model.addAttribute("CarPopAll",list8);
+	model.addAttribute("CarPowerAll",list9);
+	model.addAttribute("CarPmethodAll",list10);
+	return "user_buyCar";
+	
+}
 //卖车主页
 @RequestMapping("/SaleCar")
 public String salecar(Model model) {
@@ -395,7 +552,14 @@ public String salecar(Model model) {
 @ResponseBody
 public Integer PreserveCar(@RequestParam(name="carImage",required=false)MultipartFile[] file,@RequestParam(name="username",required=false)String username,CarModel carModel) {
 	
+//	 CommonsMultipartFile cf= (CommonsMultipartFile)file; 
+//     DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
+//
+//     File f = fi.getStoreLocation();
 	
+	
+	
+	System.out.println(file.toString());
 	Integer count=car.insertCar(carModel);//存车信息
 	String carno=carModel.getCarno();
 	Integer count2=car.insertCar_User(carno, username);//更新汽车用户表

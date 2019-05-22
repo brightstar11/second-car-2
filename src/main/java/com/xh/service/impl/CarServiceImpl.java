@@ -208,5 +208,16 @@ public class CarServiceImpl implements CarService{
 		// TODO Auto-generated method stub
 		return CarMapper.CarselectAlldong( carModel);
 	}
+	@Override
+	public List<String> Carcartype() {
+		// TODO Auto-generated method stub
+		return CarMapper.Carcartype();
+	}
+	@Override
+	public List<String> Carcarname() {
+		// TODO Auto-generated method stub
+		return CarMapper.Carcarname();
+	}
+
  
 }

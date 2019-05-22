@@ -465,6 +465,7 @@ li {
 .foot .items{
     width:15%;
     float:left;
+    padding-top:20px;
 }
 .foot .items.last{
     width:25%;

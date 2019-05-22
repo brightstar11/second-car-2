@@ -60,7 +60,18 @@
                 <a href=""><img th:src="@{/images/used-car4.jpg}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
-       <h3 align="center" style="color:blue;font-size:50px;margin-top:35px">进入我的管理</h3>
+        <div class="col-sm-7" style="height: 100%">
+            <div class="choose">
+                <a href="#">二手车</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="搜'10-20万'大众试试" id="BuyCarSearch" name="BuyCarSearch"/>
+                <button onclick="BCSearch()">搜索</button>
+            </div>
+        </div>
+        <!--<div class="col-sm-2" style="height: 100%">-->
+        <!--<a href="#" class="maiche">卖车</a>-->
+        <!--</div>-->
     </div>
 </div>
 <!--搜索框结束-->
@@ -71,7 +82,7 @@
             <div class="row">
                 <ul class="list">
                     <li><a href="/WebCar/userInfo/user_index">首页</a></li>
-                    <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
+                    <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
                     
                     <li><a href="#">估价</a></li>
@@ -91,7 +102,7 @@
                     <div class="user-photo-box">
                         <div id="user-photo">
                             <img th:src="@{/images/user-photo1.png}" alt="" class="user_photo_bg">
-                            <img th:src="@{${user_MangerList.usericon}}" alt="" class="photo">
+                            <img th:src="@{/images/uesr-photo.png}" alt="" class="photo">
                         </div>
                         <div class="userName"><span th:text="${session.LoginUser.username}" id="usernameusername"/></div>
                     </div>

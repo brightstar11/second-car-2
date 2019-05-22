@@ -82,9 +82,8 @@
                 <ul class="list">
                     <li><a href="/WebCar/userInfo/user_index">首页</a></li>
                     <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
-                    <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
-                    
-                    <li><a href="#">估价</a></li>
+                    <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>                    
+                    <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
                 </ul>
             </div>
@@ -245,15 +244,14 @@
                 </ul>
               
             </div>
-          <div class="pages">
-                <a href="#">首页</a>
-                <a href="#">上一页</a>
-                <a href="#">下一页</a>
-                <a href="#">最后一页</a>
-                <a href="#">共3页</a>
-           </div>
         </div>
-    
+       <div class="pages">
+                <a href="javascript:void(0)" id="firstNumber">首页</a>
+                <a href="javascript:void(0)" id="preNumber">上一页</a>
+                <a href="javascript:void(0)" id="nextNumber">下一页</a>
+                <a href="javascript:void(0)" id="lastNumber">最后一页</a>
+                <a href="javascript:void(0)">共<span id="totalNumber"></span>页</li>
+           </div>
      
 
     </div>
@@ -512,8 +510,8 @@ var data1={
 $('#brand-name').children('li').find('a').click(function(e){
       brandName=$(this)[0].innerHTML;
       var params ={
-    		  pageNo:2,
-    		  pageSize:5,
+    		  pageNo:1,
+    		  pageSize:10,
     		  obj:{'brandname':brandName,
     		    	 levelname:levelName,
     		    	 carmileage:mileageName,
@@ -527,8 +525,9 @@ $('#brand-name').children('li').find('a').click(function(e){
       ajaxPost(params);
 	})
 	
-	
+var total=0;	
 function ajaxPost(params){
+	console.log(params,111111111)
 	$.ajax({
 		 type: "POST",//方法类型
 	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
@@ -539,6 +538,8 @@ function ajaxPost(params){
 	    	 console.log(data)
 	    	 $('#car-list').empty()
 	    	 addlist(data.dataList)
+	    	 total=data.pagetotal
+	    	 $('#totalNumber').text(data.pagetotal)
 	     }
 	});
 }
@@ -555,21 +556,20 @@ function addlist(lists) {
 		            '<p class="pcar">上牌时间：'+list.carlntime+'</p>'+
 		            '<p class="pcar">行驶里程：'+list.carmileage+'</p>'+
 		            '<div class="car-price">'+
-		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span>万</span>'+
+		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span></span>'+
 		            '</div>'+
 		        '</li>'
 		          
 		        })
 		$('#car-list').append(str);
+		
 	}	 
 }
 
 function loading(){
-	brandName=$(this)[0].innerHTML;
-	console.log(data1)
     var params ={
   		  pageNo:1,
-  		  pageSize:5,
+  		  pageSize:10,
   		  obj:data1,
     }
     ajaxPost(params);
@@ -578,8 +578,8 @@ function loading(){
 $('#level_name').children('li').find('a').click(function(e){
 	levelName=$(this)[0].innerHTML;
     var params ={
-  		  pageNo:2,
-  		  pageSize:5,
+  		  pageNo:1,
+  		  pageSize:10,
   		  obj:{brandname:brandName,
   		    	 'levelname':levelName,
   		    	 carmileage:mileageName,
@@ -595,9 +595,10 @@ $('#level_name').children('li').find('a').click(function(e){
 })
 $('#pricename').children('li').find('a').click(function(e){
 	pricename=$(this)[0].innerHTML;
+	console.log(pricename)
     var params ={
   		  pageNo:1,
-  		  pageSize:5,
+  		  pageSize:10,
   		  obj:{brandname:brandName,
   		    	 levelname:levelName,
   		    	 carmileage:mileageName,
@@ -613,118 +614,172 @@ $('#pricename').children('li').find('a').click(function(e){
 })
 
 $('#mileages').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
-	var carmileage=$(this)[0].innerHTML;
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
-	     data:{
-	    	 brandname:brandName,
-	    	 levelname:levelName,
-	    	 carmileage:carmileage,
-	    	 carprice:pricename,
-	    	 carpop:pops,
-	    	 carcolor:colors,
-	    	 carpower:powers,
-	    	 carpmethod:methods
-	     },
-	     success: function (data) {
-	    	 $('#car-list').empty()
-	    	 addlist(data)
-	     }
-	});
+	mileageName=$(this)[0].innerHTML;
+    var params ={
+    		  pageNo:1,
+    		  pageSize:10,
+    		  obj:{brandname:brandName,
+    		    	 levelname:levelName,
+    		    	 'carmileage':mileageName,
+    		    	 carprice:pricename,
+    		    	 carpop:pops,
+    		    	 carcolor:colors,
+    		    	 carpower:powers,
+    		    	 carpmethod:methods
+    		     }
+      }
+      ajaxPost(params);
 	
 })
 $('#colors').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
-	var carcolor=$(this)[0].innerHTML;
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
-	     data:{
-	    	 brandname:brandName,
-	    	 levelname:levelName,
-	    	 carmileage:carmileage,
-	    	 carprice:pricename,
-	    	 carpop:pops,
-	    	 carcolor:carcolor,
-	    	 carpower:powers,
-	    	 carpmethod:methods
-	     },
-	     success: function (data) {
-	    	 $('#car-list').empty()
-	    	 addlist(data)
-	     }
-	});
+	colors=$(this)[0].innerHTML;
+	var params ={
+  		  pageNo:1,
+  		  pageSize:10,
+  		  obj:{brandname:brandName,
+  		    	 levelname:levelName,
+  		    	 carmileage:mileageName,
+  		    	 carprice:pricename,
+  		    	 carpop:pops,
+  		    	 'carcolor':colors,
+  		    	 carpower:powers,
+  		    	 carpmethod:methods
+  		     }
+    }
+    ajaxPost(params);
 	 
 })
 $('#pops').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
-	var carpop=$(this)[0].innerHTML;
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
-	     data:{
-	    	 brandname:brandName,
-	    	 levelname:levelName,
-	    	 carmileage:carmileage,
-	    	 carprice:pricename,
-	    	 carpop:carpop,
-	    	 carcolor:carcolor,
-	    	 carpower:powers,
-	    	 carpmethod:methods
-	     },
-	     success: function (data) {
-	    	 $('#car-list').empty()
-	    	 addlist(data)
-	     }
-	});
+	pops=$(this)[0].innerHTML;
+	var params ={
+  		  pageNo:1,
+  		  pageSize:10,
+  		  obj:{brandname:brandName,
+  		    	 levelname:levelName,
+  		    	 carmileage:mileageName,
+  		    	 carprice:pricename,
+  		    	 'carpop':pops,
+  		    	 carcolor:colors,
+  		    	 carpower:powers,
+  		    	 carpmethod:methods
+  		     }
+    }
+    ajaxPost(params);
 	
 })
 $('#powers').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
-	var carpower=$(this)[0].innerHTML;
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
-	     data:{
-	    	 brandname:brandName,
-	    	 levelname:levelName,
-	    	 carmileage:carmileage,
-	    	 carprice:pricename,
-	    	 carpop:carpop,
-	    	 carcolor:carcolor,
-	    	 carpower:carpower,
-	    	 carpmethod:methods
-	     },
-	     success: function (data) {
-	    	 $('#car-list').empty()
-	    	 addlist(data)
-	     }
-	});
+	powers=$(this)[0].innerHTML;
+	var params ={
+	  		  pageNo:1,
+	  		  pageSize:10,
+	  		  obj:{brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 'carpower':powers,
+	  		    	 carpmethod:methods
+	  		     }
+	    }
+	    ajaxPost(params);
 	
 })
 $('#methods').children('li').find('a').click(function(e){
-	console.log($(this)[0].innerHTML)
-	var carpmethod=$(this)[0].innerHTML;
-	$.ajax({
-		 type: "POST",//方法类型
-	     url: "/WebCar/userInfo/User_BuyCarSearch123" ,//url
-	     data:{
-	    	 brandname:brandName,
-	    	 levelname:levelName,
-	    	 carmileage:carmileage,
-	    	 carprice:pricename,
-	    	 carpop:carpop,
-	    	 carcolor:carcolor,
-	    	 carpower:carpower,
-	    	 carpmethod:carpmethod
-	     },
-	     success: function (data) {
-	    	 $('#car-list').empty()
-	    	 addlist(data)
-	     }
-	});
+	methods=$(this)[0].innerHTML;
+	var params ={
+	  		  pageNo:1,
+	  		  pageSize:10,
+	  		  obj:{brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 'carpmethod':methods
+	  		     }
+	    }
+	    ajaxPost(params);
+	
+})
+var pageNo=1
+$('#firstNumber').click(function(e){
+	var params ={
+	  		  pageNo:1,
+	  		  pageSize:10,
+	  		  obj:{  brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods
+	  		     }
+	    }
+	    ajaxPost(params);
+	
+})
+$('#preNumber').click(function(e){
+	if(pageNo==1){
+		pageNo=1
+	}else {
+		pageNo=pageNo-1
+	}
+	var params ={
+	  		  pageNo:pageNo,
+	  		  pageSize:10,
+	  		  obj:{  brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods
+	  		     }
+	    }
+	    ajaxPost(params);
+	
+})
+$('#nextNumber').click(function(e){
+	if(pageNo==total){
+		pageNo=total
+	}else {
+		pageNo=pageNo+1
+	}
+	var params ={
+	  		  pageNo:pageNo,
+	  		  pageSize:10,
+	  		  obj:{  brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods
+	  		     }
+	    }
+	    ajaxPost(params);
+	
+})
+$('#lastNumber').click(function(e){
+	var params ={
+	  		  pageNo:total,
+	  		  pageSize:10,
+	  		  obj:{  brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods
+	  		     }
+	    }
+	    ajaxPost(params);
 	
 })
 function IntoInformation(id){

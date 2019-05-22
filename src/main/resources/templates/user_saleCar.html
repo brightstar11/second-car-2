@@ -60,7 +60,15 @@
                 <a href=""><img th:src="@{/images/used-car4.jpg}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
-       
+        <div class="col-sm-7" style="height: 100%">
+            <div class="choose">
+                <a href="#">二手车</a>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="搜'10-20万'大众试试" id="BuyCarSearch" name="BuyCarSearch"/>
+                <button onclick="BCSearch()">搜索</button>
+            </div>
+        </div>
         <!--<div class="col-sm-2" style="height: 100%">-->
         <!--<a href="#" class="maiche">卖车</a>-->
         <!--</div>-->
@@ -76,7 +84,7 @@
                     <li><a href="/WebCar/userInfo/user_index">首页</a></li>
                     <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li class="list-active"><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
-                    <li><a href="#">估价</a></li>
+                    <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
                 </ul>
             </div>
@@ -315,75 +323,75 @@
 
 function salecarfinish(){
 	
-// 	var obj1=document.getElementById("carbandband");
-// 	var index1 = obj1.selectedIndex;
-// 	var brandname=obj1.options[index1].text;
+ 	var obj1=document.getElementById("carbandband");
+ 	var index1 = obj1.selectedIndex;
+ 	var brandname=obj1.options[index1].text;
 	
-// 	var obj2=document.getElementById("cartypetype");
-// 	var index2 = obj2.selectedIndex;
-// 	var cartype=obj2.options[index2].text;
+	var obj2=document.getElementById("cartypetype");
+ 	var index2 = obj2.selectedIndex;
+ 	var cartype=obj2.options[index2].text;
 	
-// 	var obj3=document.getElementById("carbirthbirth");
-// 	var index3 = obj3.selectedIndex;
-// 	var carbrith=obj3.options[index3].text;
+	var obj3=document.getElementById("carbirthbirth");
+ 	var index3 = obj3.selectedIndex;
+ 	var carbrith=obj3.options[index3].text;
 	
-// 	var obj4=document.getElementById("careditiondition");
-// 	var index4 = obj4.selectedIndex;
-// 	var caredition=obj4.options[index4].text;
+ 	var obj4=document.getElementById("careditiondition");
+	var index4 = obj4.selectedIndex;
+ 	var caredition=obj4.options[index4].text;
 	
-// 	var obj5=document.getElementById("carmileagemileage");
-// 	var index5 = obj5.selectedIndex;
-// 	var carmileage=obj5.options[index5].text;
+ 	var obj5=document.getElementById("carmileagemileage");
+ 	var index5 = obj5.selectedIndex;
+ 	var carmileage=obj5.options[index5].text;
 	
-// 	var obj6=document.getElementById("cardrivedrive");
-// 	var index6 = obj6.selectedIndex;
-// 	var cardrive=obj6.options[index6].text;
+ 	var obj6=document.getElementById("cardrivedrive");
+ 	var index6 = obj6.selectedIndex;
+ 	var cardrive=obj6.options[index6].text;
 	
-// 	var obj7=document.getElementById("carlevellevel");
-// 	var index7 = obj7.selectedIndex;
-// 	var levelname=obj7.options[index7].text;
+ 	var obj7=document.getElementById("carlevellevel");
+	var index7 = obj7.selectedIndex;
+ 	var levelname=obj7.options[index7].text;
 	
-// 	var obj8=document.getElementById("drivetypetype");
-// 	var index8 = obj8.selectedIndex;
-// 	var drivetype=obj8.options[index8].text;
+	var obj8=document.getElementById("drivetypetype");
+	var index8 = obj8.selectedIndex;
+	var drivetype=obj8.options[index8].text;
 	
-// 	var obj9=document.getElementById("carcolorcolor");
-// 	var index9 = obj9.selectedIndex;
-// 	var carcolor=obj9.options[index9].text;
+ 	var obj9=document.getElementById("carcolorcolor");
+	var index9 = obj9.selectedIndex;
+ 	var carcolor=obj9.options[index9].text;
 	
-//     var obj10=document.getElementById("carpoppop");
-// 	var index10 = obj10.selectedIndex;
-// 	var carpop=obj10.options[index10].text;
+    var obj10=document.getElementById("carpoppop");
+ 	var index10 = obj10.selectedIndex;
+ 	var carpop=obj10.options[index10].text;
 	
-// 	var obj11=document.getElementById("carpowerpower");
-// 	var index11 = obj11.selectedIndex;
-// 	var carpower=obj11.options[index11].text;
+	var obj11=document.getElementById("carpowerpower");
+	var index11 = obj11.selectedIndex;
+ 	var carpower=obj11.options[index11].text;
 
-//     var obj12=document.getElementById("carpmethodmethod");
-// 	var index12 = obj12.selectedIndex;
-// 	var carpmethod=obj12.options[index12].text;
+     var obj12=document.getElementById("carpmethodmethod");
+ 	var index12 = obj12.selectedIndex;
+ 	var carpmethod=obj12.options[index12].text;
 
-// 	var carname=document.getElementById("carnamecarname").value;  
-// 	var carlnwhere=document.getElementById("carlnwherecarlnwhere").value;  
-// 	var carlntime=document.getElementById("carlntimecarlntime").value; 
+ 	var carname=document.getElementById("carnamecarname").value;  
+ 	var carlnwhere=document.getElementById("carlnwherecarlnwhere").value;  
+ 	var carlntime=document.getElementById("carlntimecarlntime").value; 
 	
-// 	var cardisplacement=document.getElementById("cardisplacementcardisplacement").value;
-// 	var carmotor=document.getElementById("carmotorcarmotor").value; 
-// 	var caroil=document.getElementById("caroilcaroil").value; 
-// 	var carprice=document.getElementById("carpricecarprice").value; 
-// 	var carno=document.getElementById("carnono").value; 
+ 	var cardisplacement=document.getElementById("cardisplacementcardisplacement").value;
+ 	var carmotor=document.getElementById("carmotorcarmotor").value; 
+ 	var caroil=document.getElementById("caroilcaroil").value; 
+	var carprice=document.getElementById("carpricecarprice").value; 
+ 	var carno=document.getElementById("carnono").value; 
 	var username=document.getElementById("NowUserName").innerText;
 	
-// 	if(carlntime==""){
-// 		alert("上牌时间不能为空！！！！！！！");
-// 	}else{
+ //	if(carlntime==""){
+ 		alert("上牌时间不能为空！！！！！！！");
+ //	}else{
 	
-// 	$.ajax({
-// 		type:"post",
-// 		url:"/WebCar/userInfo/PreserveCar?username="+username,
-// 		dataType:"json",
+//	$.ajax({
+//		type:"post",
+//		url:"/WebCar/userInfo/PreserveCar?username="+username,
+ //		dataType:"json",
 // 		data:{
-// 			brandname:brandname,
+//			brandname:brandname,
 // 			cartype:cartype,
 // 			carbrith:carbrith,
 // 			caredition:caredition,
