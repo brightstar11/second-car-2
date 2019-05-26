@@ -71,8 +71,8 @@
                     <li><a href="/WebCar/userInfo/user_index">首页</a></li>
                     <li ><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>                    
-                    <li class="list-active"><a href="#">估价</a></li>
-                    <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
+                    <li class="list-active"><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
+                    <li><a href="/WebCar/userInfo/News">资讯</a></li>
                 </ul>
             </div>
         </div>
@@ -89,26 +89,26 @@
                         <input type="text" id="input-brand" placeholder="品牌"/>
                         <select id="select1" >
                             <option value="请选择">请选择</option>
-                            <option  th:each="p:${CarbrandsAll}" th:text="${p.brandname}"></option>
+                            <option  th:each="p:${carbands}" th:text="${p.carband}" th:id="${p.carband}"></option>
                            
                         </select>
                     </div>
                 </div>
-                <div class="parameters"><span>款&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式:</span>
+                <div class="parameters"><span>车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名:</span>
                     <div class="parameter">
-                        <input type="text" id="input-style" placeholder="款式"/>
+                        <input type="text" id="input-style" placeholder="车名"/>
                         <select id="select2">
                             <option value="请选择">请选择</option>
-                            <option  th:each="p:${CarBirthAll}" th:text="${p.carbirth}+款"></option>
+                            <option  th:each="p:${carnames}" th:text="${p.carname}"></option>
                         </select>
                     </div> 
                 </div>
-                <div class="parameters"><span>车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型:</span>
+                <div class="parameters"><span>版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本:</span>
                     <div class="parameter">
-                        <input type="text" id="input-levle1" placeholder="车型"/>
+                        <input type="text" id="input-levle1" placeholder="汽车版本"/>
                         <select id="select3">
                             <option value="请选择">请选择</option>
-                           <option  th:each="p:${listlevel}" th:text="${p.levelname}"></option>
+                           <option  th:each="p:${carlevels}" th:text="${p.carlevel}"></option>
                         </select>
                     </div>
                 </div>
@@ -165,43 +165,21 @@
     </div>
     <div class="row Leaderboard">
         <h1>热门车辆估价排行榜</h1>
-        <ul class="valuation">
-            <li>
+        <ul class="valuation" >
+            <li >
                 <strong style="background-color: #f8f8f8;"></strong>
                 <div>品牌</div>
                 <div>评估次数</div>
-                <div>车价</div>
+                <div>平均车价</div>
             </li>
-            <li>
-                <strong style="background-color: #ff3f20">1</strong>
-                <div>大众</div>
-                <div>2005次</div>
-                <div>4.17-5.14万</div>
+            <li th:each="p:${paihang}">
+                <strong style="background-color: #ff3f20" th:text="${p.count}"></strong>
+                <div th:text="${p.carband}"></div>
+                <div th:text="${p.carpassion}"></div>
+                <div th:text="${p.carprice}+元"></div>
             </li>
-            <li>
-                <strong>2</strong>
-                <div>大众</div>
-                <div>2005次</div>
-                <div>4.17-5.14万</div>
-            </li>
-            <li>
-                <strong>3</strong>
-                <div>大众</div>
-                <div>2005次</div>
-                <div>4.17-5.14万</div>
-            </li>
-            <li>
-                <strong>4</strong>
-                <div>大众</div>
-                <div>2005次</div>
-                <div>4.17-5.14万</div>
-            </li>
-            <li>
-                <strong>5</strong>
-                <div>大众</div>
-                <div>2005次</div>
-                <div>4.17-5.14万</div>
-            </li>
+             
+             
         </ul>
     </div>
 </div>
@@ -283,33 +261,34 @@
     	　　　　return true;
     	　　}
     }
-    $('#elvauate').click(function(e){    	
-    	var brandname=$('#input-brand').val()
-    	var style=$('#input-style').val()
-    	var level=$('#input-levle1').val()
-    	var time=$('#input-time').val()
-    	var eliage=$('#input-eliage').val()
-    	var email=$('#input-email').val()
+    $('#elvauate').click(function(e){  
+    	alert("开始估价 ，请耐心等待");
+    	var carband=$('#input-brand').val()
+    	var carname=$('#input-style').val()
+    	var carlevel=$('#input-levle1').val()
+    	var carlntime=$('#input-time').val()
+    	var carmileages=$('#input-eliage').val()
+    	var useremail=$('#input-email').val()
     	if(firmEmail){
     		$.ajax({
         		type: "POST",//方法类型
        	     url: "/WebCar/userInfo/CarEvaluationGet" ,//url
        	     data:{
-       	    	carband:brandname,
-       	    	carbirth:style,
-       	    	levelname:level,
-       	    	carlntime:time,
-       	    	carmileages:eliage,
-       	    	useremail:email
+       	    	carband:carband,
+       	    	carname:carname,
+       	    	carlevel:carlevel,
+       	    	carlntime:carlntime,
+       	    	carmileages:carmileages,
+       	    	useremail:useremail
        	     },
        	     success: function (reslut) {
        	         
        	         console.log(reslut);//打印服务端返回的数据(调试用)
        	         if (reslut=='1') {
-       	         	alert("添加成功");
+       	         	alert("估价成功，快去邮箱查看吧");
        	         	window.location.reload();
        	         }else{
-       	        	 alert("添加失败");
+       	        	 alert("估价失败，暂时未收录该车数据");
        	        	 window.location.reload();
        	         };
        	         

@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/carInformation.css}" />
  
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/buyCar.css}"/>
 </head>
 <body>
 <!--导航栏开始-->
@@ -122,7 +123,7 @@
                     <span th:text="'排量:'+${list.cardisplacement}+' 油耗:'+${list.caroil}"></span>
                 </h1>
                 <div class="price"><span>金额：</span>
-                <span th:text=${list.carprice} id="pricepriceprice"></span>
+                <span th:text=${list.carprice}+万 id="pricepriceprice"></span>
                 </div>
                 <div class="showlist">
                     <div>
@@ -240,6 +241,78 @@
                 </li>
             </ul>
         </div>
+        <div class="car-process">
+            <div class="process-title" >购车流程</div>
+            <ul class="process-lists">
+                <li class="process-list">
+                    <img th:src="@{/images/选车.png}" alt="">
+                    <span>选车</span>
+                    <span>海量车源 随心挑选</span>
+                    </li>
+                <div>...........</div>
+                <li class="process-list">
+                    <img th:src="@{/images/订车.png}" alt="">
+                    <span>订车</span>
+                    <span>抢订好车 金融特惠</span>
+                    </li>
+                <div>...........</div>
+                <li class="process-list">
+                    <img th:src="@{/images/运输.png}" alt="">
+                    <span>运输</span>
+                    <span>物流跟踪 便利购车</span>
+                    </li>
+                <div>...........</div>
+                <li class="process-list">
+                    <img th:src="@{/images/交付.png}" alt="">
+                    <span>交付</span>
+                    <span>办理手续 全程服务</span>
+                    </li>
+                <div>...........</div>
+                <li class="process-list">
+                    <img th:src="@{/images/售后.png}" alt="">
+                    <span>售后</span>
+                    <span>安享售后 贴心保障  </span>
+            </ul>
+        </div>
+        <div class="price-recommend">
+            <div class="recommend-title">同价位推荐</div>
+            <div class="row showbuy_car" >
+                <div class="showcar-right" style="height:100%;padding: 0">
+                    <ul style="margin: 0;height: 298px" class="carf">
+                      <li th:each="p:${list2}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt=""  /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
+                        </div>
+                    </li>
+                           
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="price-recommend">
+            <div class="recommend-title">同车型推荐</div>
+            <div class="row showbuy_car" >
+                <div class="showcar-right" style="height:100%;padding: 0">
+                    <ul style="margin: 0;height: 298px" class="carf">
+                         <li th:each="p:${list3}">
+                        <a  th:onclick="'IntoInformation(\''+${p.id}+'\')'"><img th:src="@{${p.caricon}}" alt=""  /></a>
+                        <div class="carname"><a href="" th:text="${p.brandname}+' '+${p.carname}+' '+${p.carbirth}+' '+${p.cardisplacement}+' '+${p.drivetype}+' '+${p.carlnwhere}+' '+${p.caredition}"></a></div>
+                        <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
+                        <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
+                        <div class="car-price">
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
+                        </div>
+                    </li>
+                            
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 <!--位置结束-->

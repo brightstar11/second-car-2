@@ -177,6 +177,7 @@ a:visited {
     margin-bottom: 5px;
     padding-left: 10px;
     height: 42px;
+    /*line-height: 42px;*/
     line-height: 28px;
     font-size: 18px;
     color: #111;
@@ -214,4 +215,43 @@ a:visited {
     width: 90%;
     border: 2px solid #eee;
     margin-bottom: 8px;
+}
+.car-process {
+    height: 250px;
+    margin-bottom: 20px;
+}
+.process-title, .recommend-title {
+    margin-top: 10px;
+    padding-left: 10px;
+    height: 42px;
+    line-height: 28px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #111;
+}
+.process-lists {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+.process-lists div {
+    width: 30px;
+    margin-top: 32px;
+    /*align-self: center;*/
+}
+.process-list {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.process-list img {
+    width: 64px;
+    align-self: center;
+    height: 64px;
+}
+.process-list span {
+    align-self: center;
 }

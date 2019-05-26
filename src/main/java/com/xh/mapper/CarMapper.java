@@ -46,6 +46,8 @@ public interface CarMapper {
    public List<CarModel> BuyCarSearch6(String carpop);
    public List<CarModel> BuyCarSearch7(String carpower);
    public List<CarModel> BuyCarSearch8(String carpmethod);
+   public List<CarModel> Carselectbrandname(String brandname);
+   
    
    public List<CarModel> BuyCarSearch21(Integer  carprice1,Integer  carprice2);
    public List<CarModel> BuyCarSearch23();

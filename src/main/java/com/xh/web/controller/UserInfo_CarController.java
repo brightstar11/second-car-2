@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 import com.xh.common.Page;
 import com.xh.common.Secondwork;
 
@@ -228,7 +232,7 @@ public List<CarModel> buyCarjinque(String search) {
 @RequestMapping("/User_BuyCarSearch123")
 @ResponseBody
 public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
-	//这里ajax pageNo 没有传过来
+	
 	
 	CarModel carModel=page.getObj();//前端传的实体
 	
@@ -259,8 +263,8 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 			    	
 				}
 	}
-	//备注  每次点击除品牌 品牌不为不限
-	//carModel.setBrandname("不限");
+	
+	
 	List<CarModel> list=car.CarselectAlldong(carModel);
 	
 	//对查出的数据进行排序
@@ -278,12 +282,9 @@ public Page<CarModel>  BuyCarSearch(@RequestBody Page<CarModel> page) {
 	result.setPagetotal(Allpage);
 	if(list2.size()%pageSize!=0) {
 		Allpage=Allpage+1;
-		result.setPagetotal(Allpage);
+		
 	}
-	System.out.println("--------------------");
-	System.out.println(pages+"aaaa");
-	System.out.println("--------------------");
-	
+	result.setPagetotal(Allpage);
 	if(Allpage<pages) {
 		page.setPageNo(pages);
 			return result;
@@ -445,26 +446,36 @@ public String  BuyCarSearch(String brandname,Model model) {
 	model.addAttribute("CarPopAll",list8);
 	model.addAttribute("CarPowerAll",list9);
 	model.addAttribute("CarPmethodAll",list10);
+	model.addAttribute("brandname",brandname);
 	return "user_buyCar";
 	
 }
 //根据车的价格，进行模糊搜索 
 @RequestMapping("/User_BuyCarSearch2")
 public String  BuyCarSearch2(Integer pageNum,Integer carprice1,Integer carprice2,Model model) {
-	if(carprice1 == null) {
-		carprice1 = 0;
-	}
-	if(carprice2 == null) {
-		carprice2 = 1000;
-	}
-	String queyrString = "&carprice1="+carprice1+"&carprice2="+carprice2;
-	List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
-	//分页
+	String string=carprice1+"-"+carprice2+"万";
+	System.out.println(string);
 	
+	String queyrString = "&carprice1="+carprice1+"&carprice2="+carprice2;
+	//List<CarModel> list=car.BuyCarSearch2(carprice1,carprice2);
+	//先所有搜索，然后进行排序 
+	List<CarModel> list=car.CarselectAll();
+	List<CarModel> list111=new ArrayList<>();
+	for(int i=0;i<list.size();i++) {
+	String	Carprice =list.get(i).getCarprice();
+	if(Carprice!=null||Carprice!="") {
+	Double double1=Double.valueOf(Carprice);
+	System.out.println(double1);
+	if(double1>=carprice1&&double1<=carprice2) {
+		System.out.println();
+		list111.add(list.get(i));
+	}
+	}
+	}
 		
 		model.addAttribute("queyrString",queyrString);
 	    
-	model.addAttribute("listAll",list);
+	model.addAttribute("listAll",list111);
 	List<CarBrands> list2=car.CarbrandsAll();
 	List<Carlevel> list3=car.CarLevelAll();
 	List<CarMileAge> list4=car.CarmileageAll();
@@ -485,6 +496,8 @@ public String  BuyCarSearch2(Integer pageNum,Integer carprice1,Integer carprice2
 	model.addAttribute("CarPopAll",list8);
 	model.addAttribute("CarPowerAll",list9);
 	model.addAttribute("CarPmethodAll",list10);
+	model.addAttribute("carprice",carprice1+"-"+carprice2+"万");
+	
 	return "user_buyCar";
 	
 }
@@ -515,6 +528,7 @@ public String  BuyCarSearch3(String levelname,Model model) {
 	model.addAttribute("CarPopAll",list8);
 	model.addAttribute("CarPowerAll",list9);
 	model.addAttribute("CarPmethodAll",list10);
+	model.addAttribute("levelname",levelname);
 	return "user_buyCar";
 	
 }
@@ -551,13 +565,12 @@ public String salecar(Model model) {
 @RequestMapping("/PreserveCar")
 @ResponseBody
 public Integer PreserveCar(@RequestParam(name="carImage",required=false)MultipartFile[] file,@RequestParam(name="username",required=false)String username,CarModel carModel) {
-	
-//	 CommonsMultipartFile cf= (CommonsMultipartFile)file; 
+// for(int i=0;i<file.length;i++) {
+//     CommonsMultipartFile cf= (CommonsMultipartFile)file[i]; 
 //     DiskFileItem fi = (DiskFileItem)cf.getFileItem(); 
 //
 //     File f = fi.getStoreLocation();
-	
-	
+// }
 	
 	System.out.println(file.toString());
 	Integer count=car.insertCar(carModel);//存车信息
@@ -569,8 +582,6 @@ public Integer PreserveCar(@RequestParam(name="carImage",required=false)Multipar
 		return 0;
 	}
 }
-
-
 
 
 

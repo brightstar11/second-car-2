@@ -1,15 +1,18 @@
 package com.xh.web.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.jasper.tagplugins.jstl.core.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xh.entity.CarBrands;
 import com.xh.entity.UserInfo;
 import com.xh.service.CarService;
 import com.xh.service.OrderService;
@@ -35,6 +38,33 @@ public String CarInforMation(Integer id,Model model) {
 	if(list.size()==1) {
 	CarModel carModel=list.get(0);
 	Integer heat=carModel.getCarheat();
+	String carprice=carModel.getCarprice();
+	System.out.println(carprice);
+	String brandname=carModel.getBrandname();
+	List<CarModel> list7=car.Carselectbrandname(brandname);
+	Integer carprices=Integer.parseInt(carprice.substring(0, 1));
+	Integer carprice1=carprices-5;
+	if(carprice1<0) {
+		carprice1=0;
+	}
+	Integer carprice2=carprices+5;
+	List<CarModel> list5=car.BuyCarSearch2(carprice1,carprice2);
+	List<CarModel> list6=new ArrayList<CarModel>();
+	List<CarModel> list8=new ArrayList<CarModel>();
+	int j=0;
+	for (int i = 0; i < list5.size(); i++) {
+		if(j<=4) {
+		list6.add(list5.get(i));
+		j++;
+		}
+	}
+	int k=0;
+	for (int i = 0; i < list7.size(); i++) {
+		if(k<=4) {
+		list8.add(list7.get(i));
+		k++;
+		}
+	}
 	if(heat==null) {
 		heat=0;
 	}
@@ -44,9 +74,12 @@ public String CarInforMation(Integer id,Model model) {
 	carm.setCarheat(heat);
 	car.insertcarheat(carm);
 	model.addAttribute("list",carModel);
+	model.addAttribute("list2",list6);
+	model.addAttribute("list3",list8);
 	}else {
 		CarModel carModel=new CarModel();
 		model.addAttribute("list",carModel);
+		
 	}
 	return "carInformation";
 	

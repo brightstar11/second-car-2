@@ -59,9 +59,9 @@
                 <a href=""><img th:src="@{/images/used-car4.jpg}" alt="" title="二手车交易市场" /></a>
             </div>
         </div>
-        <div class="col-sm-7" style="height: 100%">
+         <div class="col-sm-7" style="height: 100%">
             <div class="choose">
-                <a href="#">二手车</a>
+                <a href="Javascript:void(0)">二手车</a>
             </div>
             <div class="search">
                 <input type="text" placeholder="搜'10-20万'大众试试" id="BuyCarSearch" name="BuyCarSearch"/>
@@ -84,7 +84,8 @@
                     <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
                     <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
-                    <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/News">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/Rental">租车</a></li>
                 </ul>
             </div>
         </div>
@@ -258,7 +259,7 @@
                         <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
                         <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
                         <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
                         </div>
                     </li>
                     </ul>
@@ -380,5 +381,21 @@ function IntoInformation(id){
 	
 	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;
 }
+function BCSearch(){
+	  var search=$('#BuyCarSearch').val();
+	  $.ajax({
+			 type: "POST",//方法类型
+		     url: "/WebCar/userInfo/User_BuyCarSearch124",//url
+		     data:{
+		    	 search:search
+		     },
+		     success: function (data) {
+		    	 $('#car-list').empty()
+		    	 addlist(data)
+		     }
+		});
+	  
+ }
+ 
 </script>
 </html>

@@ -13,9 +13,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/buyCar.css}"/>
-
 </head>
-<body onload="loading()">
+<body >
 <!--导航栏开始-->
 <div class="container-fluid" style="background-color: #f8f8f8;">
     <div class="container">
@@ -61,7 +60,7 @@
         </div>
         <div class="col-sm-7" style="height: 100%">
             <div class="choose">
-                <a href="#">二手车</a>
+                <a href="Javascript:void(0)">二手车</a>
             </div>
             <div class="search">
                 <input type="text" placeholder="搜'10-20万'大众试试" id="BuyCarSearch" name="BuyCarSearch"/>
@@ -84,7 +83,7 @@
                     <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>                    
                     <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
-                    <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/News">资讯</a></li>
                 </ul>
             </div>
         </div>
@@ -94,10 +93,8 @@
 <!--开始搜索-->
 <div class="container-fluid" style="background-color: #f8f8f8">
     <div class="container">
-        <div class="row" style="height: 44px;line-height: 44px" data-class="start-search">
-            
+        <div class="row" style="height: 44px;line-height: 44px" data-class="start-search">            
         </div>
-
     </div>
 </div>
 <div class="container-fluid">
@@ -136,7 +133,7 @@
                     <div class="brand-name"><span>车价</span></div>
                     <div class="brand">
                         <ul class="brand-list Sort" id="pricename">
-                            <li><a  class="aSort">不限</a></li>
+                            <li><a class="aSort">不限</a></li>
                             <li><a >3万内</a></li>
                             <li><a >3-5万内</a></li>
                             <li><a >5-8万内</a></li>
@@ -219,12 +216,12 @@
                 <li class="search-carTop">
                     <div class="brand-name" style="border-bottom: 1px solid rgb(229, 229, 229)"><span>排序</span></div>
                     <div class="brand">
-                        <ul class="brand-list  Sort">
-                            <li><a href="#" class="aSort">默认排序</a></li>
-                            <li><a href="#">价格<span class="fuhao">↓</span></a></li>
-                            <li><a href="#">价格<span class="fuhao">↑</span></a></li>
-                            <li><a href="#">里程<span class="fuhao">↑</span></a></li>
-                            <li><a href="#" title="车龄由小到大">车龄<span class="fuhao">↑</span></a></li>
+                        <ul class="brand-list  Sort" id="sortType">
+                            <li><a href="javascript:void(0)" class="aSort" id="sort-one">默认排序</a></li>
+                            <li><a href="javascript:void(0)" title="价格从高到低" id="sort-two">价格<span class="fuhao">↓</span></a></li>
+                            <li><a href="javascript:void(0)" title="价格从低到高" id="sort-three">价格<span class="fuhao">↑</span></a></li>
+                            <li><a href="javascript:void(0)" title="里程从低到高" id="sort-four">里程<span class="fuhao">↑</span></a></li>
+                            <li><a href="javascript:void(0)" title="车龄由小到大" id="sort-five">车龄<span class="fuhao">↑</span></a></li>
                         </ul>
                     </div>
                 </li>
@@ -251,9 +248,7 @@
                 <a href="javascript:void(0)" id="nextNumber">下一页</a>
                 <a href="javascript:void(0)" id="lastNumber">最后一页</a>
                 <a href="javascript:void(0)">共<span id="totalNumber"></span>页</li>
-           </div>
-     
-
+           </div>    
     </div>
     
 </div>
@@ -327,7 +322,7 @@
 </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 </div>
-<script type="text/javascript">
+<script th:inline="javascript">
 var aa=""
 $(function(){
 	function utf8to16(str) {  
@@ -370,13 +365,11 @@ $(function(){
 		if(href[i]=='?'){
 			index=i
 		}
-	}
-	console.log(href.substring(index+1,index1))
-	
+	}	
 	if('brandname'==href.substring(index+1,index1)){
 		var hrefName=href.substring(index1+1,href.length)	
-		console.log(hrefName)	  
-		aa=utf8to16(unescape(hrefName));
+		aa=utf8to16(unescape(hrefName)); 
+		console.log(aa)
 		var index=0;
 		var aaa=[]
 		var brandName=$('#brand-name li').children('a')
@@ -396,32 +389,44 @@ $(function(){
 			}else {
 					$('#select-brand a')[0].innerHTML=aa
 					$('#select-brand a').addClass('aSort')
+					$('#select-brand').siblings().children('a').removeClass('aSort')
 				}
 		}
 	}
 	if(href.indexOf('carprice')!=-1){
-		var pricename=$('#pricename li')
-		var aa=[]
-		for(var i=0;i<pricename.length;i++){
-			aa.push($(pricename[i]).find('a').attr('href'))
-		}
-		var bb=[]
-		for(var i=0;i<aa.length;i++){
-			let c=aa[i]
-			for(var j=0;j<c.length;j++){
-				if(c[j]=='?'){
-					bb.push(c.substring(j+1,c.length))
-				}
+		var prices=href.substring(index+1,href.length)
+		var CIndex=[]
+		var Cindex=0
+		for(var i=0;i<prices.length;i++){
+			if(prices[i]=='='){
+				CIndex.push(i)
+			}
+			if(prices[i]=='&'){
+				Cindex=i
 			}
 		}
-		for(var i=0;i<bb.length;i++){
-			if(href.substring(index+1,href.length)==bb[i]){
-				$('#pricename li').eq(i).find('a').addClass('aSort')
-				$('#pricename li').eq(i).siblings().find('a').removeClass('aSort')
-			}
+		var left=prices.substring(CIndex[0]+1,Cindex-1)
+		var right=prices.substring(CIndex[1]+1,prices.length)
+		var pingjie=''
+		if(left==0){
+			pingjie=right+'万内'
+		}else if(right==1000){
+			pingjie=right+'以上'
+		}else{
+			pingjie=left+'-'+right+'万内'
 		}
-
+		let priceName=['3万内','3-5万内','5-8万内','8-10万内','10-15万内','15-20万内','20-30万内','30-50万内','50-100万内','100万以上'];
+		let priceIndex=0;
+		priceName.forEach(function(item,index){
+			if(item==pingjie){
+				priceIndex=index+1;
+			}
+		})
+		$('#pricename li').eq(priceIndex).find('a').addClass('aSort')
+		$('#pricename li').eq(priceIndex).siblings().find('a').removeClass('aSort')
+		console.log($('#pricename li a').text())
 	}
+	
 	if(href.indexOf('levelname')!=-1){
 		var pricename=$('#level_name li')
 		var aa=[]
@@ -452,13 +457,10 @@ $(function(){
 		}
 
 	}
-	
-		
+	loading();		
 })
 
 // 自定义点击开始
-
-
 
     function lianxifangshi2(){
 	
@@ -471,7 +473,7 @@ $(function(){
 	window.location.href="/WebCar/userInfo/User_order?username="+username;
 	
 }
-   function BCSearch(){
+function BCSearch(){
 	  var search=$('#BuyCarSearch').val();
 	  $.ajax({
 			 type: "POST",//方法类型
@@ -527,7 +529,6 @@ $('#brand-name').children('li').find('a').click(function(e){
 	
 var total=0;	
 function ajaxPost(params){
-	console.log(params,111111111)
 	$.ajax({
 		 type: "POST",//方法类型
 	     url: "/WebCar/userInfo/User_BuyCarSearch123",//url
@@ -556,7 +557,7 @@ function addlist(lists) {
 		            '<p class="pcar">上牌时间：'+list.carlntime+'</p>'+
 		            '<p class="pcar">行驶里程：'+list.carmileage+'</p>'+
 		            '<div class="car-price">'+
-		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span></span>'+
+		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span>万</span>'+
 		            '</div>'+
 		        '</li>'
 		          
@@ -565,14 +566,36 @@ function addlist(lists) {
 		
 	}	 
 }
-
+var brandname1=[[${brandname}]]
+var carprice1=[[${carprice}]]
+var levelname1=[[${levelname}]]
 function loading(){
-    var params ={
-  		  pageNo:1,
-  		  pageSize:10,
-  		  obj:data1,
-    }
-    ajaxPost(params);
+
+	if(brandname1!=null){
+		brandName=brandname1;
+	}
+	if(carprice1!=null){
+	  pricename=carprice1;
+	}
+	if(levelname1!=null){
+		levelName=levelname1;
+	}
+		var params ={
+		  		  pageNo:1,
+		  		  pageSize:10,
+		  		  obj:{
+		  			 brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods
+		  		  },
+		    }
+		    ajaxPost(params);
+    
 }
 
 $('#level_name').children('li').find('a').click(function(e){
@@ -781,6 +804,10 @@ $('#lastNumber').click(function(e){
 	    }
 	    ajaxPost(params);
 	
+})
+$('#sortType li a').click(function(e){
+	var id = this.id
+	console.log(id)
 })
 function IntoInformation(id){
 	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;

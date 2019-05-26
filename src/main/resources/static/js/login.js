@@ -38,8 +38,7 @@ function oBlur_3(val) {
         document.getElementById("change_margin_2").style.marginBottom = 1 + "px";
         document.getElementById("change_margin_3").style.marginTop = 2 + "px";
         return false
-    }
-    else { //验证码框value值不为空
+    }else { //验证码框value值不为空
         document.getElementById("remind_2").innerHTML = "";
         document.getElementById("change_margin_2").style.marginBottom = 19 + "px";
         document.getElementById("change_margin_3").style.marginTop = 19 + "px";
@@ -211,9 +210,9 @@ function Next_step(route) {
          document.getElementById("change_margin_1").style.marginBottom = 1 + "px";
      }
      else if(!oBlur_3(val)) {
+    	 
      }
-     else {
-       
+     else {       
          var data='username='+usernameF
          $.ajax({
              //几个参数需要注意一下
@@ -221,12 +220,8 @@ function Next_step(route) {
              dataType: "json",//预期服务器返回的数据类型
              url: route ,//url
              data: data,
-             success: function (reslut) {
-                 var code=JSON.parse(reslut)
-                  console.log(code);//打印服务端返回的数据(调试用)
-                 if (code==1) {
-                     // window.location.href = "http://localhost:8088/index";
-                	 
+             success: function (reslut) {             
+                 if (code==1) {               	 
                 	 $('#Next_stup').click();
                 	  $('body').on('hidden.bs.modal', '.modal', function () {
                           $('input').val('');

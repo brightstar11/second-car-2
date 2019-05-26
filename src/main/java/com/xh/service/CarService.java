@@ -28,7 +28,7 @@ public interface CarService {
 	 public Integer Admin_CarManageDelect(Integer id);
 	 public Integer Admin_CarManageUpdate(Integer carvalidateid,Integer id);
 	 
-	 
+	 public List<CarModel> Carselectbrandname(String brandname);
 	
 	 
 	//<!-- 根据车的品牌，进行模糊搜索 -->
