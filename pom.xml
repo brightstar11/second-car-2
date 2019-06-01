@@ -23,6 +23,12 @@
 	</properties>
 
 	<dependencies>
+	<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
 		<!--WEB项目的所有支持(自带容器,SpringMVC支持等) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -110,6 +116,8 @@
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<!--  -->
+		
 		<!-- 对nekohtml的依赖： -->
 		<dependency>
      <groupId>net.sourceforge.nekohtml</groupId>

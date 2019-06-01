@@ -69,9 +69,7 @@
                 <button onclick="BCSearch()">搜索</button>
             </div>
         </div>
-        <!--<div class="col-sm-2" style="height: 100%">-->
-        <!--<a href="#" class="maiche">卖车</a>-->
-        <!--</div>-->
+      
     </div>
 </div>
 <!--搜索框结束-->
@@ -86,6 +84,7 @@
                     <li class="list-active"><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
                     <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/News">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/Rental">租车</a></li>
                 </ul>
             </div>
         </div>
@@ -110,7 +109,7 @@
                  <div class="write-box">
                  <span>汽车座位数:</span>
                     <select id="cartypetype">
-                    <option value="1">两座</option>
+                    <option value="1">2座</option>
                     <option value="2">4座</option>
                     <option value="3">5座</option>
                     <option value="4">6座</option>
@@ -382,58 +381,41 @@ function salecarfinish(){
  	var carno=document.getElementById("carnono").value; 
 	var username=document.getElementById("NowUserName").innerText;
 	
- //	if(carlntime==""){
+if(carlntime==""){
  		alert("上牌时间不能为空！！！！！！！");
- //	}else{
+ 	}else{
 	
-//	$.ajax({
-//		type:"post",
-//		url:"/WebCar/userInfo/PreserveCar?username="+username,
- //		dataType:"json",
-// 		data:{
-//			brandname:brandname,
-// 			cartype:cartype,
-// 			carbrith:carbrith,
-// 			caredition:caredition,
-// 			carmileage:carmileage,
-// 			cardrive:cardrive,
-// 			levelname:levelname,
-// 			drivetype:drivetype,
-// 		    carcolor:carcolor,
-// 			carpop:carpop,
-// 			carpower:carpower,
-// 			carpmethod:carpmethod,
-// 			carname:carname,
-// 			carlnwhere:carlnwhere,
-// 			carlntime:carlntime,
-// 			cardisplacement:cardisplacement,
-// 			carmotor:carmotor,
-// 		    caroil:caroil,
-// 			carprice:carprice,
-// 			carno:carno
-// 		},
-// 		success:function(reslut){
-// 			   if (reslut=='1') {
-// 		         	alert("登记成功，等待验证");
-// 		         	window.location.href = "/WebCar/userInfo/buyCar";
-// 		         };
-// 		     },
-// 		     error : function() {
-// 		         alert("登记失败！");
-// 		         window.location.href = "/WebCar/userInfo/SaleCar";
-// 		     }
-		
-		
-// 	});
-// 	}
+ 
 
 alert(username)
 var data = new FormData();
 console.log($('#carImage')[0].files);
 for(var i=0;i<$('#carImage')[0].files.length;i++){
 	data.append("carImage",$('#carImage')[0].files[i]);
+	
 }
+
 data.append("username",username);
+data.append("brandname",brandname);
+data.append("cartype",cartype);
+data.append("carbirth",carbrith);
+data.append("caredition",caredition);
+data.append("carmileage",carmileage);
+data.append("cardrive",cardrive);
+data.append("levelname",levelname);
+data.append("drivetype",drivetype);
+data.append("carcolor",carcolor);
+data.append("carpop",carpop);
+data.append("carpower",carpower);
+data.append("carpmethod",carpmethod);
+data.append("carname",carname);
+data.append("carlnwhere",carlnwhere);
+data.append("carlntime",carlntime);
+data.append("cardisplacement",cardisplacement);
+data.append("carmotor",carmotor);
+data.append("caroil",caroil);
+data.append("carprice",carprice);
+data.append("carno",carno);
 	$.ajax({
         url: "/WebCar/userInfo/PreserveCar",
         type: 'POST',
@@ -446,16 +428,25 @@ data.append("username",username);
 //             uploading = true;
 //         },
         success : function(data) {
-            if (data.code == 1) {
-                $("#logo").attr("src", data.msg);
-            } else {
-//                 showError(data.msg);
-            }
-            uploading = false;
-        }
+            if (data=="1") {
+               // $("#logo").attr("src", data.msg);
+                  //if (reslut=='1') {
+ 		         	alert("登记成功，等待验证");
+ 		         	window.location.href = "/WebCar/userInfo/buyCar";
+           // } else {
+//          //       showError(data.msg);
+           // }
+           // uploading = false;
+       // }
+                  };
+	     },
+	     error : function() {
+	         alert("登记失败！");
+	         window.location.href = "/WebCar/userInfo/SaleCar";
+	     }
     });
 }
-
+}
 </script>
 <script th:inline="javascript">
 var list=[[${CarNono}]];
@@ -479,6 +470,12 @@ function usermanage(){
 	var username=document.getElementById("NowUserName").innerHTML;
 	
 	window.location.href="/WebCar/userInfo/user_Manger?username="+username;
+}
+function BCSearch(){
+	  var search=$('#BuyCarSearch').val();
+	  window.location.href="/WebCar/userInfo/User_BuyCarSearch4?search="+search;
+	
+	  
 }
 </script>
 </html>

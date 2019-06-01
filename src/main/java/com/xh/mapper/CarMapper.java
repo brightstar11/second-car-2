@@ -92,6 +92,9 @@ public interface CarMapper {
    public List<String> Carcartype();
    @Select("select carname from car")
    public List<String> Carcarname();
+   @Select("select drivetype from drivetype")
+   public List<String> drivetype();
+   
    //存储车信息
    public Integer  insertCar(CarModel carModel);
    public Integer insertCar_User(String carno,String username);
@@ -101,4 +104,8 @@ public interface CarMapper {
    
    //动态查询 汽车
    public List<CarModel> CarselectAlldong(CarModel carModel);
+   public List<CarModel> CarselectAlldongCarMileages(CarModel carModel);
+   public List<CarModel> CarselectAlldongsearch(CarModel carModel);
+   
+   
 }

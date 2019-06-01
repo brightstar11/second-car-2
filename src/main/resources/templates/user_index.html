@@ -226,7 +226,7 @@
                         <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
                         <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
                         <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
                         </div>
                     </li>
                    </ul>
@@ -237,7 +237,7 @@
                         <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
                         <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
                         <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
                         </div>
                     </li>
                     </ul>
@@ -248,7 +248,7 @@
                         <p class="pcar" th:text="'上牌时间'+${p.carlntime}"></p>
                         <p class="pcar" th:text="'行驶里程'+${p.carmileage}"></p>
                         <div class="car-price">
-                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}"></span></span>
+                            <span class="carnumber">金额：</span><span><span class="carnumber" th:text="${p.carprice}+万"></span></span>
                         </div>
                     </li>
                     </ul>
@@ -383,17 +383,8 @@ function IntoInformation(id){
 }
 function BCSearch(){
 	  var search=$('#BuyCarSearch').val();
-	  $.ajax({
-			 type: "POST",//方法类型
-		     url: "/WebCar/userInfo/User_BuyCarSearch124",//url
-		     data:{
-		    	 search:search
-		     },
-		     success: function (data) {
-		    	 $('#car-list').empty()
-		    	 addlist(data)
-		     }
-		});
+	  window.location.href="/WebCar/userInfo/User_BuyCarSearch4?search="+search;
+	
 	  
  }
  

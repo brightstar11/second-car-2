@@ -212,7 +212,8 @@ function Next_step(route) {
      else if(!oBlur_3(val)) {
     	 
      }
-     else {       
+     else {    
+    	 $('#Next_stup').attr('data-target','#myModal') 
          var data='username='+usernameF
          $.ajax({
              //几个参数需要注意一下
@@ -221,18 +222,11 @@ function Next_step(route) {
              url: route ,//url
              data: data,
              success: function (reslut) {             
-                 if (code==1) {               	 
-                	 $('#Next_stup').click();
-                	  $('body').on('hidden.bs.modal', '.modal', function () {
-                          $('input').val('');
-                          $('#Retrieve_password').val('确认')
-                          $('#Next_stup').val('下一步')
-                          $('#Next_stup').attr('data-target','')
-                          $('#confirm_number')[0].innerText = Produce(4);
-                          // location.reload();
-                      });
-                      $('#test').val(' ');
-                     $('#Next_stup').attr('data-target','#myModal')
+                 if (reslut==1) {         	 
+                      $('#Retrieve_password').val('确认')
+                      $('#Next_stup').val('下一步')
+                      $('#confirm_number')[0].innerText = Produce(4);
+                      $('#test').val('');
                  }
                  else{
                 	 alert("不存在该账户")

@@ -97,7 +97,7 @@
 				<h3 class="card-title">资讯管理</h3>
 				<div class="col-lg-3 ml-auto">
 					<form class="input-icon my-3 my-lg-0"
-						th:action="@{/WebCar/admin/admin_CarInformationLook2}" method="get">
+						th:action="@{/WebCar/admin/admin_CarInformationLook}" method="get">
 						<input type="text" name="id" class="form-control header-search"
 							placeholder="输入编号..." tabindex="1" />
 					</form>
@@ -109,26 +109,47 @@
 						<tr>
 						     
 							<td>资讯编号</td>
-							<td>资讯时间</td>
+							<td>资讯类型</td>
 							<td>资讯标题</td>
-							<td>资讯正文点击查看</td>
+							<td>资讯时间</td>
+							<td>资讯作者</td>
+							<td>资讯第1段</td>
+							<td>介绍标题</td>
+							<td>资讯第2段</td>
+							<td>图片1</td>
+							<td>资讯第3段</td>
+							<td>图片2</td>
+							<td>资讯第4段</td>
+							<td>图片3</td>
+							<td>资讯第5段</td>
+							<td>图片4</td>
 							<td>你可以进行的操作</td>
 						</tr>
 					</thead>
-					<tbody th:each="p:${list}">
+					<tbody th:each="p:${news}">
 						<tr>
 						    
 						    <td th:text="${p.id}"></td>
-                            <td th:text="${p.time}"></td>
+                            <td th:text="${p.newsytpe}"></td>
 							<td th:text="${p.title}"></td>
-							<td><button  th:onclick="'carinformationSee(\''+${p.id}+'\')'">点击查看</button>
+							<td th:text="${p.time}"></td>
+                            <td th:text="${p.autor}"></td>
+							<td th:text="${p.pone}"></td>
+							<td th:text="${p.context}"></td>
+                            <td th:text="${p.ptwo}"></td>
 							<td>
-								
-       <button  data-toggle="modal" data-target="#myModal" th:onclick="'openwin(\''+${p.id}+'\')'">修改资讯</button>
+							<img th:src="@{${p.image1}}" alt=""></td>
+							<td th:text="${p.pthree}"></td>
+                            <td ><img th:src="@{${p.image2}}" alt=""></td>
+							<td th:text="${p.pfour}"></td>
+							<td> <img th:src="@{${p.image3}}" alt=""></td>
+							<td th:text="${p.pfive}"></td>
+                            <td><img th:src="@{${p.image4}}" alt=""></td>	
+                            <td>
+       <button  data-toggle="modal" data-target="#myModal" th:onclick="'carinformationupdate(\''+${p.id}+'\')'">修改资讯</button>
        
-        <button  th:onclick="'carinformationDelect(\''+${p.id}+'\')'">删除资讯</button>
-								</td>
-								
+        <button  th:onclick="'carinformationDelect(\''+${p.id}+'\')'">删除资讯</button></td>
+							</td>	
 						</tr>
 					</tbody>
 				</table>
@@ -172,6 +193,51 @@
 </body>
 
 <script type="text/javascript">
+function update() {
+
+	var username = $('#usernameAdd').val();
+	var usericon = $('#usericonAdd').val();
+	alert(usericon)
+	var userphone = $('#userphoneAdd').val();
+	var useraddress = $('#useraddressAdd').val();
+	var usersex = $('#usersexAdd').val();
+	var userpwd = $('#userpwdAdd').val();
+	var useremail = $('#useremailAdd').val();
+    
+	$.ajax({
+		type : "post",
+		url : "/WebCar/admin/usermanageAdd",
+		data : {
+			"username" : username,
+			"usericon" : usericon,
+			"userphone" : userphone,
+			"useraddress" : useraddress,
+			"usersex" : usersex,
+			"userpwd" : userpwd,
+			"useremail" : useremail
+		},
+		dataType : "json",
+
+		success : function(result) {
+
+			if (result == '1') {
+				alert("添加成功");
+
+				$("#myModal").modal('hide');
+				window.location.href = "./usermanageupdatesuccess";
+			} else if (result == '2') {
+				alert("用户名重复");
+
+			}
+			;
+		},
+		error : function() {
+			alert("异常！");
+			window.location.href = "./usermanageupdateerror";
+		}
+	});
+
+}
 function help(){
 	var obj = document.getElementById("p111");
 	 if(obj.innerHTML==3){
@@ -205,10 +271,12 @@ function carinformationDelect(id){
 }
 
 
-function carinformationSee(id){
-	var id=id;
-	window.open("/WebCar/admin/admin_CarInformationLook?id="+id, "newwindow", "height=600,width=1000,top=0,left=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no")
-}
+  function carinformationupdate(id){
+	  var id=id;
+	
+	  window.open("/WebCar/admin/carinformationUpdate?id="+id);     
+	  
+  }
 </script>
 
 </html>

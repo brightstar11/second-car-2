@@ -1,7 +1,6 @@
 package com.xh.web.controller;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import com.github.pagehelper.PageInfo;
 import com.xh.common.GlobalConstant;
 import com.xh.entity.Admin;
 import com.xh.entity.Sellpeople_car;
-
 import com.xh.service.AdminService;
 import com.xh.service.CarService;
 import com.xh.service.Car_SellpeopleService;

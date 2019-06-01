@@ -15,6 +15,7 @@ public class Page<T> {
 	private int pageSise = 10;
 	//实体
 	private T obj;
+	
 	public List<T> getDataList() {
 		return dataList;
 	}

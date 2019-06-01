@@ -62,6 +62,7 @@ public interface CarService {
 	   public List<Carlevel> CarLevelAll();
 	   public List<CarMileAge> CarmileageAll();
 	  
+	   public List<String> drivetype();
 	   
 	   public List<CarColor> CarcolorAll();
 	 //国别，只用carpop
@@ -93,7 +94,8 @@ public interface CarService {
 	   
 	   
 	   public List<CarModel> CarselectAlldong(CarModel carModel);
-	   
+	   public List<CarModel> CarselectAlldongCarMileages(CarModel carModel);
+	   public List<CarModel> CarselectAlldongsearch(CarModel carModel);
 	  
 	   public List<String> Carcartype();
 	   

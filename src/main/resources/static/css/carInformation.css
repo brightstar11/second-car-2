@@ -255,3 +255,108 @@ a:visited {
 .process-list span {
     align-self: center;
 }
+#rental-show {
+    background-color: #FFFFFF;
+    padding-top: 20px;
+}
+.contact {
+    height: 64px;
+    background-color: #FF3300;
+    line-height: 64px;
+    font-size: 20px;
+    width: 256px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.contact-active {
+    background: url(../images/contact.png);
+    background-color: #FF3300;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 64px 64px;
+}
+#p-style p{
+    font-size: 16px;
+    color: #666666;
+    margin-top: 24px;
+}
+#p-style .result {
+    color: #333333;
+}
+#phone {
+    display: none;
+}
+.service-rental {
+    margin-top: 20px;
+    height: 80px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+}
+.service-rental li {
+    display: flex;
+}
+.service-rental li img {
+    width: 34px;
+    height: 34px;
+    margin-right: 20px;
+    align-self: center;
+}
+.service-rental li div {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+}
+.title-one {
+    font-size: 18px;
+    color: #666666;
+}
+.title-two{
+    font-size: 14px;
+    color: #666666;
+}
+.detail-decription {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    min-height: 100px;
+    display: flex;
+    border-bottom: 1px solid #f3f3f3;
+}
+.service-left {
+    width: 120px;
+    line-height: 72px;
+    text-align: center;
+}
+.service-left img {
+    width: 72px;
+    height: 72px;
+}
+.service-right li {
+    float: left;
+    margin-right: 20px;
+}
+.service-right h3 {
+    color: #333333;
+    font-size: 14px;
+}
+.service-right img{
+   width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.sevice-description {
+margin: 0;
+padding-top: 20px;
+}
+.service-right p {
+    width: 100%;
+}
+#sevice-img li img {
+    width: 380px;
+    height: 220px;
+}
+#sevice-img {
+    margin-bottom: 50px;
+}

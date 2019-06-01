@@ -307,6 +307,8 @@ public String Admin_sellpeople2(Model model,Integer pageNum,@RequestParam("name"
 	List<Admin> list2=new ArrayList<Admin>();
 	   for(int i=0;i<list.size();i++) {
 	   Admin admin=list.get(i);
+	   System.out.println(admin.getRealName()+"name");
+	   System.out.println(name+"name");
 	   if(admin.getRealName().equals(name)) {
 		   list2.add(admin);
 	   }

@@ -6,7 +6,27 @@
     background-size: 100% 660px;
     background-position: top;
 }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 2px;
+    background-color: ghostwhite;
+}
 
+::-webkit-scrollbar-track
+{
+    border-radius: 2px;
+    background-color: #f8f8f8;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+    background-color: #cccbcb;
+}
+body {
+    overflow-x:hidden;
+}
 .middlewrap {
     width: 100%;
     position: relative;

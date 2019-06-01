@@ -68,12 +68,12 @@
         <div class="container" style="height: 100%;">
             <div class="row">
                 <ul class="list">
-                    <li><a href="/WebCar/userInfo/user_index">首页</a></li>
-                    <li class="list-active"><a href="/WebCar/userInfo/buyCar">买车</a></li>
+                    <li class="list-active"><a href="/WebCar/userInfo/user_index">首页</a></li>
+                    <li><a href="/WebCar/userInfo/buyCar">买车</a></li>
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>
-                    
                     <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
-                    <li><a href="/WebCar/userInfo/car_Information">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/News">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/Rental">租车</a></li>
                 </ul>
             </div>
         </div>
@@ -445,5 +445,12 @@ function firm() {
     }  
 
 }  
+function IntoInformation(id){
+	
+	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;
+}
+
+
+
 </script>
 </html>

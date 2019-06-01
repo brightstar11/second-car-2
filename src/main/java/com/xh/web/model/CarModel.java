@@ -44,8 +44,31 @@ public class CarModel {
 	 private String  carpriceleft;
 	 private String  carpriceright;
 	 private String  paixubiaoshi;
+	 private String  search;
 	 
-	 public String getPaixubiaoshi() {
+	 public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	@Override
+	public String toString() {
+		return "CarModel [id=" + id + ", brandname=" + brandname + ", carname=" + carname + ", cartype=" + cartype
+				+ ", carlnwhere=" + carlnwhere + ", carlntime=" + carlntime + ", carbirth=" + carbirth + ", caredition="
+				+ caredition + ", carmileage=" + carmileage + ", cardisplacement=" + cardisplacement + ", carmotor="
+				+ carmotor + ", cardrive=" + cardrive + ", caroil=" + caroil + ", carlong=" + carlong + ", carwide="
+				+ carwide + ", carheight=" + carheight + ", levelname=" + levelname + ", cartrunk=" + cartrunk
+				+ ", drivetype=" + drivetype + ", carprice=" + carprice + ", carno=" + carno + ", carcolor=" + carcolor
+				+ ", carpower=" + carpower + ", carpop=" + carpop + ", carpmethod=" + carpmethod + ", caricon="
+				+ caricon + ", carvalidate=" + carvalidate + ", carhavename=" + carhavename + ", carhavenamenum="
+				+ carhavenamenum + ", carheat=" + carheat + ", carmileages=" + carmileages + ", cariconone="
+				+ cariconone + ", caricontwo=" + caricontwo + ", cariconthree=" + cariconthree + ", cariconfour="
+				+ cariconfour + ", cariconfive=" + cariconfive + ", carallocation=" + carallocation + ", carsell="
+				+ carsell + ", carpriceleft=" + carpriceleft + ", carpriceright=" + carpriceright + ", paixubiaoshi="
+				+ paixubiaoshi + "]";
+	}
+	public String getPaixubiaoshi() {
 		return paixubiaoshi;
 	}
 	public void setPaixubiaoshi(String paixubiaoshi) {
@@ -291,16 +314,7 @@ public class CarModel {
 	public void setCarvalidate(String carvalidate) {
 		this.carvalidate = carvalidate;
 	}
-	@Override
-	public String toString() {
-		return "CarModel [id=" + id + ", brandname=" + brandname + ", carname=" + carname + ", cartype=" + cartype
-				+ ", carlnwhere=" + carlnwhere + ", carlntime=" + carlntime + ", carmileage=" + carmileage
-				+ ", cardisplacement=" + cardisplacement + ", carmotor=" + carmotor + ", cardrive=" + cardrive
-				+ ", caroil=" + caroil + ", carlong=" + carlong + ", carwide=" + carwide + ", carheight=" + carheight
-				+ ", levelname=" + levelname + ", cartrunk=" + cartrunk + ", drivetype=" + drivetype + ", carprice="
-				+ carprice + ", carno=" + carno + ", carcolor=" + carcolor + ", carpower=" + carpower + ", carpop="
-				+ carpop + ", carpmethod=" + carpmethod + ", caricon=" + caricon + ", carvalidate=" + carvalidate + "]";
-	}
-	 
+
+	
 		
 }

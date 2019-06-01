@@ -34,9 +34,8 @@
                                     <li><a onclick="usermanage()">个人资料</a></li>
                                     <li><a onclick="usermanage()">我的订单</a></li>
                                 </ul>
-                            </li>
-                            
-                            <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi()">联系方式</a></li>
+                            </li>                          
+                            <li style="cursor:pointer;"><a data-toggle="modal"  onclick="lianxifangshi2()">联系方式</a></li>
 
                         </ul>
                     </div>
@@ -73,6 +72,7 @@
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>                    
                     <li class="list-active"><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/News">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/Rental">租车</a></li>
                 </ul>
             </div>
         </div>
@@ -230,7 +230,26 @@
 <div class="container-fluid" style="background-color:#f8f8f8;height: 25px">
 </div>
 
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">网站联系方式</h4>
+</div>
 
+<div class="modal-body">
+<h2>联系电话888-888-8888</h2>
+
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+</div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
 </body>
 <script>
     $(function () {
@@ -302,5 +321,15 @@
     	}
     	
     })
+        function lianxifangshi2(){
+	
+	$('#myModal').modal().show();
+}
+    function usermanage(){
+    	
+    	var username=document.getElementById("NowUserName").innerHTML;
+    	
+    	window.location.href="/WebCar/userInfo/user_Manger?username="+username;
+    }
 </script>
 </html>

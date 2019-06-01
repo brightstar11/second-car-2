@@ -2,7 +2,27 @@
     margin: 0;
     padding: 0;
 }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 2px;
+    background-color: ghostwhite;
+}
 
+::-webkit-scrollbar-track
+{
+    border-radius: 2px;
+    background-color: #f8f8f8;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+    background-color: #cccbcb;
+}
+body {
+    overflow-x:hidden;
+}
 #box-img {
     width: 100%;
     height: 420px;

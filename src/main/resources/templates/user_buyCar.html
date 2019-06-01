@@ -84,6 +84,7 @@
                     <li><a href="/WebCar/userInfo/SaleCar">卖车</a></li>                    
                     <li><a href="/WebCar/userInfo/CarEvaluation">估价</a></li>
                     <li><a href="/WebCar/userInfo/News">资讯</a></li>
+                    <li><a href="/WebCar/userInfo/Rental">租车</a></li>
                 </ul>
             </div>
         </div>
@@ -459,7 +460,7 @@ $(function(){
 	}
 	loading();		
 })
-
+var total=0;
 // 自定义点击开始
 
     function lianxifangshi2(){
@@ -473,24 +474,7 @@ $(function(){
 	window.location.href="/WebCar/userInfo/User_order?username="+username;
 	
 }
-function BCSearch(){
-	  var search=$('#BuyCarSearch').val();
-	  $.ajax({
-			 type: "POST",//方法类型
-		     url: "/WebCar/userInfo/User_BuyCarSearch124",//url
-		     data:{
-		    	 search:search
-		     },
-		     success: function (data) {
-		    	 $('#car-list').empty()
-		    	 addlist(data)
-		     }
-		});
-	  
-   }
-   
-   
-   
+var search=$('#BuyCarSearch').val()        
 var brandName =$('#brand-name').children('li').find("a[class='aSort']").text()
 var levelName =$('#level_name').children('li').find("a[class='aSort']").text()
 var mileageName =$('#mileages').children('li').find("a[class='aSort']").text()
@@ -499,17 +483,33 @@ var colors= $('#colors').children('li').find("a[class='aSort']").text()
 var pops= $('#pops').children('li').find("a[class='aSort']").text()
 var powers= $('#powers').children('li').find("a[class='aSort']").text()
 var methods=$('#methods').children('li').find("a[class='aSort']").text()
-var data1={
-	 brandname:brandName,
-	 levelname:levelName,
-	 carmileage:mileageName,
-	 carprice:pricename,
-	 carpop:pops,
-	 carcolor:colors,
-	 carpower:powers,
-	 carpmethod:methods
-}
+var paixubiaoshi=$('#sortType').children('li').find("a[class='aSort']").attr('id')
+function BCSearch(){
+	search=$('#BuyCarSearch').val()
+	console.log(search)
+	var params ={
+  		  pageNo:1,
+  		  pageSize:10,
+  		  obj:{  
+  			     brandname:brandName,
+  		    	 levelname:levelName,
+  		    	 carmileage:mileageName,
+  		    	 carprice:pricename,
+  		    	 carpop:pops,
+  		    	 carcolor:colors,
+  		    	 carpower:powers,
+  		    	 carpmethod:methods,
+  		    	 paixubiaoshi:paixubiaoshi,
+  		    	 'search':search,
+  		     }
+    }
+    ajaxPost(params);	  
+ }  
 $('#brand-name').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
+	console.log(1111111)
+	console.log(search,222222)
       brandName=$(this)[0].innerHTML;
       var params ={
     		  pageNo:1,
@@ -521,13 +521,15 @@ $('#brand-name').children('li').find('a').click(function(e){
     		    	 carpop:pops,
     		    	 carcolor:colors,
     		    	 carpower:powers,
-    		    	 carpmethod:methods
+    		    	 carpmethod:methods,
+    		    	 paixubiaoshi:paixubiaoshi,
+    		    	 search:search,
     		     }
       }
       ajaxPost(params);
 	})
 	
-var total=0;	
+	
 function ajaxPost(params){
 	$.ajax({
 		 type: "POST",//方法类型
@@ -536,7 +538,7 @@ function ajaxPost(params){
 	     data:JSON.stringify(params),
 	     contentType:'application/json',
 	     success: function (data) {
-	    	 console.log(data)
+	    	 console.log(data,111111)
 	    	 $('#car-list').empty()
 	    	 addlist(data.dataList)
 	    	 total=data.pagetotal
@@ -545,7 +547,7 @@ function ajaxPost(params){
 	});
 }
 function addlist(lists) {
-	if(lists==null) {
+	if(lists==null||lists=='') {
 		var div=$('<div>1123</div>')
 		$('#car-list').append(div)
 	}else {
@@ -555,7 +557,7 @@ function addlist(lists) {
 		            '<a onclick="IntoInformation('+list.id+')"><img src="'+list.caricon+'" alt=""></a>'+
 		            '<div class="carname"><a href="">'+list.carname+list.carbirth+list.cardisplacement+list.drivetype+list.carlnwhere+list.caredition+'</a></div>'+
 		            '<p class="pcar">上牌时间：'+list.carlntime+'</p>'+
-		            '<p class="pcar">行驶里程：'+list.carmileage+'</p>'+
+		            '<p class="pcar">行驶里程：'+list.carmileages+'</p>'+
 		            '<div class="car-price">'+
 		                '<span class="carnumber">金额：</span><span><span class="carnumber">'+list.carprice+'</span>万</span>'+
 		            '</div>'+
@@ -569,8 +571,10 @@ function addlist(lists) {
 var brandname1=[[${brandname}]]
 var carprice1=[[${carprice}]]
 var levelname1=[[${levelname}]]
-function loading(){
+var search=[[${search}]]
 
+function loading(){
+	console.log(search)
 	if(brandname1!=null){
 		brandName=brandname1;
 	}
@@ -591,7 +595,8 @@ function loading(){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	 search:search,
 		  		  },
 		    }
 		    ajaxPost(params);
@@ -599,6 +604,8 @@ function loading(){
 }
 
 $('#level_name').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	levelName=$(this)[0].innerHTML;
     var params ={
   		  pageNo:1,
@@ -610,13 +617,17 @@ $('#level_name').children('li').find('a').click(function(e){
   		    	 carpop:pops,
   		    	 carcolor:colors,
   		    	 carpower:powers,
-  		    	 carpmethod:methods
+  		    	 carpmethod:methods,
+  		    	paixubiaoshi:paixubiaoshi,
+  		    	search:search,
   		     }
     }
     ajaxPost(params);
 
 })
 $('#pricename').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	pricename=$(this)[0].innerHTML;
 	console.log(pricename)
     var params ={
@@ -629,7 +640,9 @@ $('#pricename').children('li').find('a').click(function(e){
   		    	 carpop:pops,
   		    	 carcolor:colors,
   		    	 carpower:powers,
-  		    	 carpmethod:methods
+  		    	 carpmethod:methods,
+  		    	paixubiaoshi:paixubiaoshi,
+  		    	search:search,
   		     }
     }
     ajaxPost(params);
@@ -637,6 +650,8 @@ $('#pricename').children('li').find('a').click(function(e){
 })
 
 $('#mileages').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	mileageName=$(this)[0].innerHTML;
     var params ={
     		  pageNo:1,
@@ -648,13 +663,17 @@ $('#mileages').children('li').find('a').click(function(e){
     		    	 carpop:pops,
     		    	 carcolor:colors,
     		    	 carpower:powers,
-    		    	 carpmethod:methods
+    		    	 carpmethod:methods,
+    		    	 paixubiaoshi:paixubiaoshi,
+    		    	 search:search,
     		     }
       }
       ajaxPost(params);
 	
 })
 $('#colors').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	colors=$(this)[0].innerHTML;
 	var params ={
   		  pageNo:1,
@@ -666,13 +685,17 @@ $('#colors').children('li').find('a').click(function(e){
   		    	 carpop:pops,
   		    	 'carcolor':colors,
   		    	 carpower:powers,
-  		    	 carpmethod:methods
+  		    	 carpmethod:methods,
+  		    	paixubiaoshi:paixubiaoshi,
+  		    	search:search,
   		     }
     }
     ajaxPost(params);
 	 
 })
 $('#pops').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	pops=$(this)[0].innerHTML;
 	var params ={
   		  pageNo:1,
@@ -684,13 +707,17 @@ $('#pops').children('li').find('a').click(function(e){
   		    	 'carpop':pops,
   		    	 carcolor:colors,
   		    	 carpower:powers,
-  		    	 carpmethod:methods
+  		    	 carpmethod:methods,
+  		    	paixubiaoshi:paixubiaoshi,
+  		    	search:search,
   		     }
     }
     ajaxPost(params);
 	
 })
 $('#powers').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	powers=$(this)[0].innerHTML;
 	var params ={
 	  		  pageNo:1,
@@ -702,13 +729,17 @@ $('#powers').children('li').find('a').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 'carpower':powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
 	
 })
 $('#methods').children('li').find('a').click(function(e){
+	$('#BuyCarSearch').val("")
+	search=$('#BuyCarSearch').val()
 	methods=$(this)[0].innerHTML;
 	var params ={
 	  		  pageNo:1,
@@ -720,7 +751,29 @@ $('#methods').children('li').find('a').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 'carpmethod':methods
+	  		    	 'carpmethod':methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
+	  		     }
+	    }
+	    ajaxPost(params);
+	
+})
+$('#sortType li a').click(function(e){
+	paixubiaoshi = this.id	
+	var params ={
+	  		  pageNo:1,
+	  		  pageSize:10,
+	  		  obj:{brandname:brandName,
+	  		    	 levelname:levelName,
+	  		    	 carmileage:mileageName,
+	  		    	 carprice:pricename,
+	  		    	 carpop:pops,
+	  		    	 carcolor:colors,
+	  		    	 carpower:powers,
+	  		    	 carpmethod:methods,
+	  		    	'paixubiaoshi':paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
@@ -738,7 +791,9 @@ $('#firstNumber').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
@@ -760,7 +815,9 @@ $('#preNumber').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
@@ -782,7 +839,9 @@ $('#nextNumber').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
@@ -799,15 +858,13 @@ $('#lastNumber').click(function(e){
 	  		    	 carpop:pops,
 	  		    	 carcolor:colors,
 	  		    	 carpower:powers,
-	  		    	 carpmethod:methods
+	  		    	 carpmethod:methods,
+	  		    	paixubiaoshi:paixubiaoshi,
+	  		    	search:search,
 	  		     }
 	    }
 	    ajaxPost(params);
 	
-})
-$('#sortType li a').click(function(e){
-	var id = this.id
-	console.log(id)
 })
 function IntoInformation(id){
 	window.location.href="/WebCar/userInfo/CarInforMation?id="+id;

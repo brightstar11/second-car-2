@@ -158,6 +158,15 @@ public class Userinfo_CarEvaluationController {
 	 
 	 return 0;
  }
- 
+ @RequestMapping("/CarEvaluationGetCarband")
+ @ResponseBody
+ public List<String> CarEvaluationGetCarband(String carband){
+	 System.out.println(carband);
+	 List<String> list=CarEvaluationService.carnameSs(carband);
+	return list;
+	 
+	 
+	 
+ }
  
 }
